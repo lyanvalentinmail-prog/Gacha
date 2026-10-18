@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_beret" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 120 100 C 130 50, 270 50, 280 100 C 270 120, 130 120, 120 100 Z" fill="var(--hat-primary, #FF9EAA)" />
+              <ellipse cx="200" cy="95" rx="80" ry="20" fill="var(--hat-primary, #FF9EAA)" />
+              <!-- Little stem -->
+              <line x1="200" y1="65" x2="200" y2="55" stroke="#4A3B52" stroke-width="3" />
+              <circle cx="160" cy="95" r="5" fill="var(--hat-secondary, #FFD700)" />
+            </g>
+</svg>

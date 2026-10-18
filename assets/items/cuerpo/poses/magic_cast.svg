@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="arms_magic" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Arms spread out summoning -->
+              <path d="M 160 245 Q 125 240 105 250" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="100" cy="250" r="8" fill="var(--skin, #FFE6D8)" />
+              <path d="M 240 245 Q 275 240 295 250" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="300" cy="250" r="8" fill="var(--skin, #FFE6D8)" />
+            </g>
+</svg>

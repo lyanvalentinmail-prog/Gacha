@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="wings_devil" stroke="#2B1B32" stroke-width="2.5" fill="var(--wings, #FFFFFF)">
+              <!-- Left -->
+              <path d="M 150 230 L 70 120 L 95 160 L 50 170 L 85 205 L 60 225 L 140 250 Z" />
+              <!-- Right -->
+              <path d="M 250 230 L 330 120 L 305 160 L 350 170 L 315 205 L 340 225 L 260 250 Z" />
+            </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <ellipse cx="155" cy="167" rx="18" ry="21" fill="#FFFFFF" stroke="#4A3B52" stroke-width="2.5" />
+  <ellipse cx="155" cy="169" rx="14" ry="17" fill="var(--eye-primary, #FF70A6)" />
+  <ellipse cx="155" cy="172" rx="8" ry="10" fill="#2B2D42" />
+  <ellipse cx="150" cy="160" rx="5" ry="6" fill="#FFFFFF" opacity="0.95" />
+  <circle cx="162" cy="180" r="3" fill="#64DFDF" opacity="0.9" />
+  <ellipse cx="245" cy="167" rx="18" ry="21" fill="#FFFFFF" stroke="#4A3B52" stroke-width="2.5" />
+  <ellipse cx="245" cy="169" rx="14" ry="17" fill="var(--eye-primary, #FF70A6)" />
+  <ellipse cx="245" cy="172" rx="8" ry="10" fill="#2B2D42" />
+  <ellipse cx="240" cy="160" rx="5" ry="6" fill="#FFFFFF" opacity="0.95" />
+  <circle cx="252" cy="180" r="3" fill="#64DFDF" opacity="0.9" />
+  <g stroke="#4A3B52" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M 137 150 Q 155 144 172 150" />
+    <path d="M 228 150 Q 245 144 263 150" />
+  </g>
+  <ellipse cx="140" cy="192" rx="18" ry="11" fill="var(--blush, #FF9EAA)" opacity="0.7" />
+  <ellipse cx="260" cy="192" rx="18" ry="11" fill="var(--blush, #FF9EAA)" opacity="0.7" />
+  <path d="M 278 138 Q 274 148 278 152 Q 283 150 282 140 Z" fill="#64DFDF" stroke="#4A3B52" stroke-width="1.5" />
+</svg>

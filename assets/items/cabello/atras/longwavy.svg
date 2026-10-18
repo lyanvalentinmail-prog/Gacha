@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_longwavy" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <path
+                d="M 110 150 C 70 200, 60 270, 80 320 C 65 350, 85 390, 120 380 C 160 395, 240 395, 280 380 C 315 390, 335 350, 320 320 C 340 270, 330 200, 290 150 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+            </g>
+</svg>

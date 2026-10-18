@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g id="shoes">
+
+    <path d="M 158 408 Q 152 432 186 433 Q 194 433 191 408 Z" fill="var(--shoes-primary, #FF9EAA)" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 163 414 Q 159 428 181 429 Q 187 429 186 414 Z" fill="var(--shoes-secondary, #FFFDF9)" stroke="none" />
+    <path d="M 156 424 L 192 424" stroke="#4A3B52" stroke-width="1.5" />
+    <path d="M 166 410 L 182 416 M 168 416 L 184 421" stroke="#4A3B52" stroke-width="1.2" />
+  </g>
+  <g transform="translate(400,0) scale(-1,1)">
+
+    <path d="M 158 408 Q 152 432 186 433 Q 194 433 191 408 Z" fill="var(--shoes-primary, #FF9EAA)" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 163 414 Q 159 428 181 429 Q 187 429 186 414 Z" fill="var(--shoes-secondary, #FFFDF9)" stroke="none" />
+    <path d="M 156 424 L 192 424" stroke="#4A3B52" stroke-width="1.5" />
+    <path d="M 166 410 L 182 416 M 168 416 L 184 421" stroke="#4A3B52" stroke-width="1.2" />
+  </g>
+</svg>

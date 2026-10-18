@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="prop_boba" stroke="#4A3B52" stroke-width="2">
+              <path d="M 250 295 L 255 330 Q 270 335 285 330 L 290 295 Z" fill="#FFE0B2" />
+              <!-- Boba pearls -->
+              <circle cx="262" cy="324" r="3" fill="#3D2817" />
+              <circle cx="270" cy="326" r="3" fill="#3D2817" />
+              <circle cx="278" cy="324" r="3" fill="#3D2817" />
+              <!-- Lid & straw -->
+              <line x1="270" y1="300" x2="275" y2="275" stroke="#FF6F91" stroke-width="4" stroke-linecap="round" />
+              <ellipse cx="270" cy="295" rx="20" ry="5" fill="#FFFDF9" />
+            </g>
+</svg>

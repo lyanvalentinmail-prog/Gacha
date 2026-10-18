@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="tail_devil" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 230 340 Q 290 360 300 310 Q 310 270 290 260" fill="none" stroke-width="4" stroke="var(--tail, #FFAAA6)" />
+              <polygon points="290,260 305,245 275,250" fill="var(--tail, #FFAAA6)" />
+            </g>
+</svg>

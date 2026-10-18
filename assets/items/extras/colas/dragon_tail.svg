@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="tail_dragon" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 225 345 Q 310 380 330 300 Q 340 250 325 240 Q 315 260 295 320 Z" fill="var(--tail, #FFAAA6)" />
+              <polygon points="325,240 340,245 320,260" fill="var(--top-secondary, #FFD700)" />
+            </g>
+</svg>

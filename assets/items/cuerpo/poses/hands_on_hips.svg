@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="arms_hips" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Left arm bent to hip -->
+              <path d="M 160 245 L 135 280 L 160 295" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="160" cy="295" r="7" fill="var(--skin, #FFE6D8)" />
+              <!-- Right arm bent to hip -->
+              <path d="M 240 245 L 265 280 L 240 295" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="240" cy="295" r="7" fill="var(--skin, #FFE6D8)" />
+            </g>
+</svg>

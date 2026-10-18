@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="acc_eyepatch" stroke="#4A3B52" stroke-width="2">
+              <line x1="115" y1="145" x2="195" y2="185" stroke="#FFFFFF" stroke-width="2.5" />
+              <rect x="142" y="152" width="26" height="26" rx="4" fill="#FFFDF9" />
+              <polygon points="155,158 155,172 153,172 153,158" fill="#FF5376" />
+              <polygon points="148,165 162,165 162,163 148,163" fill="#FF5376" />
+            </g>
+</svg>

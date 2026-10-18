@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_cat_ears" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Headband -->
+              <path d="M 125 110 Q 200 95 275 110" fill="none" stroke="#2B2D42" stroke-width="3" />
+              <!-- Left Cat Ear -->
+              <polygon points="120,110 105,50 160,85" fill="var(--hat-primary, #FF9EAA)" />
+              <polygon points="123,100 115,62 148,84" fill="#FFD1DC" />
+              <!-- Left bell -->
+              <circle cx="120" cy="110" r="5" fill="#FFD700" />
+              <!-- Right Cat Ear -->
+              <polygon points="280,110 295,50 240,85" fill="var(--hat-primary, #FF9EAA)" />
+              <polygon points="277,100 285,62 252,84" fill="#FFD1DC" />
+              <!-- Right bell -->
+              <circle cx="280" cy="110" r="5" fill="#FFD700" />
+            </g>
+</svg>

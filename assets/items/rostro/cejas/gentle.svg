@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g stroke="var(--eyebrows, #4A3B52)" stroke-width="3" stroke-linecap="round" fill="none">
+              <path d="M 135 138 Q 155 132 170 140" />
+              <path d="M 230 140 Q 245 132 265 138" />
+            </g>
+</svg>

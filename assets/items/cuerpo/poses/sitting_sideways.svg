@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-layer="legs" stroke="#4A3B52" stroke-width="2.5">
+    <path d="M 160 340 Q 150 390 180 405 Q 240 415 270 390 Q 285 370 240 360 Z" fill="var(--skin, #FFE6D8)" />
+    <ellipse cx="255" cy="385" rx="16" ry="10" fill="var(--shoes-primary, #FF9EAA)" />
+    <ellipse cx="255" cy="385" rx="12" ry="7" fill="var(--shoes-secondary, #FFFDF9)" />
+  </g>
+  <g data-layer="arms" stroke="#4A3B52" stroke-width="2.5">
+    <path d="M 160 245 Q 150 290 185 330" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+    <circle cx="188" cy="332" r="7" fill="var(--skin, #FFE6D8)" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 240 245 Q 250 295 215 335" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+    <circle cx="212" cy="337" r="7" fill="var(--skin, #FFE6D8)" stroke="#4A3B52" stroke-width="2.5" />
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="bottom_bloomers" stroke="#4A3B52" stroke-width="2.5">
+              <ellipse cx="175" cy="330" rx="28" ry="20" fill="var(--bottom-primary, #1D3557)" />
+              <ellipse cx="225" cy="330" rx="28" ry="20" fill="var(--bottom-primary, #1D3557)" />
+              <!-- Little ribbon -->
+              <circle cx="152" cy="335" r="4" fill="var(--bottom-secondary, #FFFDF9)" />
+              <circle cx="248" cy="335" r="4" fill="var(--bottom-secondary, #FFFDF9)" />
+            </g>
+</svg>

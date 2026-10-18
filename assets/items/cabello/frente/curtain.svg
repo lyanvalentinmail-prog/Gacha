@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <path
+            d="M 115 145 C 115 75, 285 75, 285 145 C 285 145, 275 125, 260 120 C 230 115, 170 115, 140 120 C 125 125, 115 145, 115 145 Z"
+            fill="var(--hair-base, #FFAAA6)"
+          />
+    <g>
+                <!-- Left curtain -->
+                <path
+                  d="M 115 135 C 130 150, 160 165, 190 145 C 160 135, 130 125, 115 135 Z"
+                  fill="var(--hair-base, #FFAAA6)"
+                />
+                <!-- Right curtain -->
+                <path
+                  d="M 285 135 C 270 150, 240 165, 210 145 C 240 135, 270 125, 285 135 Z"
+                  fill="var(--hair-base, #FFAAA6)"
+                />
+              </g>
+  <path
+            d="M 130 118 Q 200 108 270 118"
+            stroke="#FFFFFF"
+            stroke-width="3.5"
+            stroke-linecap="round"
+            stroke-dasharray="14 8 20 6"
+            opacity="0.65"
+            fill="none"
+          />
+</svg>

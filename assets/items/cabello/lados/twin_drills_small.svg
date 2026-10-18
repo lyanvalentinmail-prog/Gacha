@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+    <path d="M 118 145 C 95 165, 92 195, 108 210 C 90 218, 92 240, 110 248 C 100 258, 112 272, 122 262 C 118 235, 112 175, 126 150 Z" fill="var(--hair-base, #FFAAA6)" />
+    <path d="M 282 145 C 305 165, 308 195, 292 210 C 310 218, 308 240, 290 248 C 300 258, 288 272, 278 262 C 282 235, 288 175, 274 150 Z" fill="var(--hair-base, #FFAAA6)" />
+  </g>
+</svg>

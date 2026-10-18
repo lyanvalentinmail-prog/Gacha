@@ -403,6 +403,17 @@ export const StudioMode: React.FC<StudioModeProps> = ({
           onMouseUp={handleMouseUp}
           className={`relative w-full max-w-5xl aspect-[16/9] rounded-3xl overflow-hidden shadow-cute-lg border-4 border-white select-none bg-gradient-to-br ${bgObj.gradient}`}
         >
+          {/* Fondo SVG (assets/items/fondos/) */}
+          {bgObj.svg && (
+            <svg
+              viewBox="0 0 800 600"
+              preserveAspectRatio="xMidYMid slice"
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g dangerouslySetInnerHTML={{ __html: bgObj.svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '') }} />
+            </svg>
+          )}
           {/* Background illustration details */}
           {bgObj.id === 'bg_classroom' && (
             <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -655,8 +666,19 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                       : 'border-pink-100 hover:border-pink-300'
                   }`}
                 >
-                  <div className={`w-full h-16 rounded-xl mb-2 flex items-center justify-center text-3xl shadow-inner bg-gradient-to-tr ${bg.gradient}`}>
-                    <span>{bg.icon}</span>
+                  <div className={`w-full h-16 rounded-xl mb-2 flex items-center justify-center text-3xl shadow-inner bg-gradient-to-tr ${bg.gradient} overflow-hidden relative`}>
+                    {bg.svg ? (
+                      <svg
+                        viewBox="0 0 800 600"
+                        preserveAspectRatio="xMidYMid slice"
+                        className="absolute inset-0 w-full h-full"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g dangerouslySetInnerHTML={{ __html: bg.svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '') }} />
+                      </svg>
+                    ) : (
+                      <span>{bg.icon}</span>
+                    )}
                   </div>
                   <p className="text-xs font-extrabold text-[#3D344B] truncate leading-tight">
                     {bg.name}

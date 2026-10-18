@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_wolfcut" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <path
+                d="M 110 140 L 80 200 L 105 210 L 70 260 L 100 270 L 80 320 L 130 330 L 170 340 L 230 340 L 270 330 L 320 320 L 300 270 L 330 260 L 295 210 L 320 200 L 290 140 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+            </g>
+</svg>

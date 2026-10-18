@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g opacity="0.75" class="animate-spin origin-[200px_420px]" style="animation-duration: 20s">
+              <ellipse cx="200" cy="420" rx="130" ry="32" fill="none" stroke="var(--aura, #C77DFF)" stroke-width="3" stroke-dasharray="6 4" />
+              <ellipse cx="200" cy="420" rx="95" ry="24" fill="none" stroke="var(--aura, #FF9EAA)" stroke-width="2" />
+              <polygon points="120,420 280,420 200,405" fill="none" stroke="var(--aura, #C77DFF)" stroke-width="1.5" />
+              <polygon points="120,420 280,420 200,435" fill="none" stroke="var(--aura, #C77DFF)" stroke-width="1.5" />
+            </g>
+</svg>

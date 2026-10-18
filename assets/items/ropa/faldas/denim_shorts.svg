@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="bottom_denim" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 165 305 L 155 340 L 195 340 L 200 325 L 205 340 L 245 340 L 235 305 Z" fill="var(--bottom-primary, #1D3557)" />
+              <!-- Rolled hem -->
+              <rect x="153" y="335" width="44" height="6" rx="2" fill="var(--bottom-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1.5" />
+              <rect x="203" y="335" width="44" height="6" rx="2" fill="var(--bottom-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1.5" />
+            </g>
+</svg>

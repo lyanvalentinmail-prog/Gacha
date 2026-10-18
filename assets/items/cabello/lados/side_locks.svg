@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g>
+              <path d="M 120 140 C 105 180, 110 230, 125 250 C 130 240, 125 180, 130 150 Z" fill="var(--hair-base, #FFAAA6)" />
+              <path d="M 280 140 C 295 180, 290 230, 275 250 C 270 240, 275 180, 270 150 Z" fill="var(--hair-base, #FFAAA6)" />
+            </g>
+</svg>

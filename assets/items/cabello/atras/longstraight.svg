@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_longstraight" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <path
+                d="M 110 150 C 80 190, 75 280, 85 370 C 130 385, 270 385, 315 370 C 325 280, 320 190, 290 150 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+              <path d="M 130 250 L 130 365" stroke="var(--hair-sub, #FFD1DC)" stroke-width="2" opacity="0.6" />
+              <path d="M 270 250 L 270 365" stroke="var(--hair-sub, #FFD1DC)" stroke-width="2" opacity="0.6" />
+            </g>
+</svg>

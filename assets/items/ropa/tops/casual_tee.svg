@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="top_tee" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 165 240 L 160 310 L 240 310 L 235 240 Z" fill="var(--top-primary, #FFFDF9)" />
+              <!-- Cute bear face decal -->
+              <circle cx="200" cy="275" r="14" fill="var(--top-secondary, #FF9EAA)" stroke="#4A3B52" stroke-width="1.5" />
+              <circle cx="191" cy="265" r="5" fill="var(--top-secondary, #FF9EAA)" stroke="#4A3B52" stroke-width="1.5" />
+              <circle cx="209" cy="265" r="5" fill="var(--top-secondary, #FF9EAA)" stroke="#4A3B52" stroke-width="1.5" />
+              <circle cx="196" cy="274" r="1.5" fill="#4A3B52" />
+              <circle cx="204" cy="274" r="1.5" fill="#4A3B52" />
+              <ellipse cx="200" cy="278" rx="4" ry="3" fill="#FFFDF9" />
+            </g>
+</svg>

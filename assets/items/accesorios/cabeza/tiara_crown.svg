@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_tiara" stroke="#4A3B52" stroke-width="2">
+              <polygon points="160,105 170,80 185,95 200,70 215,95 230,80 240,105" fill="var(--hat-secondary, #FFD700)" />
+              <circle cx="200" cy="85" r="4" fill="#FF5376" />
+              <circle cx="170" cy="92" r="3" fill="#64DFDF" />
+              <circle cx="230" cy="92" r="3" fill="#64DFDF" />
+            </g>
+</svg>

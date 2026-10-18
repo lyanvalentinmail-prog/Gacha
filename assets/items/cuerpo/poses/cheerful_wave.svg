@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="arms_wave" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Left Arm relaxed -->
+              <path d="M 160 245 Q 140 280 145 315" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="145" cy="320" r="7" fill="var(--skin, #FFE6D8)" />
+              <!-- Right Arm raised waving -->
+              <path d="M 240 245 Q 275 220 280 170" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <!-- Waving hand -->
+              <circle cx="282" cy="165" r="9" fill="var(--skin, #FFE6D8)" />
+              <line x1="282" y1="160" x2="280" y2="150" stroke="var(--skin, #FFE6D8)" stroke-width="3" stroke-linecap="round" />
+              <line x1="287" y1="162" x2="289" y2="152" stroke="var(--skin, #FFE6D8)" stroke-width="3" stroke-linecap="round" />
+            </g>
+</svg>

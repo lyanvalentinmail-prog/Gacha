@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g id="shoes">
+
+    <path d="M 155 410 Q 148 434 186 435 Q 197 435 193 410 Z" fill="var(--shoes-primary, #FF9EAA)" stroke="#4A3B52" stroke-width="2.5" />
+    <ellipse cx="174" cy="424" rx="9" ry="7" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1.2" />
+    <circle cx="164" cy="414" r="3" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1" />
+    <circle cx="172" cy="411" r="3" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1" />
+    <circle cx="180" cy="413" r="3" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1" />
+  </g>
+  <g transform="translate(400,0) scale(-1,1)">
+
+    <path d="M 155 410 Q 148 434 186 435 Q 197 435 193 410 Z" fill="var(--shoes-primary, #FF9EAA)" stroke="#4A3B52" stroke-width="2.5" />
+    <ellipse cx="174" cy="424" rx="9" ry="7" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1.2" />
+    <circle cx="164" cy="414" r="3" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1" />
+    <circle cx="172" cy="411" r="3" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1" />
+    <circle cx="180" cy="413" r="3" fill="var(--shoes-secondary, #FFFDF9)" stroke="#4A3B52" stroke-width="1" />
+  </g>
+</svg>

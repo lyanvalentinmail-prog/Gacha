@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="neck_scarf" stroke="#4A3B52" stroke-width="2.5">
+              <ellipse cx="200" cy="240" rx="32" ry="14" fill="var(--neck, #FF6F91)" />
+              <path d="M 215 245 L 225 295 L 205 295 L 205 245 Z" fill="var(--neck, #FF6F91)" />
+            </g>
+</svg>

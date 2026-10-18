@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_witch" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Wide Brim -->
+              <ellipse cx="200" cy="100" rx="95" ry="24" fill="var(--hat-primary, #FF9EAA)" />
+              <!-- Cone -->
+              <path d="M 140 95 Q 180 30 250 10 Q 230 50 260 95 Z" fill="var(--hat-primary, #FF9EAA)" />
+              <!-- Gold Ribbon band -->
+              <path d="M 155 93 Q 200 85 245 93" stroke="var(--hat-secondary, #FFD700)" stroke-width="6" fill="none" />
+              <!-- Star buckle -->
+              <polygon points="200,85 202,90 207,91 203,94 204,99 200,96 196,99 197,94 193,91 198,90" fill="#FFD700" />
+            </g>
+</svg>

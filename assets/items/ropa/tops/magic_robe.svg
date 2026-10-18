@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="top_magic" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 160 240 L 150 315 L 250 315 L 240 240 Z" fill="var(--top-primary, #FFFDF9)" />
+              <path d="M 195 240 L 195 315" stroke="var(--top-secondary, #FF9EAA)" stroke-width="4" />
+              <polygon points="200,265 204,272 211,273 206,278 207,285 200,281 193,285 194,278 189,273 196,272" fill="#FFD700" />
+            </g>
+</svg>

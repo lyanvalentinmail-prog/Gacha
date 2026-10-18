@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="neck_ribbon" stroke="#4A3B52" stroke-width="2">
+              <path d="M 200 242 C 180 230 180 255 200 246 C 220 255 220 230 200 242 Z" fill="var(--neck, #FF6F91)" />
+              <circle cx="200" cy="242" r="4" fill="#FFD700" />
+            </g>
+</svg>
