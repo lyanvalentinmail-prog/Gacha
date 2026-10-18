@@ -3,39 +3,76 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   GACHA LIFE — Design System
-   Paleta azul cielo + rosa + amarillo, botones 3D chunky, paneles celestes
-   con contorno azul marino, tipografía bubbly redondeada.
+   CHIBIVERSE — Design System "Sakura Dawn" 🌸
+   Estética anime moderna y delicada: rosa pastel principal, lavanda
+   secundario, paneles blancos rosados, gris cálido para textos
+   secundarios. Tokens centralizados: cambia el tema aquí y se propaga
+   a todas las pantallas.
    ========================================================================== */
 
 :root {
-  /* Cielo */
-  --gl-sky-top: #4fb9ec;
-  --gl-sky-mid: #7ed0f5;
-  --gl-sky-bottom: #b3e5fb;
+  /* --- Fondo general (amanecer pastel) --- */
+  --bg-top: #ffe9f1;   /* rosa muy claro */
+  --bg-mid: #f3effb;   /* lavanda pálido */
+  --bg-bottom: #e9f3fb; /* celeste pálido */
 
-  /* Azul marino (contornos / textos) */
-  --gl-navy: #2b5fa8;
-  --gl-navy-deep: #1e4580;
+  /* --- Rosa (color principal) --- */
+  --pink-50: #fff6f9;
+  --pink-100: #ffecf2;
+  --pink-200: #ffd9e5;
+  --pink-300: #ffb9cd;  /* rosa pastel principal */
+  --pink-400: #ff9db8;
+  --pink-500: #f97fa5;  /* rosa intenso — botones destacados */
+  --pink-600: #e75e8c;
+  --pink-700: #c94773;
 
-  /* Botones */
-  --gl-pink: #ff87b2;
-  --gl-pink-dark: #e56593;
-  --gl-pink-light: #ffb1ce;
-  --gl-blue: #74c9f0;
-  --gl-blue-dark: #4aa0d0;
-  --gl-blue-light: #a8def8;
-  --gl-yellow: #ffe06b;
-  --gl-yellow-dark: #e5b84b;
-  --gl-green: #95d97c;
-  --gl-green-dark: #63b34c;
-  --gl-purple: #b79ae0;
-  --gl-purple-dark: #8f6dc4;
+  /* --- Lavanda (color secundario) --- */
+  --lav-50: #f7f5fd;
+  --lav-100: #efebfa;
+  --lav-200: #e2dbf5;
+  --lav-300: #cfc4ee;
+  --lav-400: #b5a6e2;
+  --lav-500: #9d8bd0;
+  --lav-600: #7f6bb8;
 
-  /* Paneles */
-  --gl-panel: #c3e7fb;
-  --gl-panel-2: #a5d8f4;
-  --gl-face: #eaf6ff;
+  /* --- Tinta y grises cálidos (texto) --- */
+  --ink: #4a3b52;        /* texto principal */
+  --ink-soft: #7d7189;   /* gris cálido — texto secundario */
+  --ink-faint: #a99db2;  /* texto terciario / deshabilitado */
+
+  /* --- Paneles y bordes --- */
+  --panel: #ffffff;
+  --panel-rose: #fff9fb;
+  --panel-lav: #fbfafe;
+  --line-rose: #f2dce7;  /* borde fino discreto */
+  --line-lav: #e4ddf4;
+
+  /* --- Estados semánticos --- */
+  --ok: #6fbf85;
+  --ok-deep: #3e8e52;
+  --ok-soft: #e8f7ec;
+  --gold: #f5b95a;
+  --gold-deep: #a97b2a;
+  --gold-soft: #fff4e0;
+  --danger: #e86a7e;
+  --danger-soft: #ffeef1;
+
+  /* --- Sombras suaves --- */
+  --shadow-xs: 0 1px 3px rgba(120, 80, 130, 0.08);
+  --shadow-sm: 0 3px 10px rgba(160, 100, 150, 0.1);
+  --shadow-md: 0 8px 24px rgba(160, 100, 150, 0.14);
+  --shadow-lg: 0 16px 40px rgba(140, 90, 150, 0.18);
+  --shadow-pink: 0 4px 14px rgba(249, 127, 165, 0.35);
+
+  /* --- Radios --- */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 24px;
+
+  /* Compatibilidad: variables usadas por restos del código antiguo */
+  --gl-navy: var(--ink);
+  --gl-navy-deep: var(--ink);
   --gl-white: #ffffff;
 }
 
@@ -48,7 +85,7 @@
 
   html {
     /* Rellena también la zona de las barras del sistema en Android/iOS */
-    background-color: var(--gl-sky-top);
+    background-color: var(--bg-top);
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior: none;
   }
@@ -56,9 +93,10 @@
   body {
     @apply antialiased select-none;
     font-family: 'Fredoka', 'Baloo 2', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(180deg, var(--gl-sky-top) 0%, var(--gl-sky-mid) 45%, var(--gl-sky-bottom) 100%);
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
+    background-attachment: fixed;
     min-height: 100%;
-    color: var(--gl-navy-deep);
+    color: var(--ink);
   }
 }
 
@@ -71,11 +109,11 @@
   padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
   padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
   padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
-  background: linear-gradient(180deg, var(--gl-sky-top) 0%, var(--gl-sky-mid) 45%, var(--gl-sky-bottom) 100%);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
 }
 
 /* ==========================================================================
-   Botones 3D estilo Gacha Life
+   Botones — suaves, redondeados, con elevación sutil
    ========================================================================== */
 .gl-btn {
   position: relative;
@@ -83,95 +121,126 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  border-radius: 14px;
-  border: 3px solid var(--gl-navy);
-  font-weight: 800;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--line-lav);
+  font-weight: 700;
   letter-spacing: 0.01em;
-  color: var(--gl-navy-deep);
-  box-shadow: 0 4px 0 var(--gl-navy);
-  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+  color: var(--ink);
+  background: var(--panel);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.15s ease, background 0.15s ease;
   user-select: none;
 }
 .gl-btn:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.03);
+  box-shadow: var(--shadow-md);
 }
 .gl-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 var(--gl-navy);
+  transform: translateY(2px) scale(0.99);
+  box-shadow: var(--shadow-xs);
 }
 .gl-btn:disabled {
-  filter: grayscale(0.35) brightness(0.95);
-  opacity: 0.7;
+  filter: grayscale(0.35) brightness(0.98);
+  opacity: 0.55;
+  box-shadow: none;
+  pointer-events: none;
 }
 
+/* Variante principal: rosa intenso */
 .gl-btn-pink {
-  background: linear-gradient(180deg, var(--gl-pink-light) 0%, var(--gl-pink) 55%, var(--gl-pink-dark) 100%);
+  background: linear-gradient(180deg, var(--pink-400) 0%, var(--pink-500) 100%);
+  border-color: var(--pink-500);
   color: #fff;
-  text-shadow: 0 2px 0 rgba(160, 40, 90, 0.45);
-  border-color: var(--gl-navy);
+  text-shadow: 0 1px 2px rgba(180, 60, 110, 0.35);
+  box-shadow: var(--shadow-pink);
 }
+/* Variante secundaria: lavanda */
 .gl-btn-blue {
-  background: linear-gradient(180deg, var(--gl-blue-light) 0%, var(--gl-blue) 55%, var(--gl-blue-dark) 100%);
-  color: var(--gl-navy-deep);
+  background: linear-gradient(180deg, var(--lav-300) 0%, var(--lav-400) 100%);
+  border-color: var(--lav-400);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(110, 85, 160, 0.35);
 }
+/* Variantes de acento suave */
 .gl-btn-yellow {
-  background: linear-gradient(180deg, #fff3b8 0%, var(--gl-yellow) 55%, var(--gl-yellow-dark) 100%);
-  color: var(--gl-navy-deep);
+  background: linear-gradient(180deg, #ffe9bd 0%, var(--gold) 100%);
+  border-color: #f0c27e;
+  color: #6d4d1e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 .gl-btn-green {
-  background: linear-gradient(180deg, #c8efb8 0%, var(--gl-green) 55%, var(--gl-green-dark) 100%);
-  color: var(--gl-navy-deep);
+  background: linear-gradient(180deg, #cdeedd 0%, var(--ok) 100%);
+  border-color: #9ed4ae;
+  color: #2c6642;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 .gl-btn-white {
-  background: linear-gradient(180deg, #ffffff 0%, var(--gl-face) 100%);
-  color: var(--gl-navy-deep);
+  background: var(--panel);
+  border-color: var(--line-rose);
+  color: var(--ink);
 }
 .gl-btn-purple {
-  background: linear-gradient(180deg, #d7c6f2 0%, var(--gl-purple) 55%, var(--gl-purple-dark) 100%);
+  background: linear-gradient(180deg, var(--lav-400) 0%, var(--lav-500) 100%);
+  border-color: var(--lav-500);
   color: #fff;
-  text-shadow: 0 2px 0 rgba(70, 40, 130, 0.35);
+  text-shadow: 0 1px 2px rgba(100, 75, 150, 0.4);
+}
+.gl-btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--ink-soft);
+}
+.gl-btn-ghost:hover {
+  background: var(--pink-50);
+  box-shadow: none;
 }
 
 /* Variante compacta (chips / sub-tabs) */
 .gl-chip {
   border-radius: 999px;
-  border: 2px solid var(--gl-navy);
-  padding: 0.28rem 0.72rem;
+  border: 1.5px solid var(--line-lav);
+  padding: 0.3rem 0.75rem;
   font-size: 11px;
-  font-weight: 800;
-  color: var(--gl-navy-deep);
-  background: linear-gradient(180deg, #ffffff 0%, var(--gl-face) 100%);
-  box-shadow: 0 2px 0 var(--gl-navy);
-  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background: var(--panel);
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.12s ease, color 0.12s ease;
   white-space: nowrap;
 }
+.gl-chip:hover {
+  color: var(--ink);
+  border-color: var(--lav-300);
+}
 .gl-chip:active {
-  transform: translateY(2px);
-  box-shadow: 0 0 0 var(--gl-navy);
+  transform: scale(0.96);
 }
 .gl-chip-active {
-  background: linear-gradient(180deg, var(--gl-pink-light) 0%, var(--gl-pink) 100%);
+  background: linear-gradient(180deg, var(--pink-400) 0%, var(--pink-500) 100%);
+  border-color: var(--pink-500);
   color: #fff;
-  text-shadow: 0 1px 0 rgba(160, 40, 90, 0.4);
+  box-shadow: var(--shadow-pink);
 }
 
 /* ==========================================================================
    Paneles y tarjetas
    ========================================================================== */
 .gl-panel {
-  background: linear-gradient(180deg, var(--gl-panel) 0%, var(--gl-panel-2) 100%);
-  border: 3px solid var(--gl-navy);
-  border-radius: 16px;
+  background: var(--panel-rose);
+  border: 1.5px solid var(--line-rose);
+  border-radius: var(--r-lg);
 }
 .gl-card {
-  background: var(--gl-white);
-  border: 3px solid var(--gl-navy);
-  border-radius: 14px;
+  background: var(--panel);
+  border: 1.5px solid var(--line-rose);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-md);
 }
 .gl-face {
-  background: linear-gradient(180deg, #ffffff 0%, var(--gl-face) 100%);
-  border: 3px solid var(--gl-navy);
-  border-radius: 12px;
+  background: var(--panel-lav);
+  border: 1.5px solid var(--line-lav);
+  border-radius: var(--r-md);
 }
 
 /* Píldoras (gemas, contadores) */
@@ -180,52 +249,55 @@
   align-items: center;
   gap: 0.35rem;
   border-radius: 999px;
-  border: 3px solid var(--gl-navy);
-  background: #fff;
-  color: var(--gl-navy-deep);
+  border: 1.5px solid var(--line-rose);
+  background: var(--panel);
+  color: var(--ink);
   font-weight: 800;
-  box-shadow: 0 3px 0 var(--gl-navy);
+  box-shadow: var(--shadow-xs);
   padding: 0.22rem 0.7rem;
 }
 .gl-pill-pink {
-  background: linear-gradient(180deg, var(--gl-pink-light), var(--gl-pink));
+  background: linear-gradient(180deg, var(--pink-400) 0%, var(--pink-500) 100%);
+  border-color: var(--pink-500);
   color: #fff;
-  text-shadow: 0 1px 0 rgba(160, 40, 90, 0.4);
 }
 
-/* Títulos blancos con contorno azul marino (como el logo de Gacha Life) */
+/* Títulos */
 .gl-title {
+  color: var(--ink);
+  font-weight: 800;
+}
+/* Título sobre fondos de color/degradado (banners) */
+.gl-title-light {
   color: #fff;
-  text-shadow:
-    -2px 0 var(--gl-navy), 2px 0 var(--gl-navy), 0 -2px var(--gl-navy), 0 2px var(--gl-navy),
-    -2px -2px var(--gl-navy), 2px -2px var(--gl-navy), -2px 2px var(--gl-navy), 2px 2px var(--gl-navy),
-    0 4px 0 rgba(30, 69, 128, 0.35);
+  text-shadow: 0 2px 10px rgba(150, 70, 120, 0.45);
 }
 
-/* Franja de encabezado de panel (barra de título celeste/azul) */
+/* Franja de encabezado de panel / barra de modo */
 .gl-strip {
-  background: linear-gradient(180deg, var(--gl-blue) 0%, var(--gl-blue-dark) 100%);
-  border-bottom: 3px solid var(--gl-navy);
-  color: #fff;
-  text-shadow: 0 2px 0 rgba(30, 69, 128, 0.45);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid var(--line-rose);
+  color: var(--ink);
 }
 
 /* ==========================================================================
-   Fondo de cielo con nubes
+   Fondo de cielo pastel con nubes
    ========================================================================== */
 .gl-sky {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, var(--gl-sky-top) 0%, var(--gl-sky-mid) 55%, var(--gl-sky-bottom) 100%);
+  background: linear-gradient(180deg, #ffeaf2 0%, #f4effc 55%, #e9f3fb 100%);
 }
 
 /* Nubes CSS animadas (capa decorativa) */
 .gl-cloud {
   position: absolute;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
   border-radius: 999px;
-  opacity: 0.92;
-  filter: drop-shadow(0 6px 6px rgba(70, 140, 190, 0.18));
+  opacity: 0.9;
+  filter: drop-shadow(0 6px 8px rgba(190, 140, 180, 0.15));
   animation: glDrift linear infinite;
   pointer-events: none;
 }
@@ -233,7 +305,7 @@
 .gl-cloud::after {
   content: '';
   position: absolute;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
   border-radius: 50%;
 }
 .gl-cloud::before {
@@ -259,67 +331,112 @@
 }
 
 /* ==========================================================================
-   Scrollbar estilo Gacha Life
+   Scrollbar rosa
    ========================================================================== */
 ::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.45);
-  border-radius: 999px;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--gl-blue);
-  border: 2px solid var(--gl-navy);
+  background: var(--pink-200);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gl-pink);
+  background: var(--pink-300);
 }
 
 /* ==========================================================================
    Utilidades varias
    ========================================================================== */
 .glow-pink {
-  filter: drop-shadow(0 0 8px rgba(255, 135, 178, 0.75));
+  filter: drop-shadow(0 0 8px rgba(255, 157, 184, 0.8));
 }
 .glow-purple {
-  filter: drop-shadow(0 0 10px rgba(143, 109, 196, 0.7));
+  filter: drop-shadow(0 0 10px rgba(181, 166, 226, 0.8));
 }
 .glow-gold {
-  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
+  filter: drop-shadow(0 0 12px rgba(245, 185, 90, 0.85));
 }
 
 .card-hover {
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease, border-color 0.18s ease;
 }
 .card-hover:hover {
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 .card-hover:active {
   transform: scale(0.97);
 }
 
-/* Relleno de progreso tipo barra GL */
+/* Barra de progreso */
 .gl-bar {
-  background: #fff;
-  border: 2px solid var(--gl-navy);
+  background: var(--pink-50);
+  border: 1.5px solid var(--line-rose);
   border-radius: 999px;
   overflow: hidden;
 }
 .gl-bar-fill {
-  background: linear-gradient(90deg, var(--gl-pink-light), var(--gl-pink), var(--gl-yellow));
+  background: linear-gradient(90deg, var(--pink-300), var(--pink-500), var(--lav-400));
   height: 100%;
   border-radius: 999px;
   transition: width 0.5s ease;
 }
 
+/* Botón de icono redondo y suave */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1.5px solid var(--line-lav);
+  background: var(--panel);
+  color: var(--ink-soft);
+  box-shadow: var(--shadow-xs);
+  transition: transform 0.12s ease, color 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+}
+.icon-btn:hover {
+  color: var(--pink-500);
+  background: var(--pink-50);
+}
+.icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* Campo de texto suave */
+.soft-input {
+  width: 100%;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--ink);
+  background: var(--panel);
+  border: 1.5px solid var(--line-lav);
+  border-radius: var(--r-sm);
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.soft-input::placeholder {
+  color: var(--ink-faint);
+  font-weight: 500;
+}
+.soft-input:focus {
+  border-color: var(--pink-400);
+  box-shadow: 0 0 0 3px var(--pink-100);
+}
+
+/* ==========================================================================
+   Animaciones y microinteracciones
+   ========================================================================== */
+
 /* Aparición suave de modales */
 @keyframes glFadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(10px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -327,5 +444,107 @@
   }
 }
 .animate-fadeIn {
-  animation: glFadeIn 0.25s ease-out;
+  animation: glFadeIn 0.22s ease-out;
+}
+
+/* Entrada de pantalla (transiciones de navegación) */
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.screen-in {
+  animation: screenIn 0.24s ease-out;
+}
+
+/* Pop elástico (selección de objetos, ventanas pequeñas) */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.pop-in {
+  animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Deslizamiento de paneles laterales */
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.panel-in {
+  animation: panelIn 0.22s ease-out;
+}
+
+/* Aparición de toasts / confirmaciones */
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.toast-in {
+  animation: toastIn 0.2s ease-out;
+}
+
+/* Destello de rareza alta en el gacha */
+@keyframes rarityBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) rotate(-12deg);
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5) rotate(10deg);
+  }
+}
+.rarity-burst {
+  animation: rarityBurst 1.1s ease-out forwards;
+}
+
+/* Accesibilidad: respetar "movimiento reducido" del sistema */
+@media (prefers-reduced-motion: reduce) {
+  .gl-cloud,
+  .animate-bounce-subtle,
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-sparkle {
+    animation: none !important;
+  }
+  .screen-in,
+  .pop-in,
+  .panel-in,
+  .toast-in,
+  .animate-fadeIn,
+  .rarity-burst,
+  .card-hover {
+    animation: none !important;
+    transition: none !important;
+  }
 }

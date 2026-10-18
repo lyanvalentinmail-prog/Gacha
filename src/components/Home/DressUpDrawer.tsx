@@ -26,7 +26,7 @@ import {
   POSE_OPTIONS,
 } from '../../data/items';
 import { getSkinTones } from '../../data/assetCatalog';
-import { Dices, RotateCcw, Download, Share2, BookOpen, UserPlus } from 'lucide-react';
+import { Dices, RotateCcw, Download, Share2, BookOpen, UserPlus, Check } from 'lucide-react';
 import { playSound } from '../../audio/soundEffects';
 
 export type DressPanel = 'presets' | 'body' | 'hair' | 'face' | 'clothes' | 'other' | 'props' | 'profile';
@@ -136,7 +136,7 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
     if (panel === 'presets') {
       return (
         <div className="space-y-3">
-          <p className="text-xs font-bold text-[#1E4580] uppercase">Preajustes & Acciones Rápidas</p>
+          <p className="text-[10px] font-extrabold text-ink-soft uppercase tracking-wider px-1">Preajustes & Acciones Rápidas</p>
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => { playSound('pop'); onRandomize(); }}
@@ -146,10 +146,15 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
               ¡Aleatorio!
             </button>
             <button
-              onClick={() => { playSound('click'); onReset(); }}
+              onClick={() => {
+                if (confirm('¿Restablecer la apariencia? Puedes deshacerlo después.')) {
+                  playSound('click');
+                  onReset();
+                }
+              }}
               className="gl-btn gl-btn-white flex-col gap-1.5 p-3 text-xs"
             >
-              <RotateCcw className="w-6 h-6" />
+              <RotateCcw className="w-6 h-6 text-lav-500" />
               Restablecer
             </button>
             <button
@@ -167,9 +172,9 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
               Colección
             </button>
           </div>
-          <div className="p-3 rounded-2xl bg-white/70 border border-[#74C9F0] text-[11px] text-[#1E4580] leading-relaxed">
-            <b>Tip:</b> la ropa, accesorios y partes del cuerpo se cargan desde la carpeta
-            <code className="mx-1 px-1 rounded bg-[#EAF6FF] font-bold">assets/items/</code>.
+          <div className="p-3 rounded-2xl bg-lav-50 border-[1.5px] border-line-lav text-[11px] text-ink-soft leading-relaxed font-semibold">
+            <b className="text-ink">Tip:</b> la ropa, accesorios y partes del cuerpo se cargan desde la carpeta
+            <code className="mx-1 px-1 rounded bg-white font-bold text-rosa-600 border border-line-rose">assets/items/</code>.
             ¡Agregar cosas nuevas es tan fácil como soltar un archivo SVG con su nombre!
           </div>
         </div>
@@ -186,23 +191,28 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between px-1">
-              <span className="text-xs font-bold text-[#1E4580] uppercase tracking-wider">Tonos de Piel</span>
-              <span className="text-[11px] font-semibold text-[#4AA0D0]">{skins.length} opciones</span>
+              <span className="text-[10px] font-extrabold text-ink-soft uppercase tracking-wider">Tonos de Piel</span>
+              <span className="text-[11px] font-semibold text-ink-faint">{skins.length} opciones</span>
             </div>
             <div className="grid grid-cols-4 gap-2">
-              {skins.map((s) => (
-                <button
-                  key={s.id}
-                  title={s.name}
-                  onClick={() => { playSound('equip'); updateColor('skin', s.color || '#FFE6D8'); }}
-                  className={`aspect-square rounded-xl border-[3px] transition-all ${
-                    currentCharacter.colors.skin === s.color
-                      ? 'border-[#FF87B2] ring-2 ring-[#FF87B2]/40 scale-105'
-                      : 'border-[#2B5FA8] hover:scale-105'
-                  }`}
-                  style={{ backgroundColor: s.color }}
-                />
-              ))}
+              {skins.map((s) => {
+                const isSelected = currentCharacter.colors.skin === s.color;
+                return (
+                  <button
+                    key={s.id}
+                    title={s.name}
+                    onClick={() => { playSound('equip'); updateColor('skin', s.color || '#FFE6D8'); }}
+                    className={`aspect-square rounded-2xl border-[1.5px] transition-all flex items-center justify-center ${
+                      isSelected
+                        ? 'border-rosa-400 ring-2 ring-rosa-200 scale-105'
+                        : 'border-line-rose hover:scale-105'
+                    }`}
+                    style={{ backgroundColor: s.color }}
+                  >
+                    {isSelected && <Check className="w-4 h-4 text-rosa-600 drop-shadow" />}
+                  </button>
+                );
+              })}
             </div>
           </div>
           <ColorPickerPanel
@@ -290,76 +300,76 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
     return (
       <div className="space-y-3">
         <div>
-          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Nombre</label>
+          <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">Nombre</label>
           <input
             type="text"
             value={currentCharacter.name}
             onChange={(e) => pushChange({ ...currentCharacter, name: e.target.value })}
-            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2]"
+            className="soft-input"
           />
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Título / Ocupación</label>
+          <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">Título / Ocupación</label>
           <input
             type="text"
             value={currentCharacter.title}
             onChange={(e) => pushChange({ ...currentCharacter, title: e.target.value })}
-            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2]"
+            className="soft-input"
             placeholder="ej. Idol Estelar, Brujita Traviesa..."
           />
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Elemento</label>
+          <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">Elemento</label>
           <div className="grid grid-cols-3 gap-1.5">
             {(['Luz', 'Sombra', 'Fuego', 'Agua', 'Viento', 'Astral'] as const).map((elem) => (
-            <button
-              key={elem}
-              onClick={() => { playSound('click'); pushChange({ ...currentCharacter, element: elem }); }}
-              className={`py-1.5 rounded-xl text-[11px] font-bold border-[3px] transition-all shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none ${
-                currentCharacter.element === elem
-                  ? 'bg-[#FF87B2] text-white border-[#2B5FA8]'
-                  : 'bg-white border-[#2B5FA8] text-[#1E4580] hover:bg-[#EAF6FF]'
-              }`}
-            >
+              <button
+                key={elem}
+                onClick={() => { playSound('click'); pushChange({ ...currentCharacter, element: elem }); }}
+                className={`py-1.5 rounded-full text-[11px] font-bold border-[1.5px] transition-all ${
+                  currentCharacter.element === elem
+                    ? 'bg-gradient-to-b from-rosa-400 to-rosa-500 text-white border-rosa-500 shadow-sm'
+                    : 'bg-white border-line-lav text-ink-soft hover:border-lav-300 hover:text-ink'
+                }`}
+              >
                 {elem}
               </button>
             ))}
           </div>
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Comida Favorita</label>
+          <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">Comida Favorita</label>
           <input
             type="text"
             value={currentCharacter.favorite}
             onChange={(e) => pushChange({ ...currentCharacter, favorite: e.target.value })}
-            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2]"
+            className="soft-input"
           />
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Biografía / Historia</label>
+          <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">Biografía / Historia</label>
           <textarea
             value={currentCharacter.bio}
             onChange={(e) => pushChange({ ...currentCharacter, bio: e.target.value })}
             rows={3}
-            className="w-full text-xs font-medium px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2] resize-none"
+            className="soft-input !text-xs font-medium resize-none"
           />
         </div>
         <div className="grid grid-cols-3 gap-1.5">
           <button
             onClick={() => { playSound('pop'); onShareCode(); }}
-            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#EAF6FF] border-[3px] border-[#2B5FA8] text-[#2B5FA8] font-bold text-[10px] shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none"
+            className="flex flex-col items-center gap-1 p-2 rounded-2xl bg-white border-[1.5px] border-line-lav text-ink-soft font-bold text-[10px] hover:border-rosa-300 hover:text-rosa-500 transition-all active:scale-95"
           >
             <Share2 className="w-4 h-4" /> Código
           </button>
           <button
             onClick={() => { playSound('pop'); onImportCode(); }}
-            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#EAF6FF] border-[3px] border-[#2B5FA8] text-[#2B5FA8] font-bold text-[10px] shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none"
+            className="flex flex-col items-center gap-1 p-2 rounded-2xl bg-white border-[1.5px] border-line-lav text-ink-soft font-bold text-[10px] hover:border-rosa-300 hover:text-rosa-500 transition-all active:scale-95"
           >
             <UserPlus className="w-4 h-4" /> Importar
           </button>
           <button
             onClick={() => { playSound('pop'); onOpenCollection(); }}
-            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#EAF6FF] border-[3px] border-[#2B5FA8] text-[#2B5FA8] font-bold text-[10px] shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none"
+            className="flex flex-col items-center gap-1 p-2 rounded-2xl bg-white border-[1.5px] border-line-lav text-ink-soft font-bold text-[10px] hover:border-rosa-300 hover:text-rosa-500 transition-all active:scale-95"
           >
             <BookOpen className="w-4 h-4" /> Colección
           </button>
@@ -377,11 +387,7 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
             <button
               key={st.id}
               onClick={() => { playSound('pop'); setSub(st.id); }}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-extrabold whitespace-nowrap transition-all border-2 shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none ${
-                sub === st.id
-                  ? 'bg-[#FF87B2] text-white border-[#2B5FA8]'
-                  : 'bg-white text-[#1E4580] border-[#74C9F0] hover:bg-[#EAF6FF]'
-              }`}
+              className={`gl-chip ${sub === st.id ? 'gl-chip-active' : ''}`}
             >
               {st.label}
             </button>
@@ -390,7 +396,7 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
       )}
 
       {/* Contenido */}
-      <div className="flex-1 overflow-y-auto pr-1 min-h-0">{renderContent()}</div>
+      <div key={`${panel}-${sub}`} className="flex-1 overflow-y-auto pr-1 min-h-0 panel-in">{renderContent()}</div>
     </div>
   );
 };
