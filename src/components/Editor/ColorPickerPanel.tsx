@@ -27,9 +27,9 @@ export const ColorPickerPanel: React.FC<ColorPickerPanelProps> = ({
   };
 
   return (
-    <div className="bg-white/80 p-3 rounded-2xl border border-pink-100 shadow-sm space-y-2">
+    <div className="bg-white/80 p-3 rounded-2xl border-2 border-[#74C9F0] shadow-sm space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-extrabold text-[#3D344B] flex items-center gap-1.5">
+        <span className="text-xs font-extrabold text-[#1E4580] flex items-center gap-1.5">
           <span
             className="w-3.5 h-3.5 rounded-full border border-black/20 inline-block shadow-sm"
             style={{ backgroundColor: currentColor }}
@@ -52,7 +52,7 @@ export const ColorPickerPanel: React.FC<ColorPickerPanelProps> = ({
             value={customHex}
             onChange={(e) => handleHexInput(e.target.value)}
             maxLength={7}
-            className="w-20 text-[11px] font-mono font-bold uppercase px-2 py-0.5 rounded-lg border border-pink-200 text-center focus:outline-none focus:border-[#FF6F91]"
+            className="w-20 text-[11px] font-mono font-bold uppercase px-2 py-0.5 rounded-lg border-2 border-[#74C9F0] text-center focus:outline-none focus:border-[#FF87B2]"
           />
         </div>
       </div>
@@ -72,7 +72,7 @@ export const ColorPickerPanel: React.FC<ColorPickerPanelProps> = ({
               title={swatch.name}
               className={`w-7 h-7 rounded-xl transition-all relative flex items-center justify-center border shadow-xs ${
                 isSelected
-                  ? 'ring-2 ring-[#FF6F91] ring-offset-1 scale-110 z-10 border-white'
+                  ? 'ring-2 ring-[#FF87B2] ring-offset-1 scale-110 z-10 border-white'
                   : 'hover:scale-105 border-black/10'
               }`}
               style={{ backgroundColor: swatch.hex }}

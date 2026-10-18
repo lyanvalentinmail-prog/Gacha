@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   GACHA LIFE — Design System
+   Paleta azul cielo + rosa + amarillo, botones 3D chunky, paneles celestes
+   con contorno azul marino, tipografía bubbly redondeada.
+   ========================================================================== */
+
+:root {
+  /* Cielo */
+  --gl-sky-top: #4fb9ec;
+  --gl-sky-mid: #7ed0f5;
+  --gl-sky-bottom: #b3e5fb;
+
+  /* Azul marino (contornos / textos) */
+  --gl-navy: #2b5fa8;
+  --gl-navy-deep: #1e4580;
+
+  /* Botones */
+  --gl-pink: #ff87b2;
+  --gl-pink-dark: #e56593;
+  --gl-pink-light: #ffb1ce;
+  --gl-blue: #74c9f0;
+  --gl-blue-dark: #4aa0d0;
+  --gl-blue-light: #a8def8;
+  --gl-yellow: #ffe06b;
+  --gl-yellow-dark: #e5b84b;
+  --gl-green: #95d97c;
+  --gl-green-dark: #63b34c;
+  --gl-purple: #b79ae0;
+  --gl-purple-dark: #8f6dc4;
+
+  /* Paneles */
+  --gl-panel: #c3e7fb;
+  --gl-panel-2: #a5d8f4;
+  --gl-face: #eaf6ff;
+  --gl-white: #ffffff;
+}
+
 @layer base {
   html,
   body,
@@ -11,24 +48,21 @@
 
   html {
     /* Rellena también la zona de las barras del sistema en Android/iOS */
-    background-color: #fff6f9;
+    background-color: var(--gl-sky-top);
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior: none;
   }
 
   body {
     @apply antialiased select-none;
-    font-family: 'Quicksand', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: radial-gradient(circle at 10% 20%, #FFF0F5 0%, #F5F0FF 50%, #FFF5FA 100%);
+    font-family: 'Fredoka', 'Baloo 2', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(180deg, var(--gl-sky-top) 0%, var(--gl-sky-mid) 45%, var(--gl-sky-bottom) 100%);
     min-height: 100%;
+    color: var(--gl-navy-deep);
   }
 }
 
-/* Contenedor principal de la app.
- * En Android 16 la WebView se dibuja de borde a borde, así que reservamos el
- * espacio de la barra de estado, la barra de navegación y los recortes de
- * pantalla. Capacitor inyecta --safe-area-inset-* y env() es el respaldo para
- * web/iOS. */
+/* Contenedor principal de la app (safe-areas Android/iOS). */
 .app-shell {
   width: 100%;
   height: 100vh;
@@ -37,38 +71,226 @@
   padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
   padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
   padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
+  background: linear-gradient(180deg, var(--gl-sky-top) 0%, var(--gl-sky-mid) 45%, var(--gl-sky-bottom) 100%);
 }
 
-/* Custom cute scrollbar */
+/* ==========================================================================
+   Botones 3D estilo Gacha Life
+   ========================================================================== */
+.gl-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 14px;
+  border: 3px solid var(--gl-navy);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--gl-navy-deep);
+  box-shadow: 0 4px 0 var(--gl-navy);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+  user-select: none;
+}
+.gl-btn:hover {
+  filter: brightness(1.05);
+}
+.gl-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--gl-navy);
+}
+.gl-btn:disabled {
+  filter: grayscale(0.35) brightness(0.95);
+  opacity: 0.7;
+}
+
+.gl-btn-pink {
+  background: linear-gradient(180deg, var(--gl-pink-light) 0%, var(--gl-pink) 55%, var(--gl-pink-dark) 100%);
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(160, 40, 90, 0.45);
+  border-color: var(--gl-navy);
+}
+.gl-btn-blue {
+  background: linear-gradient(180deg, var(--gl-blue-light) 0%, var(--gl-blue) 55%, var(--gl-blue-dark) 100%);
+  color: var(--gl-navy-deep);
+}
+.gl-btn-yellow {
+  background: linear-gradient(180deg, #fff3b8 0%, var(--gl-yellow) 55%, var(--gl-yellow-dark) 100%);
+  color: var(--gl-navy-deep);
+}
+.gl-btn-green {
+  background: linear-gradient(180deg, #c8efb8 0%, var(--gl-green) 55%, var(--gl-green-dark) 100%);
+  color: var(--gl-navy-deep);
+}
+.gl-btn-white {
+  background: linear-gradient(180deg, #ffffff 0%, var(--gl-face) 100%);
+  color: var(--gl-navy-deep);
+}
+.gl-btn-purple {
+  background: linear-gradient(180deg, #d7c6f2 0%, var(--gl-purple) 55%, var(--gl-purple-dark) 100%);
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(70, 40, 130, 0.35);
+}
+
+/* Variante compacta (chips / sub-tabs) */
+.gl-chip {
+  border-radius: 999px;
+  border: 2px solid var(--gl-navy);
+  padding: 0.28rem 0.72rem;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--gl-navy-deep);
+  background: linear-gradient(180deg, #ffffff 0%, var(--gl-face) 100%);
+  box-shadow: 0 2px 0 var(--gl-navy);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+  white-space: nowrap;
+}
+.gl-chip:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--gl-navy);
+}
+.gl-chip-active {
+  background: linear-gradient(180deg, var(--gl-pink-light) 0%, var(--gl-pink) 100%);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(160, 40, 90, 0.4);
+}
+
+/* ==========================================================================
+   Paneles y tarjetas
+   ========================================================================== */
+.gl-panel {
+  background: linear-gradient(180deg, var(--gl-panel) 0%, var(--gl-panel-2) 100%);
+  border: 3px solid var(--gl-navy);
+  border-radius: 16px;
+}
+.gl-card {
+  background: var(--gl-white);
+  border: 3px solid var(--gl-navy);
+  border-radius: 14px;
+}
+.gl-face {
+  background: linear-gradient(180deg, #ffffff 0%, var(--gl-face) 100%);
+  border: 3px solid var(--gl-navy);
+  border-radius: 12px;
+}
+
+/* Píldoras (gemas, contadores) */
+.gl-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  border: 3px solid var(--gl-navy);
+  background: #fff;
+  color: var(--gl-navy-deep);
+  font-weight: 800;
+  box-shadow: 0 3px 0 var(--gl-navy);
+  padding: 0.22rem 0.7rem;
+}
+.gl-pill-pink {
+  background: linear-gradient(180deg, var(--gl-pink-light), var(--gl-pink));
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(160, 40, 90, 0.4);
+}
+
+/* Títulos blancos con contorno azul marino (como el logo de Gacha Life) */
+.gl-title {
+  color: #fff;
+  text-shadow:
+    -2px 0 var(--gl-navy), 2px 0 var(--gl-navy), 0 -2px var(--gl-navy), 0 2px var(--gl-navy),
+    -2px -2px var(--gl-navy), 2px -2px var(--gl-navy), -2px 2px var(--gl-navy), 2px 2px var(--gl-navy),
+    0 4px 0 rgba(30, 69, 128, 0.35);
+}
+
+/* Franja de encabezado de panel (barra de título celeste/azul) */
+.gl-strip {
+  background: linear-gradient(180deg, var(--gl-blue) 0%, var(--gl-blue-dark) 100%);
+  border-bottom: 3px solid var(--gl-navy);
+  color: #fff;
+  text-shadow: 0 2px 0 rgba(30, 69, 128, 0.45);
+}
+
+/* ==========================================================================
+   Fondo de cielo con nubes
+   ========================================================================== */
+.gl-sky {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--gl-sky-top) 0%, var(--gl-sky-mid) 55%, var(--gl-sky-bottom) 100%);
+}
+
+/* Nubes CSS animadas (capa decorativa) */
+.gl-cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.92;
+  filter: drop-shadow(0 6px 6px rgba(70, 140, 190, 0.18));
+  animation: glDrift linear infinite;
+  pointer-events: none;
+}
+.gl-cloud::before,
+.gl-cloud::after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+.gl-cloud::before {
+  width: 55%;
+  height: 130%;
+  left: 12%;
+  top: -62%;
+}
+.gl-cloud::after {
+  width: 42%;
+  height: 110%;
+  right: 14%;
+  top: -48%;
+}
+
+@keyframes glDrift {
+  from {
+    transform: translateX(-25vw);
+  }
+  to {
+    transform: translateX(125vw);
+  }
+}
+
+/* ==========================================================================
+   Scrollbar estilo Gacha Life
+   ========================================================================== */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(255, 228, 236, 0.4);
-  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #FF9EAA;
-  border-radius: 9999px;
-  border: 2px solid rgba(255, 255, 255, 0.7);
+  background: var(--gl-blue);
+  border: 2px solid var(--gl-navy);
+  border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF6F91;
+  background: var(--gl-pink);
 }
 
-/* Pastel glow utilities */
+/* ==========================================================================
+   Utilidades varias
+   ========================================================================== */
 .glow-pink {
-  filter: drop-shadow(0 0 8px rgba(255, 158, 170, 0.6));
+  filter: drop-shadow(0 0 8px rgba(255, 135, 178, 0.75));
 }
 .glow-purple {
-  filter: drop-shadow(0 0 10px rgba(155, 114, 207, 0.7));
+  filter: drop-shadow(0 0 10px rgba(143, 109, 196, 0.7));
 }
 .glow-gold {
   filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.8));
 }
 
-/* Card hover animations */
 .card-hover {
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
@@ -77,4 +299,33 @@
 }
 .card-hover:active {
   transform: scale(0.97);
+}
+
+/* Relleno de progreso tipo barra GL */
+.gl-bar {
+  background: #fff;
+  border: 2px solid var(--gl-navy);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.gl-bar-fill {
+  background: linear-gradient(90deg, var(--gl-pink-light), var(--gl-pink), var(--gl-yellow));
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+/* Aparición suave de modales */
+@keyframes glFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.animate-fadeIn {
+  animation: glFadeIn 0.25s ease-out;
 }

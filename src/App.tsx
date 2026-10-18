@@ -201,7 +201,7 @@ export const App: React.FC = () => {
   const currentCharacter = characters[activeSlot] || characters[0];
 
   return (
-    <div className="app-shell flex flex-col overflow-hidden bg-[#C9CBF2]">
+    <div className="app-shell flex flex-col overflow-hidden">
       {/* Barra superior solo fuera del menú principal */}
       {screen !== 'home' && (
         <ModeBar

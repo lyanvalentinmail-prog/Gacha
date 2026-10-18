@@ -4,6 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
+        gl: {
+          skyTop: '#4FB9EC',
+          skyMid: '#7ED0F5',
+          skyBottom: '#B3E5FB',
+          navy: '#2B5FA8',
+          navyDeep: '#1E4580',
+          pink: '#FF87B2',
+          pinkDark: '#E56593',
+          pinkLight: '#FFB1CE',
+          blue: '#74C9F0',
+          blueDark: '#4AA0D0',
+          blueLight: '#A8DEF8',
+          yellow: '#FFE06B',
+          yellowDark: '#E5B84B',
+          green: '#95D97C',
+          greenDark: '#63B34C',
+          purple: '#B79AE0',
+          purpleDark: '#8F6DC4',
+          panel: '#C3E7FB',
+          panel2: '#A5D8F4',
+          face: '#EAF6FF',
+        },
         chibi: {
           pink: '#FF9EAA',
           lightpink: '#FFF0F5',
@@ -20,11 +42,12 @@ export default {
         },
       },
       fontFamily: {
-        anime: ['"Quicksand"', '"Nunito"', 'system-ui', 'sans-serif'],
+        display: ['"Fredoka"', '"Baloo 2"', 'system-ui', 'sans-serif'],
+        anime: ['"Fredoka"', '"Baloo 2"', '"Nunito"', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        'cute': '0 8px 24px -4px rgba(255, 158, 170, 0.25), 0 4px 12px -2px rgba(155, 114, 207, 0.15)',
-        'cute-lg': '0 12px 32px -4px rgba(255, 158, 170, 0.35), 0 6px 16px -2px rgba(155, 114, 207, 0.2)',
+        'cute': '0 8px 24px -4px rgba(255, 135, 178, 0.35), 0 4px 12px -2px rgba(74, 160, 208, 0.25)',
+        'cute-lg': '0 12px 32px -4px rgba(255, 135, 178, 0.45), 0 6px 16px -2px rgba(74, 160, 208, 0.3)',
         'inner-glow': 'inset 0 2px 8px rgba(255, 255, 255, 0.6)',
       },
       animation: {
@@ -43,8 +66,8 @@ export default {
           '50%': { transform: 'translateY(-8px)' },
         },
         pulseGlow: {
-          '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 10px rgba(255, 111, 145, 0.6))' },
-          '50%': { opacity: '.85', filter: 'drop-shadow(0 0 20px rgba(155, 114, 207, 0.8))' },
+          '0%, 100%': { opacity: '1', filter: 'drop-shadow(0 0 10px rgba(255, 135, 178, 0.6))' },
+          '50%': { opacity: '.85', filter: 'drop-shadow(0 0 20px rgba(143, 109, 196, 0.8))' },
         },
         sparkle: {
           '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '1' },

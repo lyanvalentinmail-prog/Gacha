@@ -300,18 +300,18 @@ export const StudioMode: React.FC<StudioModeProps> = ({
   const bgObj = BACKGROUND_OPTIONS.find((b) => b.id === activeScene.backgroundId) || BACKGROUND_OPTIONS[0];
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden bg-pink-50/30">
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#B3E5FB]">
       {/* Top Studio Control Bar */}
-      <div className="bg-white/90 backdrop-blur-md border-b border-pink-200/70 p-2.5 sm:px-6 flex items-center justify-between gap-2 overflow-x-auto z-30">
+      <div className="bg-white/90 backdrop-blur-md border-b border-[#74C9F0] p-2.5 sm:px-6 flex items-center justify-between gap-2 overflow-x-auto z-30">
         <div className="flex items-center gap-2">
           {/* Scene selector & name */}
-          <div className="flex items-center gap-1.5 bg-pink-50 px-3 py-1.5 rounded-2xl border border-pink-200">
-            <FolderOpen className="w-4 h-4 text-[#7E57C2]" />
+          <div className="flex items-center gap-1.5 bg-[#EAF6FF] px-3 py-1.5 rounded-2xl border border-[#74C9F0]">
+            <FolderOpen className="w-4 h-4 text-[#1E4580]" />
             <input
               type="text"
               value={activeScene.name}
               onChange={(e) => updateActiveScene((s) => ({ ...s, name: e.target.value }))}
-              className="text-xs sm:text-sm font-extrabold text-[#3D344B] bg-transparent focus:outline-none w-36 sm:w-56"
+              className="text-xs sm:text-sm font-extrabold text-[#1E4580] bg-transparent focus:outline-none w-36 sm:w-56"
             />
           </div>
 
@@ -343,7 +343,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               onSaveScenes(updated);
             }}
             title="Crear Nueva Escena"
-            className="p-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-[#7E57C2] transition-all"
+            className="p-2 rounded-xl bg-[#FFB1CE] hover:bg-[#FF87B2] text-[#1E4580] transition-all"
           >
             <Plus className="w-4 h-4" />
           </button>
@@ -356,7 +356,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               playSound('click');
               setShowAddCharModal(true);
             }}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-pink-100/80 hover:bg-pink-200 text-[#FF6F91] font-bold text-xs transition-all whitespace-nowrap"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#FFB1CE] hover:bg-[#FF87B2] text-[#E56593] font-bold text-xs transition-all whitespace-nowrap"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>+ Personaje</span>
@@ -367,7 +367,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               playSound('click');
               setShowBgModal(true);
             }}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-purple-100/80 hover:bg-purple-200 text-[#7E57C2] font-bold text-xs transition-all whitespace-nowrap"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#A8DEF8] hover:bg-[#74C9F0] text-[#1E4580] font-bold text-xs transition-all whitespace-nowrap"
           >
             <ImageIcon className="w-3.5 h-3.5" />
             <span>Fondo</span>
@@ -378,7 +378,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               playSound('click');
               setShowStickerModal(true);
             }}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-amber-100/80 hover:bg-amber-200 text-amber-700 font-bold text-xs transition-all whitespace-nowrap"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#FFE06B] hover:bg-[#FFEC9E] text-[#8A6414] font-bold text-xs transition-all whitespace-nowrap"
           >
             <Smile className="w-3.5 h-3.5" />
             <span>Stickers</span>
@@ -386,7 +386,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
 
           <button
             onClick={handleExportScenePng}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#48CAE4] to-[#0096C7] text-white font-extrabold text-xs shadow-cute hover:scale-105 transition-all whitespace-nowrap"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#74C9F0] to-[#4AA0D0] text-white font-extrabold text-xs shadow-cute hover:scale-105 transition-all whitespace-nowrap"
           >
             <Camera className="w-4 h-4" />
             <span>Exportar PNG</span>
@@ -429,7 +429,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
           )}
           {bgObj.id === 'bg_starlit' && (
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-8 right-16 w-20 h-20 rounded-full bg-amber-100/90 shadow-[0_0_50px_#FFF]" />
+              <div className="absolute top-8 right-16 w-20 h-20 rounded-full bg-[#FFE06B] shadow-[0_0_50px_#FFF]" />
             </div>
           )}
 
@@ -449,7 +449,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                   zIndex: inst.zIndex,
                 }}
                 className={`absolute cursor-grab active:cursor-grabbing transition-shadow ${
-                  isSelected ? 'ring-2 ring-[#FF6F91] ring-offset-2 rounded-2xl' : ''
+                  isSelected ? 'ring-2 ring-[#FF87B2] ring-offset-2 rounded-2xl' : ''
                 }`}
               >
                 {/* Speech Bubble */}
@@ -460,7 +460,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                     }}
                     className={`studio-bubble absolute -top-16 ${
                       inst.bubble.tailSide === 'left' ? '-left-6' : '-right-6'
-                    } min-w-[140px] max-w-[240px] bg-white text-[#3D344B] border-2 border-[#4A3B52] font-bold text-xs px-3 py-2 rounded-2xl shadow-md text-center pointer-events-none z-30`}
+                    } min-w-[140px] max-w-[240px] bg-white text-[#1E4580] border-2 border-[#4A3B52] font-bold text-xs px-3 py-2 rounded-2xl shadow-md text-center pointer-events-none z-30`}
                   >
                     {inst.bubble.text}
                     {/* Bubble tail pointer */}
@@ -506,8 +506,8 @@ export const StudioMode: React.FC<StudioModeProps> = ({
 
         {/* Selected Element Floating Transform Toolbar */}
         {selectedChar && (
-          <div className="absolute bottom-6 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-pink-200/80 shadow-cute flex items-center gap-2 z-40 max-w-[95vw] overflow-x-auto">
-            <span className="text-xs font-black text-[#FF6F91] px-2 truncate max-w-[120px]">
+          <div className="absolute bottom-6 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-[#74C9F0] shadow-cute flex items-center gap-2 z-40 max-w-[95vw] overflow-x-auto">
+            <span className="text-xs font-black text-[#E56593] px-2 truncate max-w-[120px]">
               {selectedChar.character.name}
             </span>
 
@@ -515,7 +515,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
             <button
               onClick={handleFlipSelected}
               title="Voltear horizontalmente"
-              className="p-1.5 rounded-xl hover:bg-pink-100 text-[#7A6E85] hover:text-[#FF6F91] transition-all"
+              className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#E56593] transition-all"
             >
               <FlipHorizontal className="w-4 h-4" />
             </button>
@@ -524,14 +524,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
             <button
               onClick={() => handleRotateSelected(15)}
               title="Girar +15°"
-              className="p-1.5 rounded-xl hover:bg-pink-100 text-[#7A6E85] hover:text-[#FF6F91] transition-all"
+              className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#E56593] transition-all"
             >
               <RotateCw className="w-4 h-4" />
             </button>
 
             {/* Scale Slider */}
-            <div className="flex items-center gap-1.5 px-2 border-l border-pink-100">
-              <span className="text-[10px] font-bold text-gray-400">Tamaño</span>
+            <div className="flex items-center gap-1.5 px-2 border-l border-[#A8DEF8]">
+              <span className="text-[10px] font-bold text-[#4AA0D0]">Tamaño</span>
               <input
                 type="range"
                 min="0.5"
@@ -539,7 +539,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 step="0.05"
                 value={selectedChar.scale}
                 onChange={(e) => handleScaleSelected(parseFloat(e.target.value))}
-                className="w-20 accent-[#FF6F91]"
+                className="w-20 accent-[#FF87B2]"
               />
             </div>
 
@@ -547,7 +547,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
             <select
               value={selectedChar.character.parts.pose}
               onChange={(e) => handleChangePose(e.target.value)}
-              className="text-xs font-bold bg-pink-50 border border-pink-200 rounded-xl px-2 py-1 text-[#3D344B] focus:outline-none"
+              className="text-xs font-bold bg-[#EAF6FF] border border-[#74C9F0] rounded-xl px-2 py-1 text-[#1E4580] focus:outline-none"
             >
               {POSE_OPTIONS.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -565,25 +565,25 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 setShowBubbleEditor(true);
               }}
               title="Editar Diálogo"
-              className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-purple-50 hover:bg-purple-100 text-[#7E57C2] font-bold text-xs"
+              className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#EAF6FF] hover:bg-[#C5E8FB] text-[#1E4580] font-bold text-xs"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Diálogo</span>
             </button>
 
             {/* Layers up/down */}
-            <div className="flex items-center gap-1 border-l border-pink-100 pl-1">
+            <div className="flex items-center gap-1 border-l border-[#A8DEF8] pl-1">
               <button
                 onClick={handleBringForward}
                 title="Traer al frente"
-                className="p-1.5 rounded-xl hover:bg-pink-100 text-[#7A6E85]"
+                className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0]"
               >
                 <ArrowUp className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={handleSendBackward}
                 title="Enviar atrás"
-                className="p-1.5 rounded-xl hover:bg-pink-100 text-[#7A6E85]"
+                className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0]"
               >
                 <ArrowDown className="w-3.5 h-3.5" />
               </button>
@@ -604,14 +604,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
       {/* Modal: Add Character to Scene */}
       {showAddCharModal && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-lg w-full border border-pink-200 shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-pink-100 pb-2">
-              <h3 className="font-extrabold text-base text-[#3D344B]">
+          <div className="bg-white rounded-3xl p-5 max-w-lg w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
+            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
+              <h3 className="font-extrabold text-base text-[#1E4580]">
                 Añadir Personaje a la Escena
               </h3>
               <button
                 onClick={() => setShowAddCharModal(false)}
-                className="p-1 rounded-full hover:bg-pink-100 text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -621,12 +621,12 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 <button
                   key={char.id}
                   onClick={() => handleAddCharacter(char)}
-                  className="p-3 rounded-2xl border border-pink-100 hover:border-[#FF6F91] hover:bg-pink-50/50 transition-all flex flex-col items-center text-center shadow-xs group"
+                  className="p-3 rounded-2xl border border-[#A8DEF8] hover:border-[#FF87B2] hover:bg-[#EAF6FF]/50 transition-all flex flex-col items-center text-center shadow-xs group"
                 >
                   <div className="w-16 h-20 overflow-hidden relative">
                     <ChibiRenderer character={char} animate={false} scale={0.6} className="w-32 h-32 absolute -top-4 -left-6" />
                   </div>
-                  <span className="text-xs font-extrabold text-[#3D344B] group-hover:text-[#FF6F91] truncate w-full mt-1">
+                  <span className="text-xs font-extrabold text-[#1E4580] group-hover:text-[#E56593] truncate w-full mt-1">
                     {char.name}
                   </span>
                 </button>
@@ -639,14 +639,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
       {/* Modal: Change Background */}
       {showBgModal && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-xl w-full border border-pink-200 shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-pink-100 pb-2">
-              <h3 className="font-extrabold text-base text-[#3D344B]">
+          <div className="bg-white rounded-3xl p-5 max-w-xl w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
+            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
+              <h3 className="font-extrabold text-base text-[#1E4580]">
                 Seleccionar Fondo del Estudio
               </h3>
               <button
                 onClick={() => setShowBgModal(false)}
-                className="p-1 rounded-full hover:bg-pink-100 text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -662,8 +662,8 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                   }}
                   className={`p-3 rounded-2xl border text-left transition-all ${
                     activeScene.backgroundId === bg.id
-                      ? 'border-[#FF6F91] ring-2 ring-[#FF6F91]/50 shadow-cute scale-105'
-                      : 'border-pink-100 hover:border-pink-300'
+                      ? 'border-[#FF87B2] ring-2 ring-[#FF87B2]/50 shadow-cute scale-105'
+                      : 'border-[#A8DEF8] hover:border-[#74C9F0]'
                   }`}
                 >
                   <div className={`w-full h-16 rounded-xl mb-2 flex items-center justify-center text-3xl shadow-inner bg-gradient-to-tr ${bg.gradient} overflow-hidden relative`}>
@@ -680,10 +680,10 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                       <span>{bg.icon}</span>
                     )}
                   </div>
-                  <p className="text-xs font-extrabold text-[#3D344B] truncate leading-tight">
+                  <p className="text-xs font-extrabold text-[#1E4580] truncate leading-tight">
                     {bg.name}
                   </p>
-                  <span className="text-[10px] text-[#9B72CF] font-semibold">
+                  <span className="text-[10px] text-[#8F6DC4] font-semibold">
                     {bg.category}
                   </span>
                 </button>
@@ -696,14 +696,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
       {/* Modal: Add Sticker */}
       {showStickerModal && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-md w-full border border-pink-200 shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-pink-100 pb-2">
-              <h3 className="font-extrabold text-base text-[#3D344B]">
+          <div className="bg-white rounded-3xl p-5 max-w-md w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
+            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
+              <h3 className="font-extrabold text-base text-[#1E4580]">
                 Añadir Sticker Decorativo
               </h3>
               <button
                 onClick={() => setShowStickerModal(false)}
-                className="p-1 rounded-full hover:bg-pink-100 text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -713,10 +713,10 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 <button
                   key={stk.id}
                   onClick={() => handleAddSticker(stk.id)}
-                  className="p-3 rounded-2xl border border-pink-100 hover:border-[#FFD700] hover:bg-amber-50/50 flex flex-col items-center gap-1 transition-all group"
+                  className="p-3 rounded-2xl border border-[#A8DEF8] hover:border-[#FFD700] hover:bg-[#FFF3B8]/50 flex flex-col items-center gap-1 transition-all group"
                 >
                   <span className="text-4xl group-hover:scale-125 transition-transform">{stk.icon}</span>
-                  <span className="text-[10px] font-bold text-[#7A6E85]">{stk.label}</span>
+                  <span className="text-[10px] font-bold text-[#4AA0D0]">{stk.label}</span>
                 </button>
               ))}
             </div>
@@ -727,21 +727,21 @@ export const StudioMode: React.FC<StudioModeProps> = ({
       {/* Modal: Edit Speech Bubble */}
       {showBubbleEditor && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-md w-full border border-pink-200 shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-pink-100 pb-2">
-              <h3 className="font-extrabold text-base text-[#3D344B]">
+          <div className="bg-white rounded-3xl p-5 max-w-md w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
+            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
+              <h3 className="font-extrabold text-base text-[#1E4580]">
                 Bocadillo de Diálogo
               </h3>
               <button
                 onClick={() => setShowBubbleEditor(false)}
-                className="p-1 rounded-full hover:bg-pink-100 text-gray-400 hover:text-gray-600"
+                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#7A6E85] uppercase mb-1">
+              <label className="block text-xs font-bold text-[#4AA0D0] uppercase mb-1">
                 Texto del diálogo
               </label>
               <textarea
@@ -749,20 +749,20 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 onChange={(e) => setBubbleText(e.target.value)}
                 placeholder="Escribe lo que dice el personaje..."
                 rows={3}
-                className="w-full text-sm font-bold p-3 border border-pink-200 rounded-2xl focus:outline-none focus:border-[#FF6F91] resize-none"
+                className="w-full text-sm font-bold p-3 border border-[#74C9F0] rounded-2xl focus:outline-none focus:border-[#FF87B2] resize-none"
               />
             </div>
 
             <div className="flex items-center justify-between">
               <div>
-                <label className="block text-xs font-bold text-[#7A6E85] uppercase mb-1">
+                <label className="block text-xs font-bold text-[#4AA0D0] uppercase mb-1">
                   Orientación
                 </label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setBubbleTail('left')}
                     className={`px-3 py-1 rounded-xl text-xs font-bold border ${
-                      bubbleTail === 'left' ? 'bg-[#FF6F91] text-white' : 'bg-pink-50 text-[#7A6E85]'
+                      bubbleTail === 'left' ? 'bg-[#FF87B2] text-white' : 'bg-[#EAF6FF] text-[#4AA0D0]'
                     }`}
                   >
                     Izquierda
@@ -770,7 +770,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                   <button
                     onClick={() => setBubbleTail('right')}
                     className={`px-3 py-1 rounded-xl text-xs font-bold border ${
-                      bubbleTail === 'right' ? 'bg-[#FF6F91] text-white' : 'bg-pink-50 text-[#7A6E85]'
+                      bubbleTail === 'right' ? 'bg-[#FF87B2] text-white' : 'bg-[#EAF6FF] text-[#4AA0D0]'
                     }`}
                   >
                     Derecha
@@ -784,13 +784,13 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                     setBubbleText('');
                     handleSaveBubble();
                   }}
-                  className="px-3 py-2 rounded-xl bg-gray-100 text-gray-600 text-xs font-bold"
+                  className="px-3 py-2 rounded-xl bg-[#EAF6FF] text-[#2B5FA8] text-xs font-bold"
                 >
                   Quitar Bocadillo
                 </button>
                 <button
                   onClick={handleSaveBubble}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF6F91] to-[#9B72CF] text-white text-xs font-extrabold shadow-cute"
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF87B2] to-[#74C9F0] text-white text-xs font-extrabold shadow-cute"
                 >
                   Guardar
                 </button>
