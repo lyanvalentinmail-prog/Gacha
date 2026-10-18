@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="wings_fairy" stroke="#5C3D8D" stroke-width="2" fill="var(--wings, #FFFFFF)" fillOpacity="0.82">
+              <ellipse cx="100" cy="170" rx="60" ry="35" transform="rotate(-35 100 170)" />
+              <ellipse cx="110" cy="225" rx="42" ry="24" transform="rotate(20 110 225)" />
+              <ellipse cx="300" cy="170" rx="60" ry="35" transform="rotate(35 300 170)" />
+              <ellipse cx="290" cy="225" rx="42" ry="24" transform="rotate(-20 290 225)" />
+            </g>
+</svg>

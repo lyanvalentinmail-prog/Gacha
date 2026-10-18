@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1A1046"/>
+      <stop offset="0.6" stop-color="#31227A"/>
+      <stop offset="1" stop-color="#4A36A0"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="800" height="600" fill="url(#fsky)"/>
+  <!-- Estrellas -->
+  <g fill="#FFF9C4">
+    <circle cx="80" cy="90" r="2.5"/><circle cx="180" cy="140" r="1.8"/><circle cx="280" cy="70" r="2.2"/>
+    <circle cx="380" cy="120" r="1.6"/><circle cx="500" cy="60" r="2.4"/><circle cx="600" cy="130" r="1.8"/>
+    <circle cx="700" cy="80" r="2.2"/><circle cx="760" cy="160" r="1.6"/><circle cx="140" cy="210" r="1.8"/>
+    <circle cx="330" cy="190" r="1.5"/><circle cx="560" cy="210" r="1.8"/><circle cx="680" cy="240" r="1.5"/>
+    <circle cx="40" cy="260" r="1.6"/><circle cx="450" cy="250" r="1.5"/><circle cx="770" cy="300" r="1.6"/>
+    <circle cx="220" cy="300" r="1.4"/><circle cx="320" cy="330" r="1.4"/><circle cx="620" cy="320" r="1.5"/>
+    <circle cx="120" cy="350" r="1.4"/><circle cx="500" cy="350" r="1.4"/>
+  </g>
+  <!-- Estrellas grandes con destello -->
+  <g fill="#FFF9C4">
+    <polygon points="150,120 153,128 161,130 153,133 150,141 147,133 139,130 147,128"/>
+    <polygon points="550,95 553,103 561,105 553,108 550,116 547,108 539,105 547,103"/>
+    <polygon points="420,180 422,186 428,188 422,190 420,196 418,190 412,188 418,186"/>
+  </g>
+  <!-- Luna -->
+  <circle cx="640" cy="170" r="55" fill="#FFF9C4"/>
+  <circle cx="662" cy="155" r="48" fill="#31227A"/>
+  <circle cx="618" cy="185" r="5" fill="#F0E68C" opacity="0.7"/>
+  <circle cx="630" cy="165" r="3.5" fill="#F0E68C" opacity="0.7"/>
+  <!-- Nebulosa -->
+  <ellipse cx="220" cy="180" rx="130" ry="70" fill="#7E57C2" opacity="0.35"/>
+  <ellipse cx="260" cy="160" rx="80" ry="45" fill="#B39DDB" opacity="0.3"/>
+  <ellipse cx="520" cy="280" rx="110" ry="55" fill="#4DD0E1" opacity="0.18"/>
+  <!-- Colinas nocturnas -->
+  <path d="M 0 420 Q 200 350 420 410 Q 620 360 800 420 L 800 600 L 0 600 Z" fill="#241B5E"/>
+  <path d="M 0 480 Q 250 430 500 480 Q 680 450 800 495 L 800 600 L 0 600 Z" fill="#171040"/>
+  <!-- Pinos silueta -->
+  <g fill="#0F0A2E">
+    <polygon points="120,395 85,455 155,455"/>
+    <polygon points="120,425 75,485 165,485"/>
+    <rect x="113" y="485" width="14" height="25"/>
+    <polygon points="700,375 668,430 732,430"/>
+    <polygon points="700,405 658,465 742,465"/>
+    <rect x="693" y="465" width="14" height="25"/>
+  </g>
+  <!-- Luciérnagas -->
+  <g>
+    <circle cx="300" cy="420" r="4" fill="#FFF176"/>
+    <circle cx="300" cy="420" r="8" fill="#FFF176" opacity="0.35"/>
+    <circle cx="480" cy="460" r="3.5" fill="#FFF176"/>
+    <circle cx="480" cy="460" r="7" fill="#FFF176" opacity="0.35"/>
+    <circle cx="220" cy="500" r="3" fill="#FFF176"/>
+    <circle cx="220" cy="500" r="6" fill="#FFF176" opacity="0.35"/>
+    <circle cx="580" cy="510" r="3.5" fill="#FFF176"/>
+    <circle cx="580" cy="510" r="7" fill="#FFF176" opacity="0.35"/>
+    <circle cx="400" cy="545" r="3" fill="#FFF176"/>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="acc_heart_glasses" stroke="var(--glasses, #FFD700)" stroke-width="2.5" fill="rgba(255, 111, 145, 0.25)">
+              <path d="M 155 160 C 145 145 125 155 155 180 C 185 155 165 145 155 160 Z" />
+              <path d="M 245 160 C 235 145 215 155 245 180 C 275 155 255 145 245 160 Z" />
+              <line x1="175" y1="165" x2="225" y2="165" stroke-width="2" />
+            </g>
+</svg>

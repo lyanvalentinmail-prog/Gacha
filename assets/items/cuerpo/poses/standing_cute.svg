@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="arms_default" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Left arm -->
+              <path d="M 160 245 Q 140 280 148 315" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="148" cy="318" r="7" fill="var(--skin, #FFE6D8)" />
+              <!-- Right arm -->
+              <path d="M 240 245 Q 260 280 252 315" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="252" cy="318" r="7" fill="var(--skin, #FFE6D8)" />
+            </g>
+</svg>

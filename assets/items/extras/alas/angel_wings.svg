@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="wings_angel" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Left Wing -->
+              <path
+                d="M 150 230 C 90 190, 40 120, 45 60 C 70 90, 85 130, 95 170 C 85 140, 105 130, 120 180 C 120 160, 135 160, 145 210 Z"
+                fill="var(--wings, #FFFFFF)"
+              />
+              <!-- Feathers inner layer -->
+              <path d="M 85 110 C 100 135, 115 160, 125 195" fill="none" stroke="#E2E8F0" stroke-width="2" />
+              <!-- Right Wing -->
+              <path
+                d="M 250 230 C 310 190, 360 120, 355 60 C 330 90, 315 130, 305 170 C 315 140, 295 130, 280 180 C 280 160, 265 160, 255 210 Z"
+                fill="var(--wings, #FFFFFF)"
+              />
+              <path d="M 315 110 C 300 135, 285 160, 275 195" fill="none" stroke="#E2E8F0" stroke-width="2" />
+            </g>
+</svg>

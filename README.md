@@ -61,6 +61,14 @@ carpeta `android/` con Android Studio para ejecutar la app en un emulador o disp
 
 ## 🌟 Características Principales
 
+### 0. Menú Principal estilo Gacha Life
+La pantalla de inicio replica la clásica interfaz de *Gacha Life*:
+- **Panel izquierdo**: slots de personajes (miniaturas vivas) con botón **Slots** para crear más.
+- **Escena central**: tu chibi sobre un fondo de parque (u otros fondos) con botones flotantes:
+  **Fondo**, **Skits**, **Gacha**, **Zoom**, **Ocultar**, **Regalos**, **Juegos**.
+- **Panel derecho "Vestir"**: botones de categoría (Preajustes, Cuerpo, Cabello, Rostro, Ropa,
+  Otros, Objetos, Perfil) más el botón grande **Estudio** y **Opciones**.
+
 ### 1. Editor de Personajes Completo
 - **Cabello Multicapa**:
   - Peinados delanteros (flequillos: recto, hacia un lado, cortina, despeinado spiky, estilo hime, corazón, trenza diadema).
@@ -130,6 +138,24 @@ carpeta `android/` con Android Studio para ejecutar la app en un emulador o disp
 - Botón para silenciar/activar sonido en el encabezado.
 
 ---
+
+## 📁 Assets — ropa, accesorios y partes de cuerpo
+
+**Todo el arte del juego vive en [`assets/items/`](assets/items/)**, organizado en carpetas
+(`ropa/`, `cabello/`, `rostro/`, `accesorios/`, `extras/`, `props/`, `cuerpo/`, `fondos/`).
+Cada item son archivos hermanos:
+
+```
+assets/items/ropa/tops/mi-sudadera.svg   ← el dibujo
+assets/items/ropa/tops/mi-sudadera.txt   ← el nombre (un renglón)
+assets/items/ropa/tops/mi-sudadera.json  ← rareza y descripción (opcional)
+```
+
+El juego los detecta automáticamente al compilar: **para agregar ropa o cosas nuevas sólo
+hay que soltar los archivos en la carpeta correcta** (sin tocar código). Los items de rareza
+4★-6★ entran solos al pool del Gacha y a la colección.
+
+📖 **Guía completa: [`assets/items/README.md`](assets/items/README.md)**
 
 ## 🛠️ Tecnologías Utilizadas
 

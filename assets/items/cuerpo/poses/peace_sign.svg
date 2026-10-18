@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="arms_peace" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Left Arm relaxed -->
+              <path d="M 160 245 Q 140 280 145 315" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <circle cx="145" cy="320" r="7" fill="var(--skin, #FFE6D8)" />
+              <!-- Right Arm making peace sign near head -->
+              <path d="M 240 245 Q 265 240 265 200" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <!-- Peace hand -->
+              <circle cx="265" cy="195" r="8" fill="var(--skin, #FFE6D8)" />
+              <line x1="262" y1="190" x2="258" y2="175" stroke="var(--skin, #FFE6D8)" stroke-width="4" stroke-linecap="round" />
+              <line x1="268" y1="190" x2="272" y2="175" stroke="var(--skin, #FFE6D8)" stroke-width="4" stroke-linecap="round" />
+            </g>
+</svg>

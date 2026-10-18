@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_hightwintails" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <!-- Left High Twin -->
+              <path
+                d="M 110 130 C 50 110, 20 170, 35 290 C 50 330, 75 310, 70 260 C 65 210, 85 160, 115 150 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+              <!-- Left Hair Tie -->
+              <ellipse cx="110" cy="135" rx="8" ry="12" fill="var(--top-secondary, #FF6F91)" />
+              <!-- Right High Twin -->
+              <path
+                d="M 290 130 C 350 110, 380 170, 365 290 C 350 330, 325 310, 330 260 C 335 210, 315 160, 285 150 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+              <!-- Right Hair Tie -->
+              <ellipse cx="290" cy="135" rx="8" ry="12" fill="var(--top-secondary, #FF6F91)" />
+            </g>
+</svg>

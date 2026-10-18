@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <ellipse
+              cx="235"
+              cy="335"
+              rx="18"
+              ry="18"
+              fill="var(--tail, #FFAAA6)"
+              stroke="#4A3B52"
+              stroke-width="2.5"
+            />
+</svg>

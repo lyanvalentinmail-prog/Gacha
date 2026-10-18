@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="prop_teddy" stroke="#4A3B52" stroke-width="2">
+              <circle cx="200" cy="300" r="16" fill="#D7CCC8" />
+              <circle cx="190" cy="288" r="5" fill="#D7CCC8" />
+              <circle cx="210" cy="288" r="5" fill="#D7CCC8" />
+              <circle cx="196" cy="298" r="1.5" fill="#3D2817" />
+              <circle cx="204" cy="298" r="1.5" fill="#3D2817" />
+              <ellipse cx="200" cy="303" rx="4" ry="3" fill="#FFFDF9" />
+              <path d="M 200 306 L 200 322" stroke="#3D2817" stroke-width="1" />
+            </g>
+</svg>

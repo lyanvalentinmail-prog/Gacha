@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="bottom_star" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 165 305 L 135 355 Q 200 368 265 355 L 235 305 Z" fill="var(--bottom-primary, #1D3557)" />
+              <!-- Constellation stars -->
+              <polygon points="170,335 172,339 176,340 173,343 174,347 170,344 166,347 167,343 164,340 168,339" fill="#FFD700" />
+              <polygon points="230,335 232,339 236,340 233,343 234,347 230,344 226,347 227,343 224,340 228,339" fill="#FFD700" />
+              <polygon points="200,345 202,349 206,350 203,353 204,357 200,354 196,357 197,353 194,350 198,349" fill="#FFF3B0" />
+            </g>
+</svg>

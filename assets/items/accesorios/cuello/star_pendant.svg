@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="neck_star" stroke="#FFD700" stroke-width="1.5">
+              <path d="M 185 235 Q 200 255 215 235" fill="none" />
+              <polygon points="200,250 203,256 209,257 204,261 206,267 200,264 194,267 196,261 191,257 197,256" fill="#FFD700" stroke="#4A3B52" stroke-width="1.5" />
+            </g>
+</svg>

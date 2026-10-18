@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="arms_shy" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Both hands clasped in front of tummy -->
+              <path d="M 160 245 Q 170 280 195 290" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <path d="M 240 245 Q 230 280 205 290" fill="none" stroke-width="14" stroke="var(--top-primary, #FFFDF9)" stroke-linecap="round" />
+              <ellipse cx="200" cy="290" rx="10" ry="7" fill="var(--skin, #FFE6D8)" />
+            </g>
+</svg>

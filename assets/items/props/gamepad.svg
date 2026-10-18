@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="prop_gamepad" stroke="#4A3B52" stroke-width="2">
+              <rect x="245" y="295" width="45" height="26" rx="8" fill="#D8B4E2" />
+              <!-- D-Pad -->
+              <polygon points="255,302 259,302 259,306 263,306 263,310 259,310 259,314 255,314 255,310 251,310 251,306 255,306" fill="#2B2D42" />
+              <!-- Buttons -->
+              <circle cx="275" cy="305" r="2.5" fill="#FF5376" />
+              <circle cx="282" cy="311" r="2.5" fill="#64DFDF" />
+            </g>
+</svg>

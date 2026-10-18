@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE4EF"/>
+      <stop offset="1" stop-color="#FFF3F8"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="800" height="600" fill="url(#fsky)"/>
+  <ellipse cx="150" cy="80" rx="75" ry="30" fill="#FFFFFF" opacity="0.85"/>
+  <ellipse cx="640" cy="60" rx="85" ry="32" fill="#FFFFFF" opacity="0.85"/>
+  <!-- Cerros -->
+  <path d="M 0 300 Q 220 220 430 290 Q 620 235 800 300 L 800 420 L 0 420 Z" fill="#F8BBD0"/>
+  <path d="M 0 350 Q 250 290 500 345 Q 680 305 800 355 L 800 440 L 0 440 Z" fill="#F48FB1"/>
+  <!-- Cerezos -->
+  <rect x="185" y="255" width="24" height="115" rx="10" fill="#8D6E63"/>
+  <path d="M 197 300 Q 160 285 150 265 M 197 280 Q 235 270 250 250" stroke="#8D6E63" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <circle cx="197" cy="185" r="75" fill="#F8BBD0"/>
+  <circle cx="140" cy="215" r="48" fill="#F8BBD0"/>
+  <circle cx="255" cy="212" r="50" fill="#F8BBD0"/>
+  <circle cx="165" cy="155" r="9" fill="#F48FB1"/>
+  <circle cx="225" cy="170" r="10" fill="#F48FB1"/>
+  <circle cx="195" cy="220" r="9" fill="#F48FB1"/>
+  <rect x="600" y="275" width="20" height="95" rx="9" fill="#8D6E63"/>
+  <circle cx="610" cy="215" r="58" fill="#F8BBD0"/>
+  <circle cx="565" cy="240" r="38" fill="#F8BBD0"/>
+  <circle cx="655" cy="240" r="38" fill="#F8BBD0"/>
+  <circle cx="630" cy="195" r="8" fill="#F48FB1"/>
+  <circle cx="590" cy="225" r="7" fill="#F48FB1"/>
+  <!-- Arbustos floridos -->
+  <ellipse cx="400" cy="365" rx="95" ry="42" fill="#F06292"/>
+  <circle cx="355" cy="352" r="12" fill="#F8BBD0"/>
+  <circle cx="410" cy="345" r="13" fill="#F8BBD0"/>
+  <circle cx="455" cy="356" r="11" fill="#F8BBD0"/>
+  <!-- Césped -->
+  <rect x="0" y="395" width="800" height="205" fill="#81C784"/>
+  <path d="M 0 435 Q 250 405 500 430 Q 680 410 800 440 L 800 600 L 0 600 Z" fill="#66BB6A"/>
+  <!-- Pétalos cayendo -->
+  <g fill="#F8BBD0">
+    <ellipse cx="120" cy="140" rx="7" ry="4" transform="rotate(30 120 140)"/>
+    <ellipse cx="320" cy="110" rx="7" ry="4" transform="rotate(-20 320 110)"/>
+    <ellipse cx="520" cy="160" rx="7" ry="4" transform="rotate(45 520 160)"/>
+    <ellipse cx="700" cy="130" rx="7" ry="4" transform="rotate(-35 700 130)"/>
+    <ellipse cx="240" cy="260" rx="6" ry="3.5" transform="rotate(20 240 260)"/>
+    <ellipse cx="580" cy="300" rx="6" ry="3.5" transform="rotate(-15 580 300)"/>
+    <ellipse cx="420" cy="220" rx="6" ry="3.5" transform="rotate(40 420 220)"/>
+    <ellipse cx="80" cy="330" rx="6" ry="3.5" transform="rotate(-25 80 330)"/>
+  </g>
+  <!-- Flores de césped -->
+  <circle cx="120" cy="470" r="8" fill="#FFF" stroke="#F48FB1" stroke-width="2"/>
+  <circle cx="120" cy="470" r="3" fill="#FFD166"/>
+  <circle cx="680" cy="485" r="8" fill="#FFF" stroke="#F48FB1" stroke-width="2"/>
+  <circle cx="680" cy="485" r="3" fill="#FFD166"/>
+  <circle cx="380" cy="505" r="8" fill="#FFF" stroke="#F48FB1" stroke-width="2"/>
+  <circle cx="380" cy="505" r="3" fill="#FFD166"/>
+  <circle cx="520" cy="530" r="8" fill="#FFF" stroke="#F48FB1" stroke-width="2"/>
+  <circle cx="520" cy="530" r="3" fill="#FFD166"/>
+  <g stroke="#388E3C" stroke-width="3" stroke-linecap="round" fill="none">
+    <path d="M 190 500 Q 195 485 200 500 M 200 500 Q 208 480 212 498"/>
+    <path d="M 600 545 Q 605 530 610 545 M 610 545 Q 618 525 622 543"/>
+    <path d="M 300 555 Q 305 540 310 555 M 310 555 Q 318 535 322 553"/>
+    <path d="M 740 520 Q 745 505 750 520 M 750 520 Q 758 500 762 518"/>
+  </g>
+</svg>

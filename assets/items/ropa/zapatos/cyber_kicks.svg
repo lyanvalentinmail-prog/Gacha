@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g id="shoes">
+
+    <path d="M 156 405 L 152 424 L 160 432 L 190 432 L 193 412 L 184 405 Z" fill="var(--shoes-primary, #FF9EAA)" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 152 424 L 192 424" stroke="#00F0FF" stroke-width="3" />
+    <polygon points="168,410 172,417 179,418 173,422 175,429 168,425 161,429 163,422 157,418 164,417" fill="#FFF3B0" opacity="0.9" />
+    <rect x="158" y="430" width="32" height="5" rx="2" fill="#00F0FF" stroke="#4A3B52" stroke-width="1.2" />
+  </g>
+  <g transform="translate(400,0) scale(-1,1)">
+
+    <path d="M 156 405 L 152 424 L 160 432 L 190 432 L 193 412 L 184 405 Z" fill="var(--shoes-primary, #FF9EAA)" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 152 424 L 192 424" stroke="#00F0FF" stroke-width="3" />
+    <polygon points="168,410 172,417 179,418 173,422 175,429 168,425 161,429 163,422 157,418 164,417" fill="#FFF3B0" opacity="0.9" />
+    <rect x="158" y="430" width="32" height="5" rx="2" fill="#00F0FF" stroke="#4A3B52" stroke-width="1.2" />
+  </g>
+</svg>

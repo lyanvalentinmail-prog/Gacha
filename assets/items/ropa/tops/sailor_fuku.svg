@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="top_sailor" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Main torso -->
+              <path d="M 165 240 L 160 310 L 240 310 L 235 240 Z" fill="var(--top-primary, #FFFDF9)" />
+              <!-- Sailor collar -->
+              <path d="M 165 240 L 140 280 L 175 280 L 200 295 L 225 280 L 260 280 L 235 240 Z" fill="var(--top-secondary, #FF9EAA)" />
+              <!-- Tie / Bow -->
+              <polygon points="200,285 190,305 200,300 210,305" fill="#FF5376" />
+              <circle cx="200" cy="285" r="5" fill="#FFD700" />
+            </g>
+</svg>

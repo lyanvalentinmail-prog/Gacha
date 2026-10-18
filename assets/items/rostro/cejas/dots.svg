@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g fill="var(--eyebrows, #4A3B52)">
+              <ellipse cx="155" cy="133" rx="6" ry="8" />
+              <ellipse cx="245" cy="133" rx="6" ry="8" />
+            </g>
+</svg>

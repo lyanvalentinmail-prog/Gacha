@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="prop_mic" stroke="#4A3B52" stroke-width="2">
+              <line x1="255" y1="320" x2="265" y2="285" stroke="#FF9EAA" stroke-width="4" />
+              <ellipse cx="266" cy="282" rx="7" ry="9" fill="#E2E8F0" />
+              <circle cx="260" cy="315" r="4" fill="#FFD700" />
+            </g>
+</svg>

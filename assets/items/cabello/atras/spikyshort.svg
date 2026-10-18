@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_spikyshort" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <path
+                d="M 110 140 L 80 180 L 105 190 L 75 230 L 115 235 L 90 270 L 150 255 L 200 260 L 250 255 L 310 270 L 285 235 L 325 230 L 295 190 L 320 180 L 290 140 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+            </g>
+</svg>

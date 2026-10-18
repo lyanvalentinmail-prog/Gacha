@@ -3,6 +3,8 @@ import { ItemOption } from '../../data/items';
 import { Rarity } from '../../types';
 import { Sparkles, Lock } from 'lucide-react';
 import { playSound } from '../../audio/soundEffects';
+import { AssetThumb } from '../AssetThumb';
+import { gachaIdFor } from '../../data/assetCatalog';
 
 interface ItemSelectorGridProps {
   options: ItemOption[];
@@ -50,23 +52,31 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
     }
   };
 
+  const isItemLocked = (opt: ItemOption): boolean => {
+    if (!unlockedSet) return false;
+    if (opt.rarity < 4) return false;
+    if (opt.asset?.empty) return false;
+    const gachaId = opt.asset?.partKey ? gachaIdFor(opt.asset.partKey, opt.id) : opt.id;
+    return !unlockedSet.has(gachaId) && !unlockedSet.has(opt.id) && !unlockedSet.has(`item_${opt.id}`);
+  };
+
   return (
     <div className="space-y-2">
       {categoryTitle && (
         <div className="flex items-center justify-between px-1">
-          <span className="text-xs font-bold text-[#7A6E85] uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#4A4D8E] uppercase tracking-wider">
             {categoryTitle}
           </span>
-          <span className="text-[11px] font-semibold text-[#9B72CF]">
+          <span className="text-[11px] font-semibold text-[#7D80D1]">
             {options.length} opciones
           </span>
         </div>
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2 max-h-[430px] overflow-y-auto pr-1">
         {options.map((opt) => {
           const isSelected = selectedId === opt.id;
-          const isLocked = unlockedSet && opt.rarity >= 4 && !unlockedSet.has(opt.id) && !unlockedSet.has(`item_${opt.id}`);
+          const isLocked = isItemLocked(opt);
 
           return (
             <button
@@ -80,24 +90,29 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
                 playSound('equip');
                 onSelect(opt.id);
               }}
-              className={`relative flex flex-col items-center p-2.5 rounded-2xl text-left border transition-all ${
+              className={`relative flex flex-col items-center p-2 rounded-2xl text-left border-[3px] transition-all ${
                 isSelected
-                  ? 'bg-gradient-to-b from-pink-50 to-purple-50 border-[#FF6F91] ring-2 ring-[#FF6F91]/50 shadow-cute scale-[1.02]'
+                  ? 'bg-white border-[#FF6F91] shadow-[0_0_0_2px_rgba(255,111,145,0.35)] scale-[1.02]'
                   : isLocked
-                  ? 'bg-gray-50/80 border-gray-200 opacity-60'
-                  : 'bg-white/90 hover:bg-pink-50/40 border-pink-100 hover:border-pink-300 shadow-xs'
+                  ? 'bg-[#E6E8FB]/60 border-[#B9BCE8] opacity-60'
+                  : 'bg-white/90 hover:bg-[#F2F3FF] border-[#B9BCE8] hover:border-[#7D80D1]'
               }`}
             >
               {/* Header with rarity badge */}
-              <div className="w-full flex items-center justify-between mb-1.5">
+              <div className="w-full flex items-center justify-between mb-1">
                 {getRarityBadge(opt.rarity)}
-                {isLocked && <Lock className="w-3.5 h-3.5 text-gray-500" />}
+                {isLocked && <Lock className="w-3.5 h-3.5 text-[#4A4D8E]" />}
               </div>
 
-              {/* Visual Thumbnail or Icon */}
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-tr from-pink-50/80 to-purple-50/80 border border-pink-200/50 flex items-center justify-center my-1 shadow-inner relative">
+              {/* Miniatura real del asset */}
+              <div
+                className="w-14 h-14 rounded-xl border-2 border-[#B9BCE8] flex items-center justify-center my-0.5 overflow-hidden"
+                style={{ backgroundColor: '#E6E8FB' }}
+              >
                 {renderThumbnail ? (
                   renderThumbnail(opt)
+                ) : opt.asset ? (
+                  <AssetThumb asset={opt.asset} />
                 ) : (
                   <Sparkles
                     className={`w-6 h-6 ${
@@ -113,10 +128,10 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
 
               {/* Title & Description */}
               <div className="w-full text-center mt-1">
-                <p className="text-xs font-extrabold text-[#3D344B] truncate leading-tight">
+                <p className="text-[11px] font-extrabold text-[#3D3B6E] truncate leading-tight">
                   {opt.name}
                 </p>
-                <p className="text-[10px] text-[#7A6E85] line-clamp-1 mt-0.5">
+                <p className="text-[9px] text-[#7D80D1] line-clamp-1 mt-0.5">
                   {opt.description}
                 </p>
               </div>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_bunny_ears" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Left Ear -->
+              <ellipse cx="150" cy="40" rx="14" ry="42" transform="rotate(-15 150 40)" fill="var(--hat-primary, #FF9EAA)" />
+              <ellipse cx="150" cy="40" rx="8" ry="30" transform="rotate(-15 150 40)" fill="#FFD1DC" />
+              <!-- Right Ear -->
+              <ellipse cx="250" cy="40" rx="14" ry="42" transform="rotate(15 250 40)" fill="var(--hat-primary, #FF9EAA)" />
+              <ellipse cx="250" cy="40" rx="8" ry="30" transform="rotate(15 250 40)" fill="#FFD1DC" />
+            </g>
+</svg>

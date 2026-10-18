@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g stroke="var(--blush, #FF9EAA)" stroke-width="2" stroke-linecap="round" opacity="0.75">
+              <line x1="135" y1="182" x2="145" y2="187" />
+              <line x1="143" y1="182" x2="153" y2="187" />
+              <line x1="151" y1="182" x2="161" y2="187" />
+              <line x1="245" y1="182" x2="255" y2="187" />
+              <line x1="253" y1="182" x2="263" y2="187" />
+              <line x1="261" y1="182" x2="271" y2="187" />
+            </g>
+</svg>

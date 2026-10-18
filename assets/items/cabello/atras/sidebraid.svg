@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_sidebraid" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <path
+                d="M 120 160 C 90 190, 85 240, 95 290 C 105 330, 90 350, 80 370 C 100 375, 115 360, 120 330 C 125 290, 120 240, 130 190 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+              <circle cx="85" cy="360" r="6" fill="var(--top-secondary, #FF6F91)" />
+            </g>
+</svg>

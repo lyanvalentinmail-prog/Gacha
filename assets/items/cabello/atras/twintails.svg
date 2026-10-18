@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_twintails" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <!-- Left pigtail -->
+              <path
+                d="M 120 150 C 70 170, 45 230, 60 320 C 75 340, 95 310, 90 270 C 85 230, 100 190, 120 180 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+              <!-- Right pigtail -->
+              <path
+                d="M 280 150 C 330 170, 355 230, 340 320 C 325 340, 305 310, 310 270 C 315 230, 300 190, 280 180 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+            </g>
+</svg>

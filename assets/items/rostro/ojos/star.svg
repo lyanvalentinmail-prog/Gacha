@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g id="eyes">
+
+    <ellipse cx="155" cy="165" rx="20" ry="24" fill="#FFFFFF" stroke="#4A3B52" stroke-width="2.5" />
+    <ellipse cx="155" cy="167" rx="17" ry="21" fill="var(--eye-primary, #FF70A6)" />
+    <ellipse cx="155" cy="176" rx="13.600000000000001" ry="11.55" fill="var(--eye-secondary, #FFD166)" opacity="0.85" />
+    <polygon points="155,155 159,165 170,167 159,171 155,181 151,171 140,167 151,165" fill="#FFF3B0" stroke="#2B2D42" stroke-width="1.2" />
+    <ellipse cx="148" cy="157" rx="5" ry="7" fill="#FFFFFF" opacity="0.95" />
+    <circle cx="165" cy="178" r="3" fill="#FFFFFF" opacity="0.85" />
+    <path d="M 133 155 Q 155 142 177 155" fill="none" stroke="#2B2D42" stroke-width="4" stroke-linecap="round" />
+    <line x1="175" y1="154" x2="181" y2="148" stroke="#2B2D42" stroke-width="3" stroke-linecap="round" />
+  </g>
+  <g transform="translate(400,0) scale(-1,1)">
+
+    <ellipse cx="155" cy="165" rx="20" ry="24" fill="#FFFFFF" stroke="#4A3B52" stroke-width="2.5" />
+    <ellipse cx="155" cy="167" rx="17" ry="21" fill="var(--eye-primary, #FF70A6)" />
+    <ellipse cx="155" cy="176" rx="13.600000000000001" ry="11.55" fill="var(--eye-secondary, #FFD166)" opacity="0.85" />
+    <polygon points="155,155 159,165 170,167 159,171 155,181 151,171 140,167 151,165" fill="#FFF3B0" stroke="#2B2D42" stroke-width="1.2" />
+    <ellipse cx="148" cy="157" rx="5" ry="7" fill="#FFFFFF" opacity="0.95" />
+    <circle cx="165" cy="178" r="3" fill="#FFFFFF" opacity="0.85" />
+    <path d="M 133 155 Q 155 142 177 155" fill="none" stroke="#2B2D42" stroke-width="4" stroke-linecap="round" />
+    <line x1="175" y1="154" x2="181" y2="148" stroke="#2B2D42" stroke-width="3" stroke-linecap="round" />
+  </g>
+</svg>

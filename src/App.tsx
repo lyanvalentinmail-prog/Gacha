@@ -16,18 +16,27 @@ import {
   loadQuests,
   saveQuests,
 } from './utils/storage';
-import { toggleSound, getSoundMuted, playSound } from './audio/soundEffects';
-import { Header } from './components/Header';
-import { CharacterEditor } from './components/Editor/CharacterEditor';
+import { toggleSound, getSoundMuted } from './audio/soundEffects';
+import { ModeBar } from './components/ModeBar';
+import { HomeScreen } from './components/Home/HomeScreen';
 import { StudioMode } from './components/Studio/StudioMode';
 import { GachaMode } from './components/Gacha/GachaMode';
 import { CollectionMode } from './components/Collection/CollectionMode';
 import { QuestsMode } from './components/QuestsMode';
 import { GemRewardModal } from './components/Gacha/GemRewardModal';
 
+type Screen = 'home' | 'studio' | 'gacha' | 'collection' | 'quests';
+
+const SCREEN_TITLES: Record<Exclude<Screen, 'home'>, string> = {
+  studio: 'Estudio de Escenas',
+  gacha: 'Gacha Estelar',
+  collection: 'Colección',
+  quests: 'Misiones & Juegos',
+};
+
 export const App: React.FC = () => {
   // Navigation State
-  const [activeTab, setActiveTab] = useState<'editor' | 'studio' | 'gacha' | 'collection' | 'quests'>('editor');
+  const [screen, setScreen] = useState<Screen>('home');
 
   // Persistence States
   const [characters, setCharacters] = useState<Character[]>(() => loadCharacters());
@@ -192,35 +201,42 @@ export const App: React.FC = () => {
   const currentCharacter = characters[activeSlot] || characters[0];
 
   return (
-    <div className="app-shell flex flex-col overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#F5F0FF] to-[#FFF5FA]">
-      {/* 1. Header with navigation tabs, gem counter, sound toggle */}
-      <Header
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        gems={gems}
-        onOpenGemShop={() => setShowGemModal(true)}
-        isMuted={isMuted}
-        onToggleMute={handleToggleMute}
-      />
+    <div className="app-shell flex flex-col overflow-hidden bg-[#C9CBF2]">
+      {/* Barra superior solo fuera del menú principal */}
+      {screen !== 'home' && (
+        <ModeBar
+          title={SCREEN_TITLES[screen as Exclude<Screen, 'home'>]}
+          onBack={() => setScreen('home')}
+          gems={gems}
+          onOpenGemShop={() => setShowGemModal(true)}
+          isMuted={isMuted}
+          onToggleMute={handleToggleMute}
+        />
+      )}
 
-      {/* 2. Main Game Viewport */}
-      <div className="flex-1 flex overflow-hidden min-h-0">
-        {activeTab === 'editor' && (
-          <CharacterEditor
+      {/* Vistas principales */}
+      <div className="flex-1 flex flex-col overflow-hidden min-h-0">
+        {screen === 'home' && (
+          <HomeScreen
             characters={characters}
             activeSlot={activeSlot}
-            onSelectSlot={(idx) => setActiveSlot(idx)}
+            onSelectSlot={setActiveSlot}
             onUpdateCharacter={handleUpdateCurrentCharacter}
             onCreateSlot={handleCreateSlot}
             onDuplicateSlot={handleDuplicateSlot}
             onDeleteSlot={handleDeleteSlot}
             onRenameSlot={handleRenameSlot}
             unlockedSet={unlockedSet}
-            onTriggerSaveNotification={() => handleRewardQuest('quest_first_character')}
+            gems={gems}
+            onOpenGemShop={() => setShowGemModal(true)}
+            isMuted={isMuted}
+            onToggleMute={handleToggleMute}
+            onNavigate={(s) => setScreen(s)}
+            onRewardQuest={handleRewardQuest}
           />
         )}
 
-        {activeTab === 'studio' && (
+        {screen === 'studio' && (
           <StudioMode
             characters={characters}
             savedScenes={savedScenes}
@@ -229,7 +245,7 @@ export const App: React.FC = () => {
           />
         )}
 
-        {activeTab === 'gacha' && (
+        {screen === 'gacha' && (
           <GachaMode
             gems={gems}
             onUpdateGems={setGems}
@@ -238,20 +254,20 @@ export const App: React.FC = () => {
             pullHistory={pullHistory}
             onAddHistory={(recs) => setPullHistory((h) => [...recs, ...h])}
             onRewardQuest={handleRewardQuest}
-            onOpenCollection={() => setActiveTab('collection')}
+            onOpenCollection={() => setScreen('collection')}
           />
         )}
 
-        {activeTab === 'collection' && (
+        {screen === 'collection' && (
           <CollectionMode
             unlockedSet={unlockedSet}
             currentCharacter={currentCharacter}
             onEquipItem={handleEquipFromCollection}
-            onGoToEditor={() => setActiveTab('editor')}
+            onGoToEditor={() => setScreen('home')}
           />
         )}
 
-        {activeTab === 'quests' && (
+        {screen === 'quests' && (
           <QuestsMode
             quests={quests}
             onClaimQuest={handleClaimQuest}
@@ -260,7 +276,7 @@ export const App: React.FC = () => {
         )}
       </div>
 
-      {/* 3. Free Gems & Daily Bonus Modal */}
+      {/* Modal de gemas / recompensas */}
       <GemRewardModal
         isOpen={showGemModal}
         onClose={() => setShowGemModal(false)}

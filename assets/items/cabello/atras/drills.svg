@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_drills" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <!-- Left Spiral Drill -->
+              <path
+                d="M 115 140 C 60 160, 50 200, 75 220 C 50 240, 55 280, 85 290 C 65 310, 70 340, 95 345 C 80 355, 90 370, 105 365 C 115 340, 110 260, 125 170 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+              <!-- Right Spiral Drill -->
+              <path
+                d="M 285 140 C 340 160, 350 200, 325 220 C 350 240, 345 280, 315 290 C 335 310, 330 340, 305 345 C 320 355, 310 370, 295 365 C 285 340, 290 260, 275 170 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+            </g>
+</svg>

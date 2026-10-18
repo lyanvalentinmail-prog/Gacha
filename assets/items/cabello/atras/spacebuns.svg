@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_spacebuns" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <!-- Left Bun -->
+              <circle cx="95" cy="100" r="32" fill="var(--hair-base, #FFAAA6)" />
+              <circle cx="95" cy="100" r="30" fill="none" stroke="var(--hair-sub, #FFD1DC)" stroke-width="2" stroke-dasharray="6 4" />
+              <!-- Right Bun -->
+              <circle cx="305" cy="100" r="32" fill="var(--hair-base, #FFAAA6)" />
+              <circle cx="305" cy="100" r="30" fill="none" stroke="var(--hair-sub, #FFD1DC)" stroke-width="2" stroke-dasharray="6 4" />
+            </g>
+</svg>

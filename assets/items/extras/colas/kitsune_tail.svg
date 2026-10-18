@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="tail_kitsune" stroke="#4A3B52" stroke-width="2.5">
+              <path
+                d="M 230 350 C 310 370 370 310 350 220 C 330 180 290 220 280 260 C 260 290 245 320 225 345 Z"
+                fill="var(--tail, #FFAAA6)"
+              />
+              <!-- White tip -->
+              <path
+                d="M 350 220 C 340 195 315 200 305 220 C 320 230 335 240 350 220 Z"
+                fill="#FFFFFF"
+                stroke="#4A3B52"
+                stroke-width="2"
+              />
+            </g>
+</svg>

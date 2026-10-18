@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_horns" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 140 100 Q 120 70 110 50 Q 135 60 155 90 Z" fill="var(--hat-primary, #FF9EAA)" />
+              <path d="M 260 100 Q 280 70 290 50 Q 265 60 245 90 Z" fill="var(--hat-primary, #FF9EAA)" />
+            </g>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="top_idol" stroke="#4A3B52" stroke-width="2.5">
+              <path d="M 165 240 L 160 310 L 240 310 L 235 240 Z" fill="var(--top-primary, #FFFDF9)" />
+              <!-- Frill center placket -->
+              <rect x="190" y="245" width="20" height="65" fill="var(--top-secondary, #FF9EAA)" />
+              <!-- Chest Ribbon Bow -->
+              <path d="M 200 255 C 180 245 180 270 200 260 C 220 270 220 245 200 255 Z" fill="#FF5376" />
+              <circle cx="200" cy="256" r="4" fill="#FFD700" />
+            </g>
+</svg>

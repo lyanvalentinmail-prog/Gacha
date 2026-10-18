@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hair_rear_cloudhair" stroke="var(--hair-outline, #4A3B52)" stroke-width="3">
+              <path
+                d="M 100 130 C 50 140, 40 200, 60 250 C 40 280, 50 330, 80 360 C 120 390, 160 380, 200 385 C 240 380, 280 390, 320 360 C 350 330, 360 280, 340 250 C 360 200, 350 140, 300 130 Z"
+                fill="var(--hair-base, #FFAAA6)"
+              />
+            </g>
+</svg>

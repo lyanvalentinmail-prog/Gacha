@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_gamer" stroke="#4A3B52" stroke-width="2.5">
+              <!-- Headband -->
+              <path d="M 110 150 C 105 70, 295 70, 290 150" fill="none" stroke="#2B2D42" stroke-width="6" />
+              <!-- Left Earcup -->
+              <rect x="100" y="130" width="16" height="35" rx="8" fill="var(--hat-primary, #FF9EAA)" />
+              <circle cx="108" cy="147" r="5" fill="#00F0FF" />
+              <!-- Left Neko ear on headset -->
+              <polygon points="130,85 115,55 145,70" fill="var(--hat-primary, #FF9EAA)" />
+              <!-- Right Earcup -->
+              <rect x="284" y="130" width="16" height="35" rx="8" fill="var(--hat-primary, #FF9EAA)" />
+              <circle cx="292" cy="147" r="5" fill="#00F0FF" />
+              <!-- Right Neko ear on headset -->
+              <polygon points="270,85 285,55 255,70" fill="var(--hat-primary, #FF9EAA)" />
+            </g>
+</svg>

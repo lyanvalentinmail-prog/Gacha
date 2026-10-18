@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="tail_cat" stroke="#4A3B52" stroke-width="2.5">
+              <path
+                d="M 230 340 Q 290 360 300 300 Q 310 250 280 240 Q 270 245 285 260 Q 290 290 245 330 Z"
+                fill="var(--tail, #FFAAA6)"
+              />
+              <!-- Cute ribbon on tail -->
+              <rect x="280" y="270" width="12" height="8" rx="3" fill="var(--top-secondary, #FF6F91)" />
+            </g>
+</svg>

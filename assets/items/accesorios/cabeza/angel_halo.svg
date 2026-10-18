@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g data-id="hat_halo" class="animate-float">
+              <ellipse cx="200" cy="50" rx="55" ry="14" fill="none" stroke="#FFD700" stroke-width="6" opacity="0.9" />
+              <ellipse cx="200" cy="50" rx="55" ry="14" fill="none" stroke="#FFF3B0" stroke-width="3" />
+            </g>
+</svg>

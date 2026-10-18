@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <g id="eyes">
+
+    <path d="M 135 168 Q 140 143 158 145 Q 174 147 176 166 Q 176 186 158 189 Q 140 188 135 168 Z" fill="#FFFFFF" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 139 168 Q 143 150 158 151 Q 171 153 172 167 Q 172 182 158 184 Q 144 183 139 168 Z" fill="var(--eye-primary, #FF70A6)" />
+    <ellipse cx="156" cy="168" rx="4.5" ry="15" fill="#2B2D42" />
+    <ellipse cx="151" cy="158" rx="5" ry="7" fill="#FFFFFF" opacity="0.95" />
+    <circle cx="162" cy="177" r="2.5" fill="#FFFFFF" opacity="0.85" />
+    <path d="M 133 158 Q 150 146 174 152" fill="none" stroke="#2B2D42" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="173" y1="152" x2="182" y2="145" stroke="#2B2D42" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="132" y1="160" x2="124" y2="154" stroke="#2B2D42" stroke-width="3" stroke-linecap="round" />
+  </g>
+  <g transform="translate(400,0) scale(-1,1)">
+
+    <path d="M 135 168 Q 140 143 158 145 Q 174 147 176 166 Q 176 186 158 189 Q 140 188 135 168 Z" fill="#FFFFFF" stroke="#4A3B52" stroke-width="2.5" />
+    <path d="M 139 168 Q 143 150 158 151 Q 171 153 172 167 Q 172 182 158 184 Q 144 183 139 168 Z" fill="var(--eye-primary, #FF70A6)" />
+    <ellipse cx="156" cy="168" rx="4.5" ry="15" fill="#2B2D42" />
+    <ellipse cx="151" cy="158" rx="5" ry="7" fill="#FFFFFF" opacity="0.95" />
+    <circle cx="162" cy="177" r="2.5" fill="#FFFFFF" opacity="0.85" />
+    <path d="M 133 158 Q 150 146 174 152" fill="none" stroke="#2B2D42" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="173" y1="152" x2="182" y2="145" stroke="#2B2D42" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="132" y1="160" x2="124" y2="154" stroke="#2B2D42" stroke-width="3" stroke-linecap="round" />
+  </g>
+</svg>

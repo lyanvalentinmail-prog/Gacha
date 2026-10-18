@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB74D"/>
+      <stop offset="0.55" stop-color="#FF8A65"/>
+      <stop offset="1" stop-color="#FFAB91"/>
+    </linearGradient>
+    <linearGradient id="fsea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4FC3F7"/>
+      <stop offset="1" stop-color="#29B6F6"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="800" height="600" fill="url(#fsky)"/>
+  <!-- Sol poniente -->
+  <circle cx="400" cy="255" r="72" fill="#FFD166"/>
+  <circle cx="400" cy="255" r="95" fill="#FFD166" opacity="0.25"/>
+  <!-- Nubes -->
+  <ellipse cx="150" cy="110" rx="80" ry="26" fill="#FFCCBC" opacity="0.9"/>
+  <ellipse cx="215" cy="100" rx="55" ry="22" fill="#FFCCBC" opacity="0.9"/>
+  <ellipse cx="640" cy="95" rx="90" ry="28" fill="#FFCCBC" opacity="0.9"/>
+  <!-- Mar -->
+  <rect x="0" y="315" width="800" height="140" fill="url(#fsea)"/>
+  <path d="M 0 315 Q 100 305 200 315 Q 300 325 400 315 Q 500 305 600 315 Q 700 325 800 315 L 800 340 L 0 340 Z" fill="#81D4FA"/>
+  <!-- Espuma -->
+  <path d="M 0 448 Q 120 435 250 448 Q 380 462 520 448 Q 660 435 800 450 L 800 470 L 0 470 Z" fill="#FFFFFF" opacity="0.85"/>
+  <!-- Arena -->
+  <rect x="0" y="455" width="800" height="145" fill="#FFE0B2"/>
+  <path d="M 0 455 Q 200 445 400 458 Q 600 445 800 460 L 800 600 L 0 600 Z" fill="#FFD8A8"/>
+  <!-- Conchas y estrellas de mar -->
+  <path d="M 130 520 C 130 505 155 505 155 520 C 155 530 130 530 130 520 Z" fill="#FFAB91" stroke="#E64A19" stroke-width="2"/>
+  <path d="M 137 512 L 142 522 M 148 512 L 143 522" stroke="#E64A19" stroke-width="1.5"/>
+  <g fill="#FF8A65" stroke="#E64A19" stroke-width="2">
+    <path d="M 660 530 L 666 542 L 679 543 L 670 552 L 673 565 L 660 558 L 647 565 L 650 552 L 641 543 L 654 542 Z"/>
+  </g>
+  <circle cx="320" cy="555" r="9" fill="#FFF3E0" stroke="#E0C9A0" stroke-width="2"/>
+  <path d="M 313 552 Q 320 548 327 552 M 312 558 Q 320 562 328 558" stroke="#E0C9A0" stroke-width="1.5" fill="none"/>
+  <!-- Palmera -->
+  <path d="M 705 470 Q 695 380 660 300" stroke="#8D6E63" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M 660 300 Q 600 270 560 285 Q 610 290 655 315 Z" fill="#43A047"/>
+  <path d="M 660 300 Q 700 255 755 255 Q 705 275 665 312 Z" fill="#43A047"/>
+  <path d="M 660 300 Q 645 245 685 215 Q 675 265 668 310 Z" fill="#66BB6A"/>
+  <path d="M 660 300 Q 600 320 575 355 Q 625 335 658 318 Z" fill="#66BB6A"/>
+  <circle cx="652" cy="312" r="8" fill="#8D6E63"/>
+  <circle cx="668" cy="318" r="8" fill="#8D6E63"/>
+  <!-- Gaviota -->
+  <path d="M 250 160 Q 265 148 280 160 Q 295 148 310 160" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Sol reflejo en el agua -->
+  <ellipse cx="400" cy="380" rx="60" ry="10" fill="#FFD166" opacity="0.55"/>
+  <ellipse cx="400" cy="410" rx="40" ry="7" fill="#FFD166" opacity="0.45"/>
+</svg>
