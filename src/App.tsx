@@ -192,7 +192,7 @@ export const App: React.FC = () => {
   const currentCharacter = characters[activeSlot] || characters[0];
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#F5F0FF] to-[#FFF5FA]">
+    <div className="app-shell flex flex-col overflow-hidden bg-gradient-to-br from-[#FFF0F5] via-[#F5F0FF] to-[#FFF5FA]">
       {/* 1. Header with navigation tabs, gem counter, sound toggle */}
       <Header
         activeTab={activeTab}

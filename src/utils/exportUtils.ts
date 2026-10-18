@@ -1,18 +1,101 @@
+import { Capacitor } from '@capacitor/core';
+import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
+import { Share } from '@capacitor/share';
 import { Character, StudioScene } from '../types';
 
+/** true cuando la app corre dentro del APK de Android/iOS (Capacitor). */
+const isNative = (): boolean => Capacitor.isNativePlatform();
+
+/** Convierte un nombre libre en un nombre de archivo seguro (sin acentos ni símbolos). */
+function toSafeFileName(name: string, extension: string): string {
+  const base =
+    name
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9_-]+/g, '_')
+      .replace(/^_+|_+$/g, '')
+      .slice(0, 60) || 'chibiverse';
+  return `${base}.${extension}`;
+}
+
 /**
- * Downloads a character data object as a JSON file or provides shareable JSON string.
+ * Guarda un archivo en el almacenamiento del dispositivo (carpeta Chibiverse)
+ * y abre el diálogo de Android para compartirlo/guardarlo en otra app.
+ * Se intenta primero Documentos y, si el sistema lo bloquea, la caché interna.
  */
-export function exportCharacterJSON(character: Character) {
+async function saveFileNative(fileName: string, data: string, isBase64: boolean): Promise<string> {
+  const folders = [Directory.Documents, Directory.Cache];
+  let savedUri = '';
+  let lastError: unknown;
+
+  for (const directory of folders) {
+    try {
+      const result = await Filesystem.writeFile({
+        path: `Chibiverse/${fileName}`,
+        data,
+        directory,
+        recursive: true,
+        // Sin `encoding` el plugin interpreta `data` como base64 (PNG);
+        // con UTF8 lo escribe como texto plano (JSON).
+        ...(isBase64 ? {} : { encoding: Encoding.UTF8 }),
+      });
+      savedUri = result.uri;
+      break;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  if (!savedUri) {
+    throw lastError instanceof Error ? lastError : new Error('No se pudo guardar el archivo en el dispositivo.');
+  }
+
+  try {
+    await Share.share({
+      title: fileName,
+      url: savedUri,
+      dialogTitle: 'Guardar o compartir',
+    });
+  } catch {
+    // El usuario canceló el diálogo o no hay apps compatibles.
+    // El archivo igualmente quedó guardado en la carpeta Chibiverse.
+  }
+
+  return savedUri;
+}
+
+/** Extrae el contenido base64 de un data URL (image/png;base64,...). */
+function dataUrlToBase64(dataUrl: string): string {
+  const separator = dataUrl.indexOf(',');
+  return separator >= 0 ? dataUrl.slice(separator + 1) : dataUrl;
+}
+
+/** Descarga un archivo desde el navegador (versión web). */
+function downloadInBrowser(fileName: string, href: string): void {
+  const link = document.createElement('a');
+  link.href = href;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+/**
+ * Exports a character data object as a JSON file or provides shareable JSON string.
+ */
+export async function exportCharacterJSON(character: Character): Promise<void> {
+  const fileName = toSafeFileName(`${character.name}_chibi`, 'json');
   const jsonStr = JSON.stringify(character, null, 2);
+
+  if (isNative()) {
+    await saveFileNative(fileName, jsonStr, false);
+    return;
+  }
+
   const blob = new Blob([jsonStr], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${character.name.toLowerCase().replace(/\s+/g, '_')}_chibi.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  downloadInBrowser(fileName, url);
   URL.revokeObjectURL(url);
 }
 
@@ -52,14 +135,17 @@ export async function exportSvgToPng(svgElement: SVGSVGElement, fileName: string
         ctx.drawImage(img, 0, 0, width, height);
 
         const pngUrl = canvas.toDataURL('image/png');
-        const downloadLink = document.createElement('a');
-        downloadLink.href = pngUrl;
-        downloadLink.download = `${fileName}.png`;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+
+        if (isNative()) {
+          saveFileNative(toSafeFileName(fileName, 'png'), dataUrlToBase64(pngUrl), true)
+            .then(() => resolve())
+            .catch((error) => reject(error));
+        } else {
+          downloadInBrowser(`${fileName}.png`, pngUrl);
+          resolve();
+        }
+
         URL.revokeObjectURL(url);
-        resolve();
       };
 
       img.onerror = (e) => {
@@ -156,12 +242,13 @@ export async function exportStudioScene(sceneContainer: HTMLElement, sceneName: 
     ctx.restore();
   });
 
-  // Download
   const pngUrl = canvas.toDataURL('image/png');
-  const a = document.createElement('a');
-  a.href = pngUrl;
-  a.download = `${sceneName.toLowerCase().replace(/\s+/g, '_')}_escena.png`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  const fileName = toSafeFileName(`${sceneName}_escena`, 'png');
+
+  if (isNative()) {
+    await saveFileNative(fileName, dataUrlToBase64(pngUrl), true);
+    return;
+  }
+
+  downloadInBrowser(fileName, pngUrl);
 }

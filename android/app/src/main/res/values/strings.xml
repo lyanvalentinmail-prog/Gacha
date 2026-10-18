@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Chibiverse Gacha Studio</string>
+    <string name="title_activity_main">Chibiverse Gacha Studio</string>
+    <string name="package_name">com.chibiverse.gacha</string>
+    <string name="custom_url_scheme">com.chibiverse.gacha</string>
+</resources>
