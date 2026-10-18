@@ -1,9 +1,29 @@
 # ✨ Chibiverse Gacha Studio 2D
 
-Un videojuego Gacha 2D completo, original y funcional de estilo anime / chibi, inspirado en las mejores mecánicas de *Gacha Life* y *Gacha Club*, con la **estética clásica de Gacha Life**: cielo azul con nubes, botones rosas y azules 3D, paneles celestes con contorno azul marino, máquina de gacha de cápsulas y tipografía bubbly redondeada.
+Un videojuego Gacha 2D completo, original y funcional de estilo anime / chibi, inspirado en las mejores mecánicas de *Gacha Life* y *Gacha Club*, con la **estética renovada "Sakura Dawn"**: rosa pastel, lavanda suave, paneles blancos rosados, esquinas redondeadas y sombras delicadas.
 
 [![Descargar APK](https://img.shields.io/badge/Descargar-APK%20para%20Android-FF6F91?style=for-the-badge&logo=android&logoColor=white)](https://github.com/lyanvalentinmail-prog/Gacha/releases/latest)
 [![APK Android](https://github.com/lyanvalentinmail-prog/Gacha/actions/workflows/android-apk.yml/badge.svg)](https://github.com/lyanvalentinmail-prog/Gacha/actions/workflows/android-apk.yml)
+
+---
+
+## 🎨 Rediseño "Sakura Dawn" (v2)
+
+Rediseño integral de la interfaz manteniendo **todas las mecánicas, datos y assets originales**:
+
+- **Tema centralizado**: todos los colores, sombras y radios viven en [`src/index.css`](src/index.css) (variables CSS) y [`tailwind.config.js`](tailwind.config.js) (tokens `rosa`, `lav`, `ink`, `line`, `panel`, `mint`, `gold`). Cambiar la paleta ahí redefine el juego entero.
+- **Navegación y transiciones**: entradas de pantalla animadas, botones con estados claros (hover/activo/deshabilitado), confirmaciones en acciones destructivas (eliminar personaje, eliminar escena, restablecer).
+- **Menú principal / editor**: barra de slots compacta con nombre del personaje y slot activo destacado; escena central con controles flotantes translúcidos; panel "Vestir" con las 8 categorías originales.
+- **Editor**: cuadrículas de opciones con miniaturas uniformes, selección marcada con anillo rosa y ✓, elementos bloqueados con candado y escala de grises, chips de subcategoría persistentes.
+- **Estudio**: pestañas para cambiar entre escenas guardadas (antes era imposible volver a una escena anterior), arrastre por *pointer events* (ya funciona con el dedo en móvil), los 5 estilos de bocadillo implementados de verdad (hablar/pensar/gritar/susurrar/corazón) y controles de capas también para stickers.
+- **Gacha**: misma máquina, banners, probabilidades (3★ 75% · 4★ 20% · 5★ 4% · 6★ 1%), costes (100/900) y garantía x10 originales; resultados con destello dorado/rosa para rarezas 5★+.
+- **Colección**: búsqueda por nombre, ordenación (rareza / A-Z), miniaturas SVG reales de cada objeto y panel de detalles.
+- **Accesibilidad**: se respeta `prefers-reduced-motion` (se desactivan nubes a la deriva y animaciones decorativas).
+- **Compatibilidad**: mismas claves de `localStorage` (`chibiverse_*_v2`), mismos IDs de personajes/objetos y mismo formato de guardado — las partidas existentes se conservan sin migración.
+
+> Nota: el botón de reclamar misión ahora se deshabilita hasta cumplir el objetivo (antes permitía reclamar sin completarla). Los disparadores automáticos de progreso no cambian.
+
+---
 
 ---
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ItemOption } from '../../data/items';
 import { Rarity } from '../../types';
-import { Sparkles, Lock } from 'lucide-react';
+import { Lock, Check } from 'lucide-react';
 import { playSound } from '../../audio/soundEffects';
 import { AssetThumb } from '../AssetThumb';
 import { gachaIdFor } from '../../data/assetCatalog';
@@ -15,6 +15,32 @@ interface ItemSelectorGridProps {
   renderThumbnail?: (option: ItemOption) => React.ReactNode;
 }
 
+/** Color de rareza ( Tokens compartidos con el Gacha y la Colección ) */
+export const rarityColor = (r: Rarity): { text: string; chipBg: string; chipBorder: string } => {
+  switch (r) {
+    case 6:
+      return { text: '#C94773', chipBg: '#FFECF2', chipBorder: '#FFB9CD' };
+    case 5:
+      return { text: '#A97B2A', chipBg: '#FFF4E0', chipBorder: '#F5B95A' };
+    case 4:
+      return { text: '#7F6BB8', chipBg: '#EFEBFA', chipBorder: '#CFC4EE' };
+    default:
+      return { text: '#7D7189', chipBg: '#F7F5FD', chipBorder: '#E4DDF4' };
+  }
+};
+
+const RarityBadge: React.FC<{ rarity: Rarity }> = ({ rarity }) => {
+  const c = rarityColor(rarity);
+  return (
+    <span
+      className="text-[9px] font-black px-1.5 py-[1px] rounded-full border leading-none"
+      style={{ color: c.text, backgroundColor: c.chipBg, borderColor: c.chipBorder }}
+    >
+      {rarity}★
+    </span>
+  );
+};
+
 export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
   options,
   selectedId,
@@ -23,35 +49,6 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
   categoryTitle,
   renderThumbnail,
 }) => {
-  const getRarityBadge = (rarity: Rarity) => {
-    switch (rarity) {
-      case 6:
-        return (
-          <span className="bg-[#FF87B2] text-white border border-[#E56593] text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
-            6★ ULTRA
-          </span>
-        );
-      case 5:
-        return (
-          <span className="bg-[#FFE06B] text-[#8A6414] border border-[#E5B84B] text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
-            5★ LEGEND
-          </span>
-        );
-      case 4:
-        return (
-          <span className="bg-[#B79AE0] text-white border border-[#8F6DC4] text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
-            4★ RARO
-          </span>
-        );
-      default:
-        return (
-          <span className="bg-[#A8DEF8] text-[#1E4580] border border-[#4AA0D0] text-[9px] font-bold px-1.5 py-0.2 rounded-full">
-            3★
-          </span>
-        );
-    }
-  };
-
   const isItemLocked = (opt: ItemOption): boolean => {
     if (!unlockedSet) return false;
     if (opt.rarity < 4) return false;
@@ -64,10 +61,10 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
     <div className="space-y-2">
       {categoryTitle && (
         <div className="flex items-center justify-between px-1">
-          <span className="text-xs font-bold text-[#1E4580] uppercase tracking-wider">
+          <span className="text-[10px] font-extrabold text-ink-soft uppercase tracking-wider">
             {categoryTitle}
           </span>
-          <span className="text-[11px] font-semibold text-[#4AA0D0]">
+          <span className="text-[11px] font-semibold text-ink-faint">
             {options.length} opciones
           </span>
         </div>
@@ -77,63 +74,63 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
         {options.map((opt) => {
           const isSelected = selectedId === opt.id;
           const isLocked = isItemLocked(opt);
+          const rc = rarityColor(opt.rarity);
 
           return (
             <button
               key={opt.id}
+              title={`${opt.name} — ${opt.description}`}
               onClick={() => {
                 if (isLocked) {
                   playSound('pop');
-                  alert(`¡Este artículo "${opt.name}" es de rareza ${opt.rarity}★ y se puede conseguir en las tiradas Gacha!`);
+                  alert(`¡"${opt.name}" es de rareza ${opt.rarity}★ y se consigue en las tiradas Gacha!`);
                   return;
                 }
                 playSound('equip');
                 onSelect(opt.id);
               }}
-              className={`relative flex flex-col items-center p-2 rounded-2xl text-left border-[3px] transition-all ${
+              className={`relative flex flex-col items-center p-1.5 pb-2 rounded-2xl text-left border-[1.5px] transition-all active:scale-[0.97] ${
                 isSelected
-                  ? 'bg-white border-[#FF87B2] shadow-[0_0_0_3px_#FFE06B] scale-[1.02]'
+                  ? 'bg-rosa-50 border-rosa-400 ring-2 ring-rosa-200'
                   : isLocked
-                  ? 'bg-[#EAF6FF]/60 border-[#74C9F0] opacity-60'
-                  : 'bg-white/90 hover:bg-[#EAF6FF] border-[#74C9F0] hover:border-[#4AA0D0]'
+                  ? 'bg-panel-lav border-line-lav opacity-75'
+                  : 'bg-white border-line-rose hover:border-lav-300 hover:shadow-sm'
               }`}
             >
-              {/* Header with rarity badge */}
-              <div className="w-full flex items-center justify-between mb-1">
-                {getRarityBadge(opt.rarity)}
-                {isLocked && <Lock className="w-3.5 h-3.5 text-[#1E4580]" />}
-              </div>
-
-              {/* Miniatura real del asset */}
+              {/* Miniatura uniforme */}
               <div
-                className="w-14 h-14 rounded-xl border-2 border-[#74C9F0] flex items-center justify-center my-0.5 overflow-hidden"
-                style={{ backgroundColor: '#EAF6FF' }}
+                className="relative w-full aspect-square rounded-xl border border-line-rose flex items-center justify-center overflow-hidden"
+                style={{ backgroundColor: '#FFF6F9' }}
               >
                 {renderThumbnail ? (
-                  renderThumbnail(opt)
+                  <span className={`w-full h-full flex items-center justify-center ${isLocked ? 'grayscale-[0.5] opacity-70' : ''}`}>
+                    {renderThumbnail(opt)}
+                  </span>
                 ) : opt.asset ? (
-                  <AssetThumb asset={opt.asset} />
-                ) : (
-                  <Sparkles
-                    className={`w-6 h-6 ${
-                      opt.rarity >= 5
-                        ? 'text-yellow-500'
-                        : opt.rarity === 4
-                        ? 'text-purple-500'
-                        : 'text-pink-400'
-                    }`}
-                  />
+                  <AssetThumb asset={opt.asset} className={`w-full h-full ${isLocked ? 'grayscale-[0.5] opacity-70' : ''}`} />
+                ) : null}
+
+                {/* Estado: seleccionado / bloqueado */}
+                {isSelected && (
+                  <span className="absolute top-1 right-1 w-5 h-5 p-0.5 rounded-full text-white flex items-center justify-center shadow-sm pop-in" style={{ background: 'linear-gradient(180deg,#FF9DB8,#F97FA5)' }}>
+                    <Check className="w-3 h-3" strokeWidth={3.5} />
+                  </span>
+                )}
+                {isLocked && (
+                  <span className="absolute top-1 right-1 w-5 h-5 rounded-full bg-white/90 border border-line-lav flex items-center justify-center">
+                    <Lock className="w-3 h-3 text-ink-faint" />
+                  </span>
                 )}
               </div>
 
-              {/* Title & Description */}
-              <div className="w-full text-center mt-1">
-                <p className="text-[11px] font-extrabold text-[#2B5FA8] truncate leading-tight">
+              {/* Nombre + rareza */}
+              <div className="w-full text-center mt-1 px-0.5">
+                <p className={`text-[10px] font-extrabold truncate leading-tight ${isSelected ? 'text-rosa-600' : 'text-ink'}`}>
                   {opt.name}
                 </p>
-                <p className="text-[9px] text-[#4AA0D0] line-clamp-1 mt-0.5">
-                  {opt.description}
-                </p>
+                <span className="text-[9px] font-black leading-none" style={{ color: rc.text }}>
+                  {'★'.repeat(opt.rarity)}
+                </span>
               </div>
             </button>
           );

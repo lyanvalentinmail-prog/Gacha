@@ -214,8 +214,8 @@ export const App: React.FC = () => {
         />
       )}
 
-      {/* Vistas principales */}
-      <div className="flex-1 flex flex-col overflow-hidden min-h-0">
+      {/* Vistas principales (transición suave entre pantallas) */}
+      <div key={screen} className="flex-1 flex flex-col overflow-hidden min-h-0 screen-in">
         {screen === 'home' && (
           <HomeScreen
             characters={characters}

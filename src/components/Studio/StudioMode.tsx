@@ -13,14 +13,14 @@ import {
   MessageSquare,
   Image as ImageIcon,
   Smile,
-  Save,
   FolderOpen,
   ArrowUp,
   ArrowDown,
   X,
-  Check,
 } from 'lucide-react';
 import { playSound } from '../../audio/soundEffects';
+
+type BubbleStyle = NonNullable<StudioCharacterInstance['bubble']>['style'];
 
 interface StudioModeProps {
   characters: Character[];
@@ -28,6 +28,66 @@ interface StudioModeProps {
   onSaveScenes: (scenes: StudioScene[]) => void;
   onRewardQuest?: (questId: string) => void;
 }
+
+const BUBBLE_STYLES: { id: BubbleStyle; label: string; icon: string }[] = [
+  { id: 'speech', label: 'Hablar', icon: '💬' },
+  { id: 'thought', label: 'Pensar', icon: '💭' },
+  { id: 'shout', label: 'Gritar', icon: '💥' },
+  { id: 'whisper', label: 'Susurrar', icon: '🤫' },
+  { id: 'heart', label: 'Corazón', icon: '💖' },
+];
+
+/** Bocadillo de diálogo con estilos reales (habla, pensamiento, grito, susurro, corazón). */
+const DialogueBubble: React.FC<{ bubble: NonNullable<StudioCharacterInstance['bubble']> }> = ({ bubble }) => {
+  const base = 'absolute -top-14 sm:-top-16 min-w-[130px] max-w-[230px] px-3 py-2 text-xs font-bold text-center pointer-events-none z-30';
+  const tailPos = bubble.tailSide === 'left' ? 'left-5' : 'right-5';
+  const tailSide = bubble.tailSide === 'left' ? '-left-5' : '-right-5';
+
+  switch (bubble.style) {
+    case 'thought':
+      return (
+        <div className={`${base} bg-white/95 border-[1.5px] border-line-lav rounded-[26px] shadow-md text-ink-soft italic`}>
+          {bubble.text}
+          <span className={`absolute -bottom-4 ${tailPos} w-3 h-3 rounded-full bg-white/95 border-[1.5px] border-line-lav`} />
+          <span className={`absolute -bottom-7 ${bubble.tailSide === 'left' ? 'left-4' : 'right-4'} w-2 h-2 rounded-full bg-white/90 border-[1.5px] border-line-lav`} />
+        </div>
+      );
+    case 'shout':
+      return (
+        <div className={`${base} bg-gold-soft border-[2.5px] border-[#E8A13C] rounded-xl shadow-md text-[#8A5A14] font-black italic uppercase`}>
+          {bubble.text}
+          <span
+            className={`absolute -bottom-[7px] ${tailPos} w-3.5 h-3.5 bg-gold-soft border-b-[2.5px] border-r-[2.5px] border-[#E8A13C] rotate-45`}
+          />
+        </div>
+      );
+    case 'whisper':
+      return (
+        <div className={`${base} bg-white/85 border-[1.5px] border-dashed border-lav-300 rounded-2xl text-ink-faint italic`}>
+          {bubble.text}
+          <span className={`absolute -bottom-[6px] ${tailPos} w-2.5 h-2.5 bg-white/85 border-b-[1.5px] border-r-[1.5px] border-lav-300 rotate-45`} />
+        </div>
+      );
+    case 'heart':
+      return (
+        <div className={`${base} text-white rounded-2xl shadow-md border border-rosa-400`} style={{ background: 'linear-gradient(180deg,#FF9DB8,#F97FA5)' }}>
+          <span className="mr-1">💖</span>
+          {bubble.text}
+          <span
+            className={`absolute -bottom-[6px] ${tailPos} w-3 h-3 rotate-45 border-b border-r border-rosa-400`}
+            style={{ background: '#F97FA5' }}
+          />
+        </div>
+      );
+    default:
+      return (
+        <div className={`${base} bg-white text-ink border-[1.5px] border-line-lav rounded-2xl shadow-md`}>
+          {bubble.text}
+          <span className={`absolute -bottom-[7px] ${tailPos} w-3 h-3 bg-white border-b-[1.5px] border-r-[1.5px] border-line-lav rotate-45`} />
+        </div>
+      );
+  }
+};
 
 export const StudioMode: React.FC<StudioModeProps> = ({
   characters,
@@ -52,13 +112,13 @@ export const StudioMode: React.FC<StudioModeProps> = ({
   const [showStickerModal, setShowStickerModal] = useState<boolean>(false);
   const [showBubbleEditor, setShowBubbleEditor] = useState<boolean>(false);
   const [bubbleText, setBubbleText] = useState<string>('');
-  const [bubbleStyle, setBubbleStyle] = useState<'speech' | 'thought' | 'shout' | 'whisper' | 'heart'>('speech');
+  const [bubbleStyle, setBubbleStyle] = useState<BubbleStyle>('speech');
   const [bubbleTail, setBubbleTail] = useState<'left' | 'right'>('left');
 
-  // Dragging state
+  // Dragging state (Pointer Events: ratón + táctil)
   const sceneRef = useRef<HTMLDivElement>(null);
+  const dragState = useRef<{ id: string; pointerId: number } | null>(null);
   const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [dragOffset, setDragOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   // Update active scene helper
   const updateActiveScene = (updater: (prev: StudioScene) => StudioScene) => {
@@ -73,7 +133,53 @@ export const StudioMode: React.FC<StudioModeProps> = ({
   const selectedChar = activeScene.characters.find((c) => c.instanceId === selectedInstanceId);
   const selectedSticker = activeScene.stickers.find((s) => s.instanceId === selectedInstanceId);
 
-  // Add character to scene
+  // ------------------------------------------------------------------
+  // Gestión de escenas (crear, cambiar, eliminar, renombrar)
+  // ------------------------------------------------------------------
+  const handleNewScene = () => {
+    playSound('pop');
+    const newScene: StudioScene = {
+      id: `scene_${Date.now()}`,
+      name: `Nueva Escena #${scenes.length + 1}`,
+      backgroundId: 'bg_classroom',
+      characters: [
+        {
+          instanceId: `inst_${Date.now()}`,
+          character: characters[0],
+          x: 50,
+          y: 50,
+          scale: 1,
+          rotation: 0,
+          flip: false,
+          zIndex: 1,
+        },
+      ],
+      stickers: [],
+    };
+    const updated = [...scenes, newScene];
+    setScenes(updated);
+    setCurrentSceneIndex(updated.length - 1);
+    onSaveScenes(updated);
+    setSelectedInstanceId(newScene.characters[0]?.instanceId || null);
+  };
+
+  const handleDeleteScene = (index: number) => {
+    if (scenes.length <= 1) {
+      alert('Debe quedar al menos una escena.');
+      return;
+    }
+    if (!confirm(`¿Eliminar la escena "${scenes[index].name}"? Esta acción no se puede deshacer.`)) return;
+    playSound('delete');
+    const updated = scenes.filter((_, i) => i !== index);
+    setScenes(updated);
+    onSaveScenes(updated);
+    setCurrentSceneIndex(Math.max(0, Math.min(index - 1, updated.length - 1)));
+    setSelectedInstanceId(null);
+  };
+
+  // ------------------------------------------------------------------
+  // Añadir elementos
+  // ------------------------------------------------------------------
   const handleAddCharacter = (char: Character) => {
     playSound('pop');
     const newInstance: StudioCharacterInstance = {
@@ -94,7 +200,6 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     setShowAddCharModal(false);
   };
 
-  // Add sticker to scene
   const handleAddSticker = (stickerId: string) => {
     playSound('pop');
     const newStk: StudioStickerInstance = {
@@ -114,7 +219,9 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     setShowStickerModal(false);
   };
 
-  // Remove selected element
+  // ------------------------------------------------------------------
+  // Transformaciones del elemento seleccionado
+  // ------------------------------------------------------------------
   const handleRemoveSelected = () => {
     if (!selectedInstanceId) return;
     playSound('delete');
@@ -126,7 +233,6 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     setSelectedInstanceId(null);
   };
 
-  // Flip horizontal
   const handleFlipSelected = () => {
     if (!selectedChar) return;
     playSound('click');
@@ -138,7 +244,6 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     }));
   };
 
-  // Rotate
   const handleRotateSelected = (delta: number) => {
     if (selectedChar) {
       updateActiveScene((s) => ({
@@ -161,7 +266,6 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     }
   };
 
-  // Scale
   const handleScaleSelected = (newScale: number) => {
     if (selectedChar) {
       updateActiveScene((s) => ({
@@ -180,30 +284,22 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     }
   };
 
-  // Layer ordering
-  const handleBringForward = () => {
-    if (selectedChar) {
-      updateActiveScene((s) => ({
-        ...s,
-        characters: s.characters.map((c) =>
-          c.instanceId === selectedChar.instanceId ? { ...c, zIndex: c.zIndex + 1 } : c
-        ),
-      }));
-    }
+  // Capas (personajes y stickers tienen zIndex)
+  const handleLayer = (delta: number) => {
+    if (!selectedInstanceId) return;
+    playSound('click');
+    updateActiveScene((s) => ({
+      ...s,
+      characters: s.characters.map((c) =>
+        c.instanceId === selectedInstanceId ? { ...c, zIndex: Math.max(0, c.zIndex + delta) } : c
+      ),
+      stickers: s.stickers.map((st) =>
+        st.instanceId === selectedInstanceId ? { ...st, zIndex: Math.max(0, st.zIndex + delta) } : st
+      ),
+    }));
   };
 
-  const handleSendBackward = () => {
-    if (selectedChar && selectedChar.zIndex > 0) {
-      updateActiveScene((s) => ({
-        ...s,
-        characters: s.characters.map((c) =>
-          c.instanceId === selectedChar.instanceId ? { ...c, zIndex: c.zIndex - 1 } : c
-        ),
-      }));
-    }
-  };
-
-  // Change character pose inside scene
+  // Cambiar pose del personaje seleccionado
   const handleChangePose = (poseId: string) => {
     if (!selectedChar) return;
     playSound('equip');
@@ -223,7 +319,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     }));
   };
 
-  // Change speech bubble
+  // Guardar bocadillo de diálogo
   const handleSaveBubble = () => {
     if (!selectedChar) return;
     playSound('pop');
@@ -243,43 +339,38 @@ export const StudioMode: React.FC<StudioModeProps> = ({
     setShowBubbleEditor(false);
   };
 
-  // Drag handling
-  const handleMouseDown = (e: React.MouseEvent, id: string) => {
+  // ------------------------------------------------------------------
+  // Arrastre con Pointer Events (ratón + táctil)
+  // ------------------------------------------------------------------
+  const handlePointerDown = (e: React.PointerEvent, id: string) => {
     e.stopPropagation();
     setSelectedInstanceId(id);
+    dragState.current = { id, pointerId: e.pointerId };
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {
+      /* algunos navegadores antiguos no lo soportan */
+    }
     setIsDragging(true);
-    if (!sceneRef.current) return;
-    const rect = sceneRef.current.getBoundingClientRect();
-    setDragOffset({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !sceneRef.current || !selectedInstanceId) return;
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!dragState.current || !sceneRef.current) return;
+    if (e.pointerId !== dragState.current.pointerId) return;
     const rect = sceneRef.current.getBoundingClientRect();
     const relX = Math.max(5, Math.min(95, ((e.clientX - rect.left) / rect.width) * 100));
     const relY = Math.max(10, Math.min(90, ((e.clientY - rect.top) / rect.height) * 100));
+    const id = dragState.current.id;
 
-    if (selectedChar) {
-      updateActiveScene((s) => ({
-        ...s,
-        characters: s.characters.map((c) =>
-          c.instanceId === selectedInstanceId ? { ...c, x: relX, y: relY } : c
-        ),
-      }));
-    } else if (selectedSticker) {
-      updateActiveScene((s) => ({
-        ...s,
-        stickers: s.stickers.map((st) =>
-          st.instanceId === selectedInstanceId ? { ...st, x: relX, y: relY } : st
-        ),
-      }));
-    }
+    updateActiveScene((s) => ({
+      ...s,
+      characters: s.characters.map((c) => (c.instanceId === id ? { ...c, x: relX, y: relY } : c)),
+      stickers: s.stickers.map((st) => (st.instanceId === id ? { ...st, x: relX, y: relY } : st)),
+    }));
   };
 
-  const handleMouseUp = () => {
+  const endDrag = () => {
+    dragState.current = null;
     setIsDragging(false);
   };
 
@@ -300,66 +391,33 @@ export const StudioMode: React.FC<StudioModeProps> = ({
   const bgObj = BACKGROUND_OPTIONS.find((b) => b.id === activeScene.backgroundId) || BACKGROUND_OPTIONS[0];
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#B3E5FB]">
-      {/* Top Studio Control Bar */}
-      <div className="bg-white/90 backdrop-blur-md border-b border-[#74C9F0] p-2.5 sm:px-6 flex items-center justify-between gap-2 overflow-x-auto z-30">
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-gradient-to-b from-[#F3EFFB] to-[#E9F3FB]">
+      {/* ============ Barra de control superior ============ */}
+      <div className="bg-white/85 backdrop-blur-md border-b border-line-rose p-2 sm:px-4 flex items-center justify-between gap-2 overflow-x-auto z-30">
         <div className="flex items-center gap-2">
-          {/* Scene selector & name */}
-          <div className="flex items-center gap-1.5 bg-[#EAF6FF] px-3 py-1.5 rounded-2xl border border-[#74C9F0]">
-            <FolderOpen className="w-4 h-4 text-[#1E4580]" />
+          {/* Nombre de la escena activa */}
+          <div className="flex items-center gap-1.5 bg-lav-50 px-3 py-1.5 rounded-full border-[1.5px] border-line-lav">
+            <FolderOpen className="w-4 h-4 text-lav-500 shrink-0" />
             <input
               type="text"
               value={activeScene.name}
               onChange={(e) => updateActiveScene((s) => ({ ...s, name: e.target.value }))}
-              className="text-xs sm:text-sm font-extrabold text-[#1E4580] bg-transparent focus:outline-none w-36 sm:w-56"
+              className="text-xs sm:text-sm font-extrabold text-ink bg-transparent focus:outline-none w-32 sm:w-48"
             />
           </div>
-
-          {/* New Scene Slot */}
-          <button
-            onClick={() => {
-              playSound('pop');
-              const newScene: StudioScene = {
-                id: `scene_${Date.now()}`,
-                name: `Nueva Escena #${scenes.length + 1}`,
-                backgroundId: 'bg_classroom',
-                characters: [
-                  {
-                    instanceId: `inst_${Date.now()}`,
-                    character: characters[0],
-                    x: 50,
-                    y: 50,
-                    scale: 1,
-                    rotation: 0,
-                    flip: false,
-                    zIndex: 1,
-                  },
-                ],
-                stickers: [],
-              };
-              const updated = [...scenes, newScene];
-              setScenes(updated);
-              setCurrentSceneIndex(updated.length - 1);
-              onSaveScenes(updated);
-            }}
-            title="Crear Nueva Escena"
-            className="p-2 rounded-xl bg-[#FFB1CE] hover:bg-[#FF87B2] text-[#1E4580] transition-all"
-          >
-            <Plus className="w-4 h-4" />
-          </button>
         </div>
 
-        {/* Action Buttons: Add Char, Change BG, Add Sticker, Export PNG */}
+        {/* Acciones */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={() => {
               playSound('click');
               setShowAddCharModal(true);
             }}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#FFB1CE] hover:bg-[#FF87B2] text-[#E56593] font-bold text-xs transition-all whitespace-nowrap"
+            className="gl-btn gl-btn-pink !rounded-full px-3 py-1.5 text-xs whitespace-nowrap"
           >
             <Plus className="w-3.5 h-3.5" />
-            <span>+ Personaje</span>
+            <span>Personaje</span>
           </button>
 
           <button
@@ -367,9 +425,9 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               playSound('click');
               setShowBgModal(true);
             }}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#A8DEF8] hover:bg-[#74C9F0] text-[#1E4580] font-bold text-xs transition-all whitespace-nowrap"
+            className="gl-btn gl-btn-white !rounded-full px-3 py-1.5 text-xs whitespace-nowrap"
           >
-            <ImageIcon className="w-3.5 h-3.5" />
+            <ImageIcon className="w-3.5 h-3.5 text-lav-500" />
             <span>Fondo</span>
           </button>
 
@@ -378,15 +436,15 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               playSound('click');
               setShowStickerModal(true);
             }}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#FFE06B] hover:bg-[#FFEC9E] text-[#8A6414] font-bold text-xs transition-all whitespace-nowrap"
+            className="gl-btn gl-btn-white !rounded-full px-3 py-1.5 text-xs whitespace-nowrap"
           >
-            <Smile className="w-3.5 h-3.5" />
+            <Smile className="w-3.5 h-3.5 text-lav-500" />
             <span>Stickers</span>
           </button>
 
           <button
             onClick={handleExportScenePng}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#74C9F0] to-[#4AA0D0] text-white font-extrabold text-xs shadow-cute hover:scale-105 transition-all whitespace-nowrap"
+            className="gl-btn gl-btn-blue !rounded-full px-3.5 py-1.5 text-xs whitespace-nowrap"
           >
             <Camera className="w-4 h-4" />
             <span>Exportar PNG</span>
@@ -394,14 +452,63 @@ export const StudioMode: React.FC<StudioModeProps> = ({
         </div>
       </div>
 
-      {/* Main Staging Canvas Area */}
-      <div className="flex-1 relative flex items-center justify-center p-3 sm:p-6 overflow-hidden">
-        {/* Canvas Screen Viewport (16:9 aspect or responsive) */}
+      {/* ============ Pestañas de escenas ============ */}
+      <div className="flex items-center gap-1.5 px-2 sm:px-4 py-1.5 bg-white/60 border-b border-line-rose overflow-x-auto z-20">
+        <Layers className="w-3.5 h-3.5 text-ink-faint shrink-0" />
+        {scenes.map((s, i) => {
+          const isActive = i === currentSceneIndex;
+          return (
+            <div key={s.id} className="relative shrink-0">
+              <button
+                onClick={() => {
+                  playSound('click');
+                  setCurrentSceneIndex(i);
+                  setSelectedInstanceId(s.characters[0]?.instanceId || null);
+                }}
+                className={`pl-2 pr-6 py-1 rounded-full text-[11px] font-extrabold max-w-[150px] border-[1.5px] transition-all whitespace-nowrap ${
+                  isActive
+                    ? 'bg-gradient-to-b from-rosa-400 to-rosa-500 text-white border-rosa-500 shadow-sm'
+                    : 'bg-white text-ink-soft border-line-lav hover:border-lav-300 hover:text-ink'
+                }`}
+              >
+                <span className="opacity-60 mr-1">{i + 1}.</span>
+                {s.name}
+              </button>
+              {scenes.length > 1 && (
+                <button
+                  onClick={(e) => { e.stopPropagation(); handleDeleteScene(i); }}
+                  title="Eliminar escena"
+                  className={`absolute -top-1 -right-1 w-4 h-4 rounded-full text-[9px] flex items-center justify-center border transition-all ${
+                    isActive
+                      ? 'bg-white/90 text-rosa-600 border-white'
+                      : 'bg-white text-ink-faint border-line-lav hover:text-[#E86A7E]'
+                  }`}
+                >
+                  <X className="w-2.5 h-2.5" strokeWidth={3} />
+                </button>
+              )}
+            </div>
+          );
+        })}
+        <button
+          onClick={handleNewScene}
+          title="Crear nueva escena"
+          className="shrink-0 w-6 h-6 rounded-full border-[1.5px] border-dashed border-rosa-300 text-rosa-500 flex items-center justify-center hover:bg-rosa-50 transition-all active:scale-90"
+        >
+          <Plus className="w-3.5 h-3.5" strokeWidth={2.5} />
+        </button>
+      </div>
+
+      {/* ============ Lienzo de la escena ============ */}
+      <div className="flex-1 relative flex items-center justify-center p-3 sm:p-5 overflow-hidden">
         <div
           ref={sceneRef}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          className={`relative w-full max-w-5xl aspect-[16/9] rounded-3xl overflow-hidden shadow-cute-lg border-4 border-white select-none bg-gradient-to-br ${bgObj.gradient}`}
+          onPointerMove={handlePointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          className={`relative w-full max-w-5xl aspect-[16/9] rounded-[26px] overflow-hidden shadow-cute-lg border-[6px] border-white select-none bg-gradient-to-br ${bgObj.gradient} ${
+            isDragging ? 'cursor-grabbing' : ''
+          }`}
         >
           {/* Fondo SVG (assets/items/fondos/) */}
           {bgObj.svg && (
@@ -414,7 +521,7 @@ export const StudioMode: React.FC<StudioModeProps> = ({
               <g dangerouslySetInnerHTML={{ __html: bgObj.svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '') }} />
             </svg>
           )}
-          {/* Background illustration details */}
+          {/* Detalles decorativos para fondos sin SVG */}
           {bgObj.id === 'bg_classroom' && (
             <div className="absolute inset-0 pointer-events-none opacity-20">
               <div className="absolute left-8 top-12 w-64 h-40 border-4 border-amber-800 rounded-lg bg-green-900/40" />
@@ -433,13 +540,13 @@ export const StudioMode: React.FC<StudioModeProps> = ({
             </div>
           )}
 
-          {/* Render Characters in Scene */}
+          {/* Personajes en escena */}
           {activeScene.characters.map((inst) => {
             const isSelected = selectedInstanceId === inst.instanceId;
             return (
               <div
                 key={inst.instanceId}
-                onMouseDown={(e) => handleMouseDown(e, inst.instanceId)}
+                onPointerDown={(e) => handlePointerDown(e, inst.instanceId)}
                 style={{
                   left: `${inst.x}%`,
                   top: `${inst.y}%`,
@@ -448,31 +555,18 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                   }`,
                   zIndex: inst.zIndex,
                 }}
-                className={`absolute cursor-grab active:cursor-grabbing transition-shadow ${
-                  isSelected ? 'ring-2 ring-[#FF87B2] ring-offset-2 rounded-2xl' : ''
+                className={`absolute cursor-grab active:cursor-grabbing touch-none ${
+                  isSelected ? 'ring-2 ring-rosa-400 ring-offset-2 ring-offset-white/60 rounded-2xl' : ''
                 }`}
               >
-                {/* Speech Bubble */}
+                {/* Bocadillo de diálogo */}
                 {inst.bubble && (
-                  <div
-                    style={{
-                      transform: inst.flip ? 'scaleX(-1)' : 'none',
-                    }}
-                    className={`studio-bubble absolute -top-16 ${
-                      inst.bubble.tailSide === 'left' ? '-left-6' : '-right-6'
-                    } min-w-[140px] max-w-[240px] bg-white text-[#1E4580] border-2 border-[#4A3B52] font-bold text-xs px-3 py-2 rounded-2xl shadow-md text-center pointer-events-none z-30`}
-                  >
-                    {inst.bubble.text}
-                    {/* Bubble tail pointer */}
-                    <div
-                      className={`absolute -bottom-2 ${
-                        inst.bubble.tailSide === 'left' ? 'left-6' : 'right-6'
-                      } w-3 h-3 bg-white border-r-2 border-b-2 border-[#4A3B52] transform rotate-45`}
-                    />
+                  <div style={{ transform: inst.flip ? 'scaleX(-1)' : 'none' }}>
+                    <DialogueBubble bubble={inst.bubble} />
                   </div>
                 )}
 
-                {/* Chibi Character */}
+                {/* Personaje */}
                 <div className="w-[180px] h-[240px] sm:w-[240px] sm:h-[300px] pointer-events-none">
                   <ChibiRenderer character={inst.character} animate={false} />
                 </div>
@@ -480,22 +574,22 @@ export const StudioMode: React.FC<StudioModeProps> = ({
             );
           })}
 
-          {/* Render Stickers */}
+          {/* Stickers en escena */}
           {activeScene.stickers.map((stk) => {
             const isSelected = selectedInstanceId === stk.instanceId;
             const stkData = STICKER_OPTIONS.find((s) => s.id === stk.stickerId);
             return (
               <div
                 key={stk.instanceId}
-                onMouseDown={(e) => handleMouseDown(e, stk.instanceId)}
+                onPointerDown={(e) => handlePointerDown(e, stk.instanceId)}
                 style={{
                   left: `${stk.x}%`,
                   top: `${stk.y}%`,
                   transform: `translate(-50%, -50%) scale(${stk.scale}) rotate(${stk.rotation}deg)`,
                   zIndex: stk.zIndex,
                 }}
-                className={`absolute cursor-grab active:cursor-grabbing text-4xl sm:text-5xl ${
-                  isSelected ? 'ring-2 ring-[#FFD700] rounded-xl' : ''
+                className={`absolute cursor-grab active:cursor-grabbing touch-none text-4xl sm:text-5xl rounded-xl ${
+                  isSelected ? 'ring-2 ring-lav-400 ring-offset-2 ring-offset-white/60' : ''
                 }`}
               >
                 {stkData?.icon || '✨'}
@@ -504,96 +598,94 @@ export const StudioMode: React.FC<StudioModeProps> = ({
           })}
         </div>
 
-        {/* Selected Element Floating Transform Toolbar */}
-        {selectedChar && (
-          <div className="absolute bottom-6 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-[#74C9F0] shadow-cute flex items-center gap-2 z-40 max-w-[95vw] overflow-x-auto">
-            <span className="text-xs font-black text-[#E56593] px-2 truncate max-w-[120px]">
-              {selectedChar.character.name}
+        {/* ============ Barra flotante del elemento seleccionado ============ */}
+        {(selectedChar || selectedSticker) && (
+          <div className="absolute bottom-4 bg-white/95 backdrop-blur-md p-2 rounded-2xl border-[1.5px] border-line-rose shadow-cute flex items-center gap-2 z-40 max-w-[95vw] overflow-x-auto pop-in">
+            <span className="text-xs font-black text-rosa-600 px-2 truncate max-w-[110px] shrink-0">
+              {selectedChar ? selectedChar.character.name : STICKER_OPTIONS.find((s) => s.id === selectedSticker?.stickerId)?.label || 'Sticker'}
             </span>
 
-            {/* Flip */}
-            <button
-              onClick={handleFlipSelected}
-              title="Voltear horizontalmente"
-              className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#E56593] transition-all"
-            >
-              <FlipHorizontal className="w-4 h-4" />
-            </button>
+            {/* Voltear (solo personajes) */}
+            {selectedChar && (
+              <button
+                onClick={handleFlipSelected}
+                title="Voltear horizontalmente"
+                className="icon-btn w-8 h-8 shrink-0"
+              >
+                <FlipHorizontal className="w-4 h-4" />
+              </button>
+            )}
 
-            {/* Rotate */}
+            {/* Rotar */}
             <button
               onClick={() => handleRotateSelected(15)}
               title="Girar +15°"
-              className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#E56593] transition-all"
+              className="icon-btn w-8 h-8 shrink-0"
             >
               <RotateCw className="w-4 h-4" />
             </button>
 
-            {/* Scale Slider */}
-            <div className="flex items-center gap-1.5 px-2 border-l border-[#A8DEF8]">
-              <span className="text-[10px] font-bold text-[#4AA0D0]">Tamaño</span>
+            {/* Tamaño */}
+            <div className="flex items-center gap-1.5 px-2 border-l border-line-lav shrink-0">
+              <span className="text-[10px] font-bold text-ink-faint">Tamaño</span>
               <input
                 type="range"
                 min="0.5"
                 max="2.0"
                 step="0.05"
-                value={selectedChar.scale}
+                value={selectedChar ? selectedChar.scale : selectedSticker!.scale}
                 onChange={(e) => handleScaleSelected(parseFloat(e.target.value))}
-                className="w-20 accent-[#FF87B2]"
+                className="w-20 accent-rosa-500"
               />
             </div>
 
-            {/* Change Pose dropdown */}
-            <select
-              value={selectedChar.character.parts.pose}
-              onChange={(e) => handleChangePose(e.target.value)}
-              className="text-xs font-bold bg-[#EAF6FF] border border-[#74C9F0] rounded-xl px-2 py-1 text-[#1E4580] focus:outline-none"
-            >
-              {POSE_OPTIONS.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Speech Bubble Button */}
-            <button
-              onClick={() => {
-                setBubbleText(selectedChar.bubble?.text || '');
-                setBubbleStyle(selectedChar.bubble?.style || 'speech');
-                setBubbleTail(selectedChar.bubble?.tailSide || 'left');
-                setShowBubbleEditor(true);
-              }}
-              title="Editar Diálogo"
-              className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#EAF6FF] hover:bg-[#C5E8FB] text-[#1E4580] font-bold text-xs"
-            >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>Diálogo</span>
-            </button>
-
-            {/* Layers up/down */}
-            <div className="flex items-center gap-1 border-l border-[#A8DEF8] pl-1">
-              <button
-                onClick={handleBringForward}
-                title="Traer al frente"
-                className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0]"
+            {/* Pose (solo personajes) */}
+            {selectedChar && (
+              <select
+                value={selectedChar.character.parts.pose}
+                onChange={(e) => handleChangePose(e.target.value)}
+                className="text-xs font-bold bg-lav-50 border-[1.5px] border-line-lav rounded-xl px-2 py-1 text-ink focus:outline-none focus:border-rosa-400 shrink-0"
               >
+                {POSE_OPTIONS.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            )}
+
+            {/* Diálogo (solo personajes) */}
+            {selectedChar && (
+              <button
+                onClick={() => {
+                  setBubbleText(selectedChar.bubble?.text || '');
+                  setBubbleStyle(selectedChar.bubble?.style || 'speech');
+                  setBubbleTail(selectedChar.bubble?.tailSide || 'left');
+                  setShowBubbleEditor(true);
+                }}
+                title="Editar Diálogo"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-lav-50 border-[1.5px] border-line-lav text-ink font-bold text-xs hover:border-lav-300 transition-all shrink-0"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-lav-500" />
+                <span>Diálogo</span>
+              </button>
+            )}
+
+            {/* Capas */}
+            <div className="flex items-center gap-1 border-l border-line-lav pl-1 shrink-0">
+              <button onClick={() => handleLayer(1)} title="Traer al frente" className="icon-btn w-7 h-7">
                 <ArrowUp className="w-3.5 h-3.5" />
               </button>
-              <button
-                onClick={handleSendBackward}
-                title="Enviar atrás"
-                className="p-1.5 rounded-xl hover:bg-[#FFB1CE] text-[#4AA0D0]"
-              >
+              <button onClick={() => handleLayer(-1)} title="Enviar atrás" className="icon-btn w-7 h-7">
                 <ArrowDown className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Delete button */}
+            {/* Eliminar */}
             <button
               onClick={handleRemoveSelected}
               title="Eliminar de la escena"
-              className="p-1.5 rounded-xl hover:bg-red-100 text-red-500 transition-all ml-1"
+              className="icon-btn w-8 h-8 hover:!bg-[#FFEEF1] hover:!text-[#E86A7E] ml-1 shrink-0"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -601,19 +693,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
         )}
       </div>
 
-      {/* Modal: Add Character to Scene */}
+      {/* ============ Modal: Añadir personaje ============ */}
       {showAddCharModal && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-lg w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
-              <h3 className="font-extrabold text-base text-[#1E4580]">
-                Añadir Personaje a la Escena
-              </h3>
-              <button
-                onClick={() => setShowAddCharModal(false)}
-                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
-              >
-                <X className="w-5 h-5" />
+        <div className="fixed inset-0 z-50 bg-[#4A3B52]/40 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn" onClick={() => setShowAddCharModal(false)}>
+          <div className="gl-card p-5 max-w-lg w-full space-y-4" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b border-line-rose pb-2">
+              <h3 className="gl-title text-base font-display">Añadir Personaje a la Escena</h3>
+              <button onClick={() => setShowAddCharModal(false)} className="icon-btn w-8 h-8 !text-rosa-500">
+                <X className="w-4 h-4" />
               </button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-80 overflow-y-auto pr-1">
@@ -621,12 +708,12 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 <button
                   key={char.id}
                   onClick={() => handleAddCharacter(char)}
-                  className="p-3 rounded-2xl border border-[#A8DEF8] hover:border-[#FF87B2] hover:bg-[#EAF6FF]/50 transition-all flex flex-col items-center text-center shadow-xs group"
+                  className="p-3 rounded-2xl border-[1.5px] border-line-lav hover:border-rosa-400 hover:bg-rosa-50/60 transition-all flex flex-col items-center text-center card-hover group"
                 >
                   <div className="w-16 h-20 overflow-hidden relative">
                     <ChibiRenderer character={char} animate={false} scale={0.6} className="w-32 h-32 absolute -top-4 -left-6" />
                   </div>
-                  <span className="text-xs font-extrabold text-[#1E4580] group-hover:text-[#E56593] truncate w-full mt-1">
+                  <span className="text-xs font-extrabold text-ink group-hover:text-rosa-600 truncate w-full mt-1">
                     {char.name}
                   </span>
                 </button>
@@ -636,19 +723,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
         </div>
       )}
 
-      {/* Modal: Change Background */}
+      {/* ============ Modal: Cambiar fondo ============ */}
       {showBgModal && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-xl w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
-              <h3 className="font-extrabold text-base text-[#1E4580]">
-                Seleccionar Fondo del Estudio
-              </h3>
-              <button
-                onClick={() => setShowBgModal(false)}
-                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
-              >
-                <X className="w-5 h-5" />
+        <div className="fixed inset-0 z-50 bg-[#4A3B52]/40 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn" onClick={() => setShowBgModal(false)}>
+          <div className="gl-card p-5 max-w-xl w-full space-y-4" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b border-line-rose pb-2">
+              <h3 className="gl-title text-base font-display">Seleccionar Fondo del Estudio</h3>
+              <button onClick={() => setShowBgModal(false)} className="icon-btn w-8 h-8 !text-rosa-500">
+                <X className="w-4 h-4" />
               </button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-96 overflow-y-auto pr-1">
@@ -660,13 +742,13 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                     updateActiveScene((s) => ({ ...s, backgroundId: bg.id }));
                     setShowBgModal(false);
                   }}
-                  className={`p-3 rounded-2xl border text-left transition-all ${
+                  className={`p-3 rounded-2xl border-[1.5px] text-left transition-all card-hover ${
                     activeScene.backgroundId === bg.id
-                      ? 'border-[#FF87B2] ring-2 ring-[#FF87B2]/50 shadow-cute scale-105'
-                      : 'border-[#A8DEF8] hover:border-[#74C9F0]'
+                      ? 'border-rosa-400 ring-2 ring-rosa-200 bg-rosa-50/60'
+                      : 'border-line-lav hover:border-lav-300 bg-white'
                   }`}
                 >
-                  <div className={`w-full h-16 rounded-xl mb-2 flex items-center justify-center text-3xl shadow-inner bg-gradient-to-tr ${bg.gradient} overflow-hidden relative`}>
+                  <div className={`w-full h-16 rounded-xl mb-2 flex items-center justify-center text-3xl shadow-inner bg-gradient-to-tr ${bg.gradient} overflow-hidden relative border border-line-rose`}>
                     {bg.svg ? (
                       <svg
                         viewBox="0 0 800 600"
@@ -680,12 +762,8 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                       <span>{bg.icon}</span>
                     )}
                   </div>
-                  <p className="text-xs font-extrabold text-[#1E4580] truncate leading-tight">
-                    {bg.name}
-                  </p>
-                  <span className="text-[10px] text-[#8F6DC4] font-semibold">
-                    {bg.category}
-                  </span>
+                  <p className="text-xs font-extrabold text-ink truncate leading-tight">{bg.name}</p>
+                  <span className="text-[10px] text-lav-500 font-semibold">{bg.category}</span>
                 </button>
               ))}
             </div>
@@ -693,19 +771,14 @@ export const StudioMode: React.FC<StudioModeProps> = ({
         </div>
       )}
 
-      {/* Modal: Add Sticker */}
+      {/* ============ Modal: Añadir sticker ============ */}
       {showStickerModal && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-md w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
-              <h3 className="font-extrabold text-base text-[#1E4580]">
-                Añadir Sticker Decorativo
-              </h3>
-              <button
-                onClick={() => setShowStickerModal(false)}
-                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
-              >
-                <X className="w-5 h-5" />
+        <div className="fixed inset-0 z-50 bg-[#4A3B52]/40 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn" onClick={() => setShowStickerModal(false)}>
+          <div className="gl-card p-5 max-w-md w-full space-y-4" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b border-line-rose pb-2">
+              <h3 className="gl-title text-base font-display">Añadir Sticker Decorativo</h3>
+              <button onClick={() => setShowStickerModal(false)} className="icon-btn w-8 h-8 !text-rosa-500">
+                <X className="w-4 h-4" />
               </button>
             </div>
             <div className="grid grid-cols-4 gap-3 max-h-80 overflow-y-auto">
@@ -713,10 +786,10 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 <button
                   key={stk.id}
                   onClick={() => handleAddSticker(stk.id)}
-                  className="p-3 rounded-2xl border border-[#A8DEF8] hover:border-[#FFD700] hover:bg-[#FFF3B8]/50 flex flex-col items-center gap-1 transition-all group"
+                  className="p-3 rounded-2xl border-[1.5px] border-line-lav hover:border-rosa-300 hover:bg-rosa-50/60 flex flex-col items-center gap-1 transition-all card-hover group"
                 >
                   <span className="text-4xl group-hover:scale-125 transition-transform">{stk.icon}</span>
-                  <span className="text-[10px] font-bold text-[#4AA0D0]">{stk.label}</span>
+                  <span className="text-[10px] font-bold text-ink-soft">{stk.label}</span>
                 </button>
               ))}
             </div>
@@ -724,24 +797,19 @@ export const StudioMode: React.FC<StudioModeProps> = ({
         </div>
       )}
 
-      {/* Modal: Edit Speech Bubble */}
+      {/* ============ Modal: Editor de bocadillo ============ */}
       {showBubbleEditor && (
-        <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl p-5 max-w-md w-full border border-[#74C9F0] shadow-cute-lg space-y-4">
-            <div className="flex items-center justify-between border-b border-[#A8DEF8] pb-2">
-              <h3 className="font-extrabold text-base text-[#1E4580]">
-                Bocadillo de Diálogo
-              </h3>
-              <button
-                onClick={() => setShowBubbleEditor(false)}
-                className="p-1 rounded-full hover:bg-[#FFB1CE] text-[#4AA0D0] hover:text-[#2B5FA8]"
-              >
-                <X className="w-5 h-5" />
+        <div className="fixed inset-0 z-50 bg-[#4A3B52]/40 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn" onClick={() => setShowBubbleEditor(false)}>
+          <div className="gl-card p-5 max-w-md w-full space-y-4" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between border-b border-line-rose pb-2">
+              <h3 className="gl-title text-base font-display">Bocadillo de Diálogo</h3>
+              <button onClick={() => setShowBubbleEditor(false)} className="icon-btn w-8 h-8 !text-rosa-500">
+                <X className="w-4 h-4" />
               </button>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#4AA0D0] uppercase mb-1">
+              <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">
                 Texto del diálogo
               </label>
               <textarea
@@ -749,28 +817,54 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                 onChange={(e) => setBubbleText(e.target.value)}
                 placeholder="Escribe lo que dice el personaje..."
                 rows={3}
-                className="w-full text-sm font-bold p-3 border border-[#74C9F0] rounded-2xl focus:outline-none focus:border-[#FF87B2] resize-none"
+                className="soft-input resize-none"
               />
             </div>
 
-            <div className="flex items-center justify-between">
+            <div>
+              <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1.5 px-1">
+                Estilo del bocadillo
+              </label>
+              <div className="grid grid-cols-5 gap-1.5">
+                {BUBBLE_STYLES.map((st) => (
+                  <button
+                    key={st.id}
+                    onClick={() => { playSound('click'); setBubbleStyle(st.id); }}
+                    className={`flex flex-col items-center gap-0.5 py-2 rounded-xl text-[10px] font-bold border-[1.5px] transition-all ${
+                      bubbleStyle === st.id
+                        ? 'bg-rosa-50 border-rosa-400 text-rosa-600 ring-2 ring-rosa-200'
+                        : 'bg-white border-line-lav text-ink-soft hover:border-lav-300'
+                    }`}
+                  >
+                    <span className="text-lg leading-none">{st.icon}</span>
+                    {st.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between gap-3 flex-wrap">
               <div>
-                <label className="block text-xs font-bold text-[#4AA0D0] uppercase mb-1">
+                <label className="block text-[10px] font-extrabold text-ink-soft uppercase tracking-wider mb-1 px-1">
                   Orientación
                 </label>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setBubbleTail('left')}
-                    className={`px-3 py-1 rounded-xl text-xs font-bold border ${
-                      bubbleTail === 'left' ? 'bg-[#FF87B2] text-white' : 'bg-[#EAF6FF] text-[#4AA0D0]'
+                    className={`px-3 py-1 rounded-full text-xs font-bold border-[1.5px] transition-all ${
+                      bubbleTail === 'left'
+                        ? 'bg-gradient-to-b from-rosa-400 to-rosa-500 text-white border-rosa-500'
+                        : 'bg-white text-ink-soft border-line-lav hover:border-lav-300'
                     }`}
                   >
                     Izquierda
                   </button>
                   <button
                     onClick={() => setBubbleTail('right')}
-                    className={`px-3 py-1 rounded-xl text-xs font-bold border ${
-                      bubbleTail === 'right' ? 'bg-[#FF87B2] text-white' : 'bg-[#EAF6FF] text-[#4AA0D0]'
+                    className={`px-3 py-1 rounded-full text-xs font-bold border-[1.5px] transition-all ${
+                      bubbleTail === 'right'
+                        ? 'bg-gradient-to-b from-rosa-400 to-rosa-500 text-white border-rosa-500'
+                        : 'bg-white text-ink-soft border-line-lav hover:border-lav-300'
                     }`}
                   >
                     Derecha
@@ -784,14 +878,11 @@ export const StudioMode: React.FC<StudioModeProps> = ({
                     setBubbleText('');
                     handleSaveBubble();
                   }}
-                  className="px-3 py-2 rounded-xl bg-[#EAF6FF] text-[#2B5FA8] text-xs font-bold"
+                  className="gl-btn gl-btn-white px-3 py-2 text-xs"
                 >
                   Quitar Bocadillo
                 </button>
-                <button
-                  onClick={handleSaveBubble}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF87B2] to-[#74C9F0] text-white text-xs font-extrabold shadow-cute"
-                >
+                <button onClick={handleSaveBubble} className="gl-btn gl-btn-pink px-4 py-2 text-xs">
                   Guardar
                 </button>
               </div>
