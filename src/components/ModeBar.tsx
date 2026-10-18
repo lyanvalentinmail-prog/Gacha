@@ -11,7 +11,8 @@ interface ModeBarProps {
 }
 
 /**
- * Barra superior para las pantallas de modo (Estudio, Gacha, Colección, Misiones).
+ * Barra superior estilo Gacha Life para las pantallas de modo
+ * (Estudio, Gacha, Colección, Misiones).
  * El menú principal (HomeScreen) no la usa: integra sus propios controles.
  */
 export const ModeBar: React.FC<ModeBarProps> = ({
@@ -24,43 +25,36 @@ export const ModeBar: React.FC<ModeBarProps> = ({
 }) => {
   return (
     <header
-      className="shrink-0 flex items-center justify-between gap-2 px-3 py-2 border-b-4 shadow-sm"
-      style={{ backgroundColor: '#C9CBF2', borderColor: '#3D3B6E' }}
+      className="shrink-0 flex items-center justify-between gap-2 px-2 sm:px-3 py-2 gl-strip"
+      style={{ borderBottom: '4px solid #1E4580' }}
     >
       <div className="flex items-center gap-2 min-w-0">
         <button
           onClick={onBack}
-          className="flex items-center gap-1 rounded-full border-[3px] px-3 py-1.5 font-extrabold text-sm shadow-[0_3px_0_rgba(61,59,110,0.85)] active:translate-y-[3px] active:shadow-none transition-all"
-          style={{ borderColor: '#3D3B6E', backgroundColor: '#E6E8FB', color: '#3D3B6E' }}
+          className="gl-btn gl-btn-yellow px-3 py-1.5 text-xs sm:text-sm"
         >
           <ChevronLeft className="w-4 h-4" /> Menú
         </button>
         <div className="flex items-center gap-2 min-w-0">
           <div
-            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
-            style={{ backgroundColor: '#3D3B6E' }}
+            className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 border-2 border-[#1E4580]"
+            style={{ backgroundColor: '#FFE06B' }}
           >
-            <Sparkles className="w-4 h-4 text-white" />
+            <Sparkles className="w-4 h-4 text-[#1E4580]" />
           </div>
-          <h1 className="font-black text-base sm:text-lg truncate" style={{ color: '#3D3B6E' }}>
+          <h1 className="gl-title font-display font-bold text-base sm:text-xl truncate">
             {title}
           </h1>
         </div>
       </div>
 
       <div className="flex items-center gap-2">
-        <button
-          onClick={onOpenGemShop}
-          className="flex items-center gap-1.5 rounded-full border-[3px] px-3 py-1.5 hover:bg-white/50 transition-all"
-          style={{ borderColor: '#3D3B6E' }}
-        >
-          <Gem className="w-4 h-4" style={{ color: '#7E57C2' }} />
-          <span className="font-extrabold text-sm" style={{ color: '#3D3B6E' }}>
-            {gems.toLocaleString()}
-          </span>
+        <button onClick={onOpenGemShop} className="gl-pill hover:brightness-105 active:translate-y-[2px] transition-all">
+          <Gem className="w-4 h-4" style={{ color: '#B79AE0' }} />
+          <span className="text-xs sm:text-sm">{gems.toLocaleString()}</span>
           <span
             className="w-4 h-4 rounded-full text-white flex items-center justify-center"
-            style={{ backgroundColor: '#4A4D8E' }}
+            style={{ backgroundColor: '#FF87B2' }}
           >
             <Plus className="w-2.5 h-2.5" />
           </span>
@@ -68,13 +62,12 @@ export const ModeBar: React.FC<ModeBarProps> = ({
         <button
           onClick={onToggleMute}
           title={isMuted ? 'Activar Sonido' : 'Silenciar'}
-          className="w-9 h-9 rounded-full border-[3px] flex items-center justify-center hover:bg-white/50"
-          style={{ borderColor: '#3D3B6E' }}
+          className="w-9 h-9 rounded-full border-[3px] border-[#2B5FA8] bg-white flex items-center justify-center shadow-[0_3px_0_#2B5FA8] active:translate-y-[3px] active:shadow-none transition-all"
         >
           {isMuted ? (
-            <VolumeX className="w-4 h-4" style={{ color: '#3D3B6E' }} />
+            <VolumeX className="w-4 h-4 text-[#1E4580]" />
           ) : (
-            <Volume2 className="w-4 h-4" style={{ color: '#3D3B6E' }} />
+            <Volume2 className="w-4 h-4 text-[#1E4580]" />
           )}
         </button>
       </div>

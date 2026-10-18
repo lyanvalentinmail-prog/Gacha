@@ -1,6 +1,6 @@
 # ✨ Chibiverse Gacha Studio 2D
 
-Un videojuego Gacha 2D completo, original y funcional de estilo anime / chibi, inspirado en las mejores mecánicas de *Gacha Life 2* y *Gacha Club*, con estética pastel moderna (rosa, lavanda, menta y blanco), animaciones fluidas, sintetizador de audio procedural y un robusto sistema de creación y estudio.
+Un videojuego Gacha 2D completo, original y funcional de estilo anime / chibi, inspirado en las mejores mecánicas de *Gacha Life* y *Gacha Club*, con la **estética clásica de Gacha Life**: cielo azul con nubes, botones rosas y azules 3D, paneles celestes con contorno azul marino, máquina de gacha de cápsulas y tipografía bubbly redondeada.
 
 [![Descargar APK](https://img.shields.io/badge/Descargar-APK%20para%20Android-FF6F91?style=for-the-badge&logo=android&logoColor=white)](https://github.com/lyanvalentinmail-prog/Gacha/releases/latest)
 [![APK Android](https://github.com/lyanvalentinmail-prog/Gacha/actions/workflows/android-apk.yml/badge.svg)](https://github.com/lyanvalentinmail-prog/Gacha/actions/workflows/android-apk.yml)

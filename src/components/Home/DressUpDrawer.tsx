@@ -136,40 +136,40 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
     if (panel === 'presets') {
       return (
         <div className="space-y-3">
-          <p className="text-xs font-bold text-[#4A4D8E] uppercase">Preajustes & Acciones Rápidas</p>
+          <p className="text-xs font-bold text-[#1E4580] uppercase">Preajustes & Acciones Rápidas</p>
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => { playSound('pop'); onRandomize(); }}
-              className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-extrabold text-xs shadow-[0_3px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none transition-all"
+              className="gl-btn gl-btn-yellow flex-col gap-1.5 p-3 text-xs"
             >
               <Dices className="w-6 h-6" />
               ¡Aleatorio!
             </button>
             <button
               onClick={() => { playSound('click'); onReset(); }}
-              className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-extrabold text-xs shadow-[0_3px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none transition-all"
+              className="gl-btn gl-btn-white flex-col gap-1.5 p-3 text-xs"
             >
               <RotateCcw className="w-6 h-6" />
               Restablecer
             </button>
             <button
               onClick={() => { playSound('pop'); onExportPng(); }}
-              className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-extrabold text-xs shadow-[0_3px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none transition-all"
+              className="gl-btn gl-btn-blue flex-col gap-1.5 p-3 text-xs"
             >
               <Download className="w-6 h-6" />
               Exportar PNG
             </button>
             <button
               onClick={() => { playSound('pop'); onOpenCollection(); }}
-              className="flex flex-col items-center gap-1.5 p-3 rounded-2xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-extrabold text-xs shadow-[0_3px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none transition-all"
+              className="gl-btn gl-btn-pink flex-col gap-1.5 p-3 text-xs"
             >
               <BookOpen className="w-6 h-6" />
               Colección
             </button>
           </div>
-          <div className="p-3 rounded-2xl bg-white/70 border border-[#B9BCE8] text-[11px] text-[#4A4D8E] leading-relaxed">
+          <div className="p-3 rounded-2xl bg-white/70 border border-[#74C9F0] text-[11px] text-[#1E4580] leading-relaxed">
             <b>Tip:</b> la ropa, accesorios y partes del cuerpo se cargan desde la carpeta
-            <code className="mx-1 px-1 rounded bg-[#E6E8FB] font-bold">assets/items/</code>.
+            <code className="mx-1 px-1 rounded bg-[#EAF6FF] font-bold">assets/items/</code>.
             ¡Agregar cosas nuevas es tan fácil como soltar un archivo SVG con su nombre!
           </div>
         </div>
@@ -186,8 +186,8 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between px-1">
-              <span className="text-xs font-bold text-[#4A4D8E] uppercase tracking-wider">Tonos de Piel</span>
-              <span className="text-[11px] font-semibold text-[#7D80D1]">{skins.length} opciones</span>
+              <span className="text-xs font-bold text-[#1E4580] uppercase tracking-wider">Tonos de Piel</span>
+              <span className="text-[11px] font-semibold text-[#4AA0D0]">{skins.length} opciones</span>
             </div>
             <div className="grid grid-cols-4 gap-2">
               {skins.map((s) => (
@@ -197,8 +197,8 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
                   onClick={() => { playSound('equip'); updateColor('skin', s.color || '#FFE6D8'); }}
                   className={`aspect-square rounded-xl border-[3px] transition-all ${
                     currentCharacter.colors.skin === s.color
-                      ? 'border-[#FF6F91] ring-2 ring-[#FF6F91]/40 scale-105'
-                      : 'border-[#3D3B6E] hover:scale-105'
+                      ? 'border-[#FF87B2] ring-2 ring-[#FF87B2]/40 scale-105'
+                      : 'border-[#2B5FA8] hover:scale-105'
                   }`}
                   style={{ backgroundColor: s.color }}
                 />
@@ -290,76 +290,76 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
     return (
       <div className="space-y-3">
         <div>
-          <label className="block text-[10px] font-extrabold text-[#4A4D8E] uppercase tracking-wider mb-1">Nombre</label>
+          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Nombre</label>
           <input
             type="text"
             value={currentCharacter.name}
             onChange={(e) => pushChange({ ...currentCharacter, name: e.target.value })}
-            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#3D3B6E] rounded-xl bg-white focus:outline-none focus:border-[#FF6F91]"
+            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2]"
           />
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#4A4D8E] uppercase tracking-wider mb-1">Título / Ocupación</label>
+          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Título / Ocupación</label>
           <input
             type="text"
             value={currentCharacter.title}
             onChange={(e) => pushChange({ ...currentCharacter, title: e.target.value })}
-            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#3D3B6E] rounded-xl bg-white focus:outline-none focus:border-[#FF6F91]"
+            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2]"
             placeholder="ej. Idol Estelar, Brujita Traviesa..."
           />
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#4A4D8E] uppercase tracking-wider mb-1">Elemento</label>
+          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Elemento</label>
           <div className="grid grid-cols-3 gap-1.5">
             {(['Luz', 'Sombra', 'Fuego', 'Agua', 'Viento', 'Astral'] as const).map((elem) => (
-              <button
-                key={elem}
-                onClick={() => { playSound('click'); pushChange({ ...currentCharacter, element: elem }); }}
-                className={`py-1.5 rounded-xl text-[11px] font-bold border-[3px] transition-all ${
-                  currentCharacter.element === elem
-                    ? 'bg-[#7D80D1] text-white border-[#3D3B6E]'
-                    : 'bg-white border-[#3D3B6E] text-[#4A4D8E] hover:bg-[#E6E8FB]'
-                }`}
-              >
+            <button
+              key={elem}
+              onClick={() => { playSound('click'); pushChange({ ...currentCharacter, element: elem }); }}
+              className={`py-1.5 rounded-xl text-[11px] font-bold border-[3px] transition-all shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none ${
+                currentCharacter.element === elem
+                  ? 'bg-[#FF87B2] text-white border-[#2B5FA8]'
+                  : 'bg-white border-[#2B5FA8] text-[#1E4580] hover:bg-[#EAF6FF]'
+              }`}
+            >
                 {elem}
               </button>
             ))}
           </div>
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#4A4D8E] uppercase tracking-wider mb-1">Comida Favorita</label>
+          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Comida Favorita</label>
           <input
             type="text"
             value={currentCharacter.favorite}
             onChange={(e) => pushChange({ ...currentCharacter, favorite: e.target.value })}
-            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#3D3B6E] rounded-xl bg-white focus:outline-none focus:border-[#FF6F91]"
+            className="w-full text-sm font-bold px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2]"
           />
         </div>
         <div>
-          <label className="block text-[10px] font-extrabold text-[#4A4D8E] uppercase tracking-wider mb-1">Biografía / Historia</label>
+          <label className="block text-[10px] font-extrabold text-[#1E4580] uppercase tracking-wider mb-1">Biografía / Historia</label>
           <textarea
             value={currentCharacter.bio}
             onChange={(e) => pushChange({ ...currentCharacter, bio: e.target.value })}
             rows={3}
-            className="w-full text-xs font-medium px-3 py-2 border-[3px] border-[#3D3B6E] rounded-xl bg-white focus:outline-none focus:border-[#FF6F91] resize-none"
+            className="w-full text-xs font-medium px-3 py-2 border-[3px] border-[#2B5FA8] rounded-xl bg-white focus:outline-none focus:border-[#FF87B2] resize-none"
           />
         </div>
         <div className="grid grid-cols-3 gap-1.5">
           <button
             onClick={() => { playSound('pop'); onShareCode(); }}
-            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-bold text-[10px] shadow-[0_2px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none"
+            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#EAF6FF] border-[3px] border-[#2B5FA8] text-[#2B5FA8] font-bold text-[10px] shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none"
           >
             <Share2 className="w-4 h-4" /> Código
           </button>
           <button
             onClick={() => { playSound('pop'); onImportCode(); }}
-            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-bold text-[10px] shadow-[0_2px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none"
+            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#EAF6FF] border-[3px] border-[#2B5FA8] text-[#2B5FA8] font-bold text-[10px] shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none"
           >
             <UserPlus className="w-4 h-4" /> Importar
           </button>
           <button
             onClick={() => { playSound('pop'); onOpenCollection(); }}
-            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#E6E8FB] border-[3px] border-[#3D3B6E] text-[#3D3B6E] font-bold text-[10px] shadow-[0_2px_0_#3D3B6E] active:translate-y-[2px] active:shadow-none"
+            className="flex flex-col items-center gap-1 p-2 rounded-xl bg-[#EAF6FF] border-[3px] border-[#2B5FA8] text-[#2B5FA8] font-bold text-[10px] shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none"
           >
             <BookOpen className="w-4 h-4" /> Colección
           </button>
@@ -377,10 +377,10 @@ export const DressUpDrawer: React.FC<DressUpDrawerProps> = ({
             <button
               key={st.id}
               onClick={() => { playSound('pop'); setSub(st.id); }}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-extrabold whitespace-nowrap transition-all border-2 ${
+              className={`px-2.5 py-1 rounded-full text-[11px] font-extrabold whitespace-nowrap transition-all border-2 shadow-[0_2px_0_#2B5FA8] active:translate-y-[2px] active:shadow-none ${
                 sub === st.id
-                  ? 'bg-[#4A4D8E] text-white border-[#3D3B6E]'
-                  : 'bg-[#E6E8FB] text-[#4A4D8E] border-[#B9BCE8] hover:bg-white'
+                  ? 'bg-[#FF87B2] text-white border-[#2B5FA8]'
+                  : 'bg-white text-[#1E4580] border-[#74C9F0] hover:bg-[#EAF6FF]'
               }`}
             >
               {st.label}

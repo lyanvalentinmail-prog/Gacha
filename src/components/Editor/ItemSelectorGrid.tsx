@@ -27,25 +27,25 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
     switch (rarity) {
       case 6:
         return (
-          <span className="bg-gradient-to-r from-red-500 via-purple-500 to-cyan-400 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
+          <span className="bg-[#FF87B2] text-white border border-[#E56593] text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
             6★ ULTRA
           </span>
         );
       case 5:
         return (
-          <span className="bg-gradient-to-r from-amber-400 to-yellow-500 text-purple-950 text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
+          <span className="bg-[#FFE06B] text-[#8A6414] border border-[#E5B84B] text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
             5★ LEGEND
           </span>
         );
       case 4:
         return (
-          <span className="bg-gradient-to-r from-purple-400 to-indigo-500 text-white text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
+          <span className="bg-[#B79AE0] text-white border border-[#8F6DC4] text-[9px] font-black px-1.5 py-0.2 rounded-full shadow-xs">
             4★ RARO
           </span>
         );
       default:
         return (
-          <span className="bg-blue-100 text-blue-700 text-[9px] font-bold px-1.5 py-0.2 rounded-full">
+          <span className="bg-[#A8DEF8] text-[#1E4580] border border-[#4AA0D0] text-[9px] font-bold px-1.5 py-0.2 rounded-full">
             3★
           </span>
         );
@@ -64,10 +64,10 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
     <div className="space-y-2">
       {categoryTitle && (
         <div className="flex items-center justify-between px-1">
-          <span className="text-xs font-bold text-[#4A4D8E] uppercase tracking-wider">
+          <span className="text-xs font-bold text-[#1E4580] uppercase tracking-wider">
             {categoryTitle}
           </span>
-          <span className="text-[11px] font-semibold text-[#7D80D1]">
+          <span className="text-[11px] font-semibold text-[#4AA0D0]">
             {options.length} opciones
           </span>
         </div>
@@ -92,22 +92,22 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
               }}
               className={`relative flex flex-col items-center p-2 rounded-2xl text-left border-[3px] transition-all ${
                 isSelected
-                  ? 'bg-white border-[#FF6F91] shadow-[0_0_0_2px_rgba(255,111,145,0.35)] scale-[1.02]'
+                  ? 'bg-white border-[#FF87B2] shadow-[0_0_0_3px_#FFE06B] scale-[1.02]'
                   : isLocked
-                  ? 'bg-[#E6E8FB]/60 border-[#B9BCE8] opacity-60'
-                  : 'bg-white/90 hover:bg-[#F2F3FF] border-[#B9BCE8] hover:border-[#7D80D1]'
+                  ? 'bg-[#EAF6FF]/60 border-[#74C9F0] opacity-60'
+                  : 'bg-white/90 hover:bg-[#EAF6FF] border-[#74C9F0] hover:border-[#4AA0D0]'
               }`}
             >
               {/* Header with rarity badge */}
               <div className="w-full flex items-center justify-between mb-1">
                 {getRarityBadge(opt.rarity)}
-                {isLocked && <Lock className="w-3.5 h-3.5 text-[#4A4D8E]" />}
+                {isLocked && <Lock className="w-3.5 h-3.5 text-[#1E4580]" />}
               </div>
 
               {/* Miniatura real del asset */}
               <div
-                className="w-14 h-14 rounded-xl border-2 border-[#B9BCE8] flex items-center justify-center my-0.5 overflow-hidden"
-                style={{ backgroundColor: '#E6E8FB' }}
+                className="w-14 h-14 rounded-xl border-2 border-[#74C9F0] flex items-center justify-center my-0.5 overflow-hidden"
+                style={{ backgroundColor: '#EAF6FF' }}
               >
                 {renderThumbnail ? (
                   renderThumbnail(opt)
@@ -128,10 +128,10 @@ export const ItemSelectorGrid: React.FC<ItemSelectorGridProps> = ({
 
               {/* Title & Description */}
               <div className="w-full text-center mt-1">
-                <p className="text-[11px] font-extrabold text-[#3D3B6E] truncate leading-tight">
+                <p className="text-[11px] font-extrabold text-[#2B5FA8] truncate leading-tight">
                   {opt.name}
                 </p>
-                <p className="text-[9px] text-[#7D80D1] line-clamp-1 mt-0.5">
+                <p className="text-[9px] text-[#4AA0D0] line-clamp-1 mt-0.5">
                   {opt.description}
                 </p>
               </div>
