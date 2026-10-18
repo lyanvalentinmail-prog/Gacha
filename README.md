@@ -2,6 +2,55 @@
 
 Un videojuego Gacha 2D completo, original y funcional de estilo anime / chibi, inspirado en las mejores mecánicas de *Gacha Life 2* y *Gacha Club*, con estética pastel moderna (rosa, lavanda, menta y blanco), animaciones fluidas, sintetizador de audio procedural y un robusto sistema de creación y estudio.
 
+[![Descargar APK](https://img.shields.io/badge/Descargar-APK%20para%20Android-FF6F91?style=for-the-badge&logo=android&logoColor=white)](https://github.com/lyanvalentinmail-prog/Gacha/releases/latest)
+[![APK Android](https://github.com/lyanvalentinmail-prog/Gacha/actions/workflows/android-apk.yml/badge.svg)](https://github.com/lyanvalentinmail-prog/Gacha/actions/workflows/android-apk.yml)
+
+---
+
+## 📱 Descargar e instalar en Android
+
+Cada vez que se sube un cambio a `main`, **GitHub Actions** compila el APK firmado y lo publica en
+[Releases](https://github.com/lyanvalentinmail-prog/Gacha/releases). No necesitas Android Studio ni
+compilar nada para jugar en el teléfono.
+
+### 1. Descarga el APK
+
+- Última versión (enlace directo):
+  **<https://github.com/lyanvalentinmail-prog/Gacha/releases/latest/download/Chibiverse-Gacha-Studio.apk>**
+- Todas las versiones: **<https://github.com/lyanvalentinmail-prog/Gacha/releases>**
+
+### 2. Instálalo en el teléfono
+
+1. Abre el enlace desde el navegador del teléfono (Chrome, Firefox, etc.) y descarga el archivo `.apk`.
+2. Toca el archivo descargado o ábrelo desde **Archivos → Descargas**.
+3. Si Android indica *«Por seguridad, tu teléfono no puede instalar apps de esta fuente»*, toca
+   **Ajustes** y activa **Permitir desde esta fuente** para el navegador o el gestor de archivos.
+4. Si aparece el aviso de **Play Protect**, elige **«Instalar de todas formas»**. El aviso sale porque
+   la APK se firma fuera de Google Play, no porque la app tenga malware.
+5. Abre **Chibiverse Gacha Studio** y ¡listo! ✨
+
+> **Requisitos:** Android 7.0 (API 24) o superior. La primera apertura tarda unos segundos mientras la
+> WebView carga todos los recursos del juego.
+
+**Actualizaciones:** descarga la nueva APK desde la última release e instálala encima de la anterior.
+Como todas las versiones se firman con la misma clave, Android no te pedirá desinstalar y tus
+personajes, gemas y escenas guardadas se conservan.
+
+### 3. Compilar la APK tú mismo (opcional)
+
+Requisitos: Node.js 22+, JDK 21 y Android SDK con la plataforma 36.
+
+```bash
+npm ci
+npm run build
+npx cap sync android
+cd android
+./gradlew assembleRelease      # En Windows: gradlew.bat assembleRelease
+```
+
+El APK firmado queda en `android/app/build/outputs/apk/release/app-release.apk`. También puedes abrir la
+carpeta `android/` con Android Studio para ejecutar la app en un emulador o dispositivo físico.
+
 ---
 
 ## 🌟 Características Principales
@@ -85,14 +134,17 @@ Un videojuego Gacha 2D completo, original y funcional de estilo anime / chibi, i
 - **HTML5 Canvas** para exportación de imágenes PNG de alta calidad
 - **Web Audio API** para sonidos en tiempo real
 - **Lucide Icons** para iconografía moderna y limpia
+- **Capacitor 8** para empaquetar el juego como app Android nativa (APK firmado)
+- **GitHub Actions** para compilar y publicar el APK automáticamente en cada push
 
 ---
 
 ## 🚀 Instrucciones para Ejecutar y Compilar
 
 ### Requisitos previos
-- Node.js (v18 o superior)
-- npm (v9 o superior)
+- Node.js 22 o superior (lo exige Capacitor 8)
+- npm 10 o superior
+- Para generar el APK: JDK 21 y Android SDK 36 (o dejar que lo haga GitHub Actions)
 
 ### Ejecutar en modo desarrollo
 ```bash
@@ -106,3 +158,35 @@ El juego estará disponible inmediatamente en `http://localhost:5173` (o la URL 
 npm run build
 ```
 Los archivos optimizados y listos para distribución se generarán en la carpeta `dist/`.
+
+---
+
+## 🤖 Compilación automática del APK (GitHub Actions)
+
+El workflow [`.github/workflows/android-apk.yml`](.github/workflows/android-apk.yml) se encarga de todo:
+
+| Evento | Qué hace |
+| --- | --- |
+| Push a `main` | Compila la web, sincroniza Capacitor, genera el APK firmado y actualiza la release `latest`. |
+| Tag `v*` (p. ej. `git tag v1.2.0 && git push origin v1.2.0`) | Crea una release con esa versión. |
+| Pull request hacia `main` | Solo compila (sin publicar) para validar los cambios. |
+| Manual (*Actions → APK Android → Run workflow*) | Compila y publica cuando tú quieras. |
+
+El APK también queda como **artefacto** de la ejecución durante 90 días, por si necesitas descargar
+una compilación concreta.
+
+### Versionado y firma
+
+- `versionName` = `1.0.<número de ejecución>` (o el tag `vX.Y.Z` si lo hay) y `versionCode` = número de
+  ejecución, así cada build se instala encima de la anterior.
+- Las releases se firman con la clave incluida en [`android/keystore`](android/keystore/README.md)
+  (contraseña `chibiverse`). Es lo que permite actualizar sin desinstalar.
+
+> ⚠️ Esa clave es pública a propósito, para que cualquiera pueda compilar el proyecto sin configurar
+> secretos. No la uses para publicar en Google Play: si algún día subes la app a la tienda, genera una
+> clave privada nueva y guárdala en los *Secrets* del repositorio.
+
+### Datos y privacidad
+
+La app funciona 100 % en el dispositivo: personajes, gemas, escenas e historial se guardan en el
+almacenamiento local de la WebView (`localStorage`). No hay cuentas, servidores ni compras reales.

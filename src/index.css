@@ -3,12 +3,40 @@
 @tailwind utilities;
 
 @layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  html {
+    /* Rellena también la zona de las barras del sistema en Android/iOS */
+    background-color: #fff6f9;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+
   body {
     @apply antialiased select-none;
     font-family: 'Quicksand', 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: radial-gradient(circle at 10% 20%, #FFF0F5 0%, #F5F0FF 50%, #FFF5FA 100%);
-    min-height: 100vh;
+    min-height: 100%;
   }
+}
+
+/* Contenedor principal de la app.
+ * En Android 16 la WebView se dibuja de borde a borde, así que reservamos el
+ * espacio de la barra de estado, la barra de navegación y los recortes de
+ * pantalla. Capacitor inyecta --safe-area-inset-* y env() es el respaldo para
+ * web/iOS. */
+.app-shell {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  padding-top: var(--safe-area-inset-top, env(safe-area-inset-top, 0px));
+  padding-right: var(--safe-area-inset-right, env(safe-area-inset-right, 0px));
+  padding-bottom: var(--safe-area-inset-bottom, env(safe-area-inset-bottom, 0px));
+  padding-left: var(--safe-area-inset-left, env(safe-area-inset-left, 0px));
 }
 
 /* Custom cute scrollbar */
