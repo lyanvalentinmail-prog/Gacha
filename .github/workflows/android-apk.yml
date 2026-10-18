@@ -137,6 +137,13 @@ jobs:
 
           if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             gh release upload "$TAG" artifacts/*.apk --clobber --repo "$GITHUB_REPOSITORY"
+            # Borra las APK versionadas de compilaciones anteriores para no acumular archivos
+            gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' \
+              | grep -E "^${APK_NAME}-v.+\.apk$" \
+              | grep -v -F "v${{ steps.version.outputs.name }}.apk" \
+              | while read -r stale; do
+                  gh release delete-asset "$TAG" "$stale" --yes --repo "$GITHUB_REPOSITORY"
+                done || true
             gh release edit "$TAG" --title "$TITLE" --notes-file release-notes.md --latest --repo "$GITHUB_REPOSITORY"
           else
             gh release create "$TAG" artifacts/*.apk \

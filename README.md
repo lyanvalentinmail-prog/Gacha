@@ -15,6 +15,12 @@ compilar nada para jugar en el teléfono.
 
 ### 1. Descarga el APK
 
+<p align="center">
+  <img src="assets/apk-qr.png" alt="Código QR para descargar el APK" width="180" />
+  <br />
+  <sub>Escanea el QR con la cámara del teléfono y descarga la última APK.</sub>
+</p>
+
 - Última versión (enlace directo):
   **<https://github.com/lyanvalentinmail-prog/Gacha/releases/latest/download/Chibiverse-Gacha-Studio.apk>**
 - Todas las versiones: **<https://github.com/lyanvalentinmail-prog/Gacha/releases>**
